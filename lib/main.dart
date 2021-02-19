@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'src/Earndu.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:async';
+import 'src/start.dart';
 
+//플루터 시작 부분
 void main() {
   runApp(
     MaterialApp(
+      //앱을 시작하는 함수, 여기서부터 시작된다.
       title: 'Start',
-      home: Earndu(),
+      home: start(),
     ),
   );
 }

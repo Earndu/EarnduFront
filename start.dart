@@ -35,14 +35,15 @@ class Post {
 }
 
 // 여기서 부터 시작
-class Earndu extends StatelessWidget {
+class start extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('임시로 만든 것임을 명확히 명시하는 바임미다.'),
-        ),
-        body: Center(
+      theme: ThemeData(
+          primarySwatch: Colors.grey,
+          visualDensity: VisualDensity.adaptivePlatformDensity),
+      home: Container(
+        child: Center(
+          child: Text('Earndu', textAlign: TextAlign.center),
           child: RaisedButton(
             child: Text('Let\'s start Earndu!'),
             onPressed: () {
