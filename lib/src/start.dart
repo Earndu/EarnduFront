@@ -13,6 +13,7 @@ class start extends StatelessWidget {
             children: <Widget>[
               Positioned(
                 top: 200,
+                left: 20,
                 child: Container(
                   child: Text(
                     'Earndu',
@@ -128,6 +129,7 @@ class start extends StatelessWidget {
 
               Positioned(
                 bottom: 120,
+                left: 20,
                 child: Container(
                     child: RaisedButton(
                       child: Text('Let\'s go!'),

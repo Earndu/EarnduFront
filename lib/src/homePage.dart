@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'sub_widget/home_widget.dart';
@@ -240,7 +241,7 @@ class _homePage extends State<homePage> {
                           ],
                         ),
                       ),
-                      setSub(context, '$sub'),
+                      setSub(context, 'History'),
                       Container(
                         child: Column(
                           children: <Widget>[
@@ -258,7 +259,33 @@ class _homePage extends State<homePage> {
 
             Icon(Icons.home),
             Icon(Icons.home),
-            Container(),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 30),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all()),
+                    child: Image.asset(
+                      'image/camera.png',
+                      width: 150,
+                      height: 150,
+                    ),
+                  ),
+                  Container(
+                      height: _height * 0.25,
+                      width: _width * 0.7,
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
+                      child: drawGraph(context)),
+                  Container(
+                      height: _height * 0.25,
+                      width: _width * 0.7,
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
+                      child: drawGraph(context)),
+                ],
+              ),
+            ),
           ]),
         ),
       ),
