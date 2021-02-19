@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'sub_widget/home_widget.dart';
 
 //상태 변동이 수행되어야 하는 스테이트 풀 위젯 선언
 class homePage extends StatefulWidget {
@@ -16,17 +18,19 @@ class _homePage extends State<homePage> {
     double _top = MediaQuery.of(context).padding.top;
     double _bottom = MediaQuery.of(context).padding.bottom;
 
+    String sub = "Sports";
+
     //마테리얼 앱 타입 반환
     return MaterialApp(
       theme: ThemeData(
-        //스마트폰 환경에 호환 될 수 있도록 선언
+        //대부분의 환경에 호환 될 수 있도록 선언
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //홈, 찜목록, 퀴즈, 정보기능을 사용하기 위한 탭바 컨트롤러 선언
       home: DefaultTabController(
         // 4개의 길이 지정
         length: 4,
-        // 자식 으로 스캐폴드 타입의 값을 반환
+        // 자식 으로 스캐폴드 위젯 생성, 골자를 생성하는 것
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
           // 상단에 탭 생성
@@ -209,6 +213,7 @@ class _homePage extends State<homePage> {
                             )),
                       ),
 
+                      //중간에 위치한 choose category를 작성하기 위해 사용
                       Container(
                         alignment: Alignment(-0.8, 0.0),
                         child: Text(
@@ -218,68 +223,42 @@ class _homePage extends State<homePage> {
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
-
+                      //카테고리 컨테이너로 여기에Listview를 만들어 과목을 돌릴거임
                       Container(
-                        height: 100,
+                        //
+                        height: _height / 8.4,
                         padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
+
                         child: ListView(
+                          scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 2),
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.black)),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Icon(Icons.calculate),
-                                      Text(
-                                        'Math',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 2),
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.black)),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Icon(Icons.calculate),
-                                      Text(
-                                        'Math',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
+                            setListItem(context, 'Math', Icons.calculate),
+                            setListItem(context, 'Engilish', Icons.spellcheck),
+                            setListItem(context, 'Science', Icons.science),
+                            setListItem(context, 'Health', Icons.healing),
+                            setListItem(context, 'Sports', Icons.sports),
                           ],
                         ),
                       ),
+                      setSub(context, '$sub'),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            historyCard(context, sub, _width),
+                            historyCard(context, sub, _width),
+                            historyCard(context, sub, _width),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
               ),
             ),
+
             Icon(Icons.home),
             Icon(Icons.home),
-            Icon(Icons.home),
+            Container(),
           ]),
         ),
       ),
