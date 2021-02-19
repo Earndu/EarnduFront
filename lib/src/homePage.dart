@@ -24,7 +24,7 @@ class _homePage extends State<homePage> {
     //마테리얼 앱 타입 반환
     return MaterialApp(
       theme: ThemeData(
-        //대부분의 환경에 호환 될 수 있도록 선언
+        //시각적 밀도 지정
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //홈, 찜목록, 퀴즈, 정보기능을 사용하기 위한 탭바 컨트롤러 선언
@@ -226,12 +226,14 @@ class _homePage extends State<homePage> {
                       ),
                       //카테고리 컨테이너로 여기에Listview를 만들어 과목을 돌릴거임
                       Container(
-                        //
+                        //컨테이너의 크기 지정
                         height: _height / 8.4,
                         padding: const EdgeInsets.all(10),
-
+                        // 리스트뷰 위젯 생성
                         child: ListView(
+                          //가로로 스크롤 할 수 있게 지정
                           scrollDirection: Axis.horizontal,
+                          //내부에 미리선언해둔 위젯 반환 함수 호출
                           children: <Widget>[
                             setListItem(context, 'Math', Icons.calculate),
                             setListItem(context, 'Engilish', Icons.spellcheck),
@@ -241,8 +243,11 @@ class _homePage extends State<homePage> {
                           ],
                         ),
                       ),
+                      //과거 기록에 대한 제목을 작성하는 컨테이너를 함수로 호출
                       setSub(context, 'History'),
+                      //컨테이너 호출
                       Container(
+                        //내부에 카드를 정렬시켜놓고 보이도록 호출
                         child: Column(
                           children: <Widget>[
                             historyCard(context, sub, _width),
@@ -259,9 +264,15 @@ class _homePage extends State<homePage> {
 
             Icon(Icons.home),
             Icon(Icons.home),
+            //마지막 사용자 정보를 가져오는 컨테이너
             Container(
+              //내부 구성 요소를 정렬 시킴으로 사용자 정보 -> 그래프 -> 그래프 순으로 출력
               child: Column(
+                //내부 위젯들을 구성하는 children
                 children: [
+                  /*사용자 정보 컨테이너로 컨테이너 안에 사용자의 이미지를 나타나게 한다.
+                  원형식으로 지정했음
+                  */
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 30),
                     decoration: BoxDecoration(
