@@ -2,10 +2,15 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'homePage.dart';
+import 'login.dart';
 
 // 여기서 부터 시작
 class start extends StatelessWidget {
   Widget build(BuildContext context) {
+    //사용자 로그인 변수 할당 부분
+    String UserName = "";
+    String PassWord = "";
+
     return Scaffold(
       body: Container(
         child: Center(
@@ -136,6 +141,28 @@ class start extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => homePage()));
+                      },
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10),
+                      ),
+                      textColor: Colors.black,
+                      color: Colors.white,
+                    ),
+                    width: 200,
+                    height: 50,
+                    margin:
+                        const EdgeInsetsDirectional.fromSTEB(80, 50, 100, 50)),
+              ),
+
+              Positioned(
+                bottom: 20,
+                left: 20,
+                child: Container(
+                    child: RaisedButton(
+                      child: Text('login'),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => loginPage()));
                       },
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(10),

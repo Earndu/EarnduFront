@@ -6,6 +6,7 @@ void main() {
   runApp(
     MaterialApp(
       //앱을 시작하는 함수, 여기서부터 시작된다.
+      debugShowCheckedModeBanner: false,
       title: 'Start',
       home: start(),
     ),

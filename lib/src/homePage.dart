@@ -19,6 +19,8 @@ class _homePage extends State<homePage> {
     double _top = MediaQuery.of(context).padding.top;
     double _bottom = MediaQuery.of(context).padding.bottom;
 
+    //
+
     String sub = "Sports";
 
     //마테리얼 앱 타입 반환
