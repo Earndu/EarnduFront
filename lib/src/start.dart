@@ -13,6 +13,7 @@ class start extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(color: const Color(0xffffc12f)),
         child: Center(
           child: Stack(
             children: <Widget>[
