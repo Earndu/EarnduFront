@@ -36,7 +36,7 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
         children: <Widget>[
           Icon(iconVal),
           AutoSizeText(
-            'Math',
+            sub,
             style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.bold,
