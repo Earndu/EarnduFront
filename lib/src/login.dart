@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/signup.dart';
-import 'homePage.dart';
+import 'mainPage.dart';
 
 class loginPage extends StatelessWidget {
   Widget build(BuildContext context) {

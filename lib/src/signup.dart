@@ -29,6 +29,7 @@ class _signUp_stateful extends State<signUp_stateful> {
     DateTime _selectedDateTime = DateTime.now();
     final String formatedData = DateFormat.yMd().format(_selectedDateTime);
 
+    //시간을 갱신하기 위한 함수 setState를 사용하였다.
     void onBirthdayChange(DateTime birthday) {
       setState(() {
         _selectedDateTime = birthday;
@@ -181,6 +182,7 @@ class _signUp_stateful extends State<signUp_stateful> {
 
 
               */
+              //컨테이너3 여기는 user의 fullname이 들어간다
               Container(
                 //전체적인 크기 지정
                 width: 281,

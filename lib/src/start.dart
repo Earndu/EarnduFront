@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'homePage.dart';
+import 'mainPage.dart';
 import 'login.dart';
 
 // 여기서 부터 시작
