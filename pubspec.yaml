@@ -27,6 +27,9 @@ dependencies:
   http: ^0.12.0
   auto_size_text: ^2.1.0
   fl_chart: ^0.12.3
+  share:
+  intl:
+  cupertino_date_textbox:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
