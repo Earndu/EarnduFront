@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'sub_widget/home_widget.dart';
 import 'sub_widget/appbar.dart';
+import 'mypage.dart';
 
 //상태 변동이 수행되어야 하는 스테이트 풀 위젯 선언
 class homePage extends StatefulWidget {
@@ -182,38 +183,7 @@ class _homePage extends State<homePage> {
             Icon(Icons.home),
             Icon(Icons.home),
             //마지막 사용자 정보를 가져오는 컨테이너
-            Container(
-              //내부 구성 요소를 정렬 시킴으로 사용자 정보 -> 그래프 -> 그래프 순으로 출력
-              child: Column(
-                //내부 위젯들을 구성하는 children
-                children: [
-                  /*사용자 정보 컨테이너로 컨테이너 안에 사용자의 이미지를 나타나게 한다.
-                  원형식으로 지정했음
-                  */
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 30),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all()),
-                    child: Image.asset(
-                      'image/camera.png',
-                      width: 150,
-                      height: 150,
-                    ),
-                  ),
-                  Container(
-                      height: _height * 0.25,
-                      width: _width * 0.7,
-                      margin: const EdgeInsets.symmetric(horizontal: 12),
-                      child: drawGraph(context)),
-                  Container(
-                      height: _height * 0.25,
-                      width: _width * 0.7,
-                      margin: const EdgeInsets.symmetric(horizontal: 12),
-                      child: drawGraph(context)),
-                ],
-              ),
-            ),
+            myPage()
           ]),
         ),
       ),

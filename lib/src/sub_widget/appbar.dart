@@ -17,7 +17,7 @@ Widget appBar(BuildContext context) {
           //전체적인 크기를 원의 형태로 변경
           borderRadius: BorderRadius.circular(50),
           //선택된 탭의 색을 변경
-          color: Colors.grey),
+          color: Color(0xffff7f41)),
       // 탭리스트에 탭 선언
       tabs: [
         // 첫번쨰 탭인 홈 탭 선언

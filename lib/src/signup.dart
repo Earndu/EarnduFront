@@ -3,6 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:intl/intl.dart';
 
+class signUp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        theme: ThemeData(
+          cursorColor: Colors.grey,
+          primaryColor: Colors.grey,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        debugShowCheckedModeBanner: false,
+        //머티리얼 앱의 스캐폴드 타입으로 정의
+        home: signUp_stateful());
+  }
+}
+
 class signUp_stateful extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _signUp_stateful();
@@ -13,6 +28,12 @@ class _signUp_stateful extends State<signUp_stateful> {
   Widget build(BuildContext context) {
     DateTime _selectedDateTime = DateTime.now();
     final String formatedData = DateFormat.yMd().format(_selectedDateTime);
+
+    void onBirthdayChange(DateTime birthday) {
+      setState(() {
+        _selectedDateTime = birthday;
+      });
+    }
 
     TextEditingController userName = TextEditingController();
     TextEditingController passWord = TextEditingController();
@@ -211,42 +232,57 @@ class _signUp_stateful extends State<signUp_stateful> {
                 margin: const EdgeInsets.symmetric(vertical: 12),
                 //컨테이너의 형태를 잡기 위한 boxdecoration
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                     boxShadow: [
                       BoxShadow(
                           color: const Color(0x29000000),
-                          offset: Offset(0, 3),
+                          offset: Offset(0, 2),
                           blurRadius: 6,
                           spreadRadius: 0)
                     ],
                     color: const Color(0xffffffff)),
                 //컨테이너 내부의 위젯으로 textfield 지정
                 child: CupertinoDateTextBox(
-                  initialValue: _selectedDateTime,
-                  onDateChange: (){setState(() {
-                    _selectedDateTime = 
-                  });},
-                  hintText: DateFormat.yMd().format(_selectedDateTime),
+                  hintColor: Colors.grey,
+                  onDateChange: onBirthdayChange,
+                  hintText: ("Select your birthday"),
                 ),
               ),
+
+              InkWell(
+                child: Container(
+                  width: 111,
+                  height: 37,
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.all(25),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(14)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: const Color(0x29000000),
+                            offset: Offset(0, 3),
+                            blurRadius: 6,
+                            spreadRadius: 0)
+                      ],
+                      color: const Color(0xffff7f41)),
+                  child: Text("Sign up",
+                      style: const TextStyle(
+                          color: const Color(0xffffffff),
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "Arial",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 20.0),
+                      textAlign: TextAlign.center),
+                ),
+                onTap: () {
+                  print(_selectedDateTime);
+                  Navigator.of(context, rootNavigator: true).pop(context);
+                },
+              )
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class signUp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          cursorColor: Colors.grey,
-          primaryColor: Colors.grey,
-        ),
-        debugShowCheckedModeBanner: false,
-        //머티리얼 앱의 스캐폴드 타입으로 정의
-        home: signUp_stateful());
   }
 }
