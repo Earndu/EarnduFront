@@ -20,7 +20,7 @@ Widget tabfunc(BuildContext context, IconData icon) {
             //아이콘 타입 지정
             icon,
             //아이콘의 색 지정
-            color: Colors.grey,
+            color: Color(0xffff7f41),
             size: 35,
           )),
     ),
@@ -35,12 +35,14 @@ Widget appBar(BuildContext context) {
     elevation: 0,
     //탭 하단에 탭바를 생성하도록 선언
     bottom: TabBar(
+      indicatorColor: Colors.white,
       //선택되지 않았을 시, 디폴트 색은 하얀색으로
-      unselectedLabelColor: Colors.white,
+      unselectedLabelColor: Colors.blue,
       //탭 클릭 범위에 대한 설정
       indicatorSize: TabBarIndicatorSize.label,
       //탭을 클릭했을 시에 대한 설정
       indicator: BoxDecoration(
+
           //전체적인 크기를 원의 형태로 변경
           borderRadius: BorderRadius.circular(50),
           //선택된 탭의 색을 변경
