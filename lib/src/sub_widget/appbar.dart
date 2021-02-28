@@ -1,5 +1,32 @@
 import 'package:flutter/material.dart';
 
+Widget tabfunc(BuildContext context, IconData icon) {
+  return Tab(
+    // 콘테이너 선언을 통해 탭 선언
+    child: Container(
+      //탭의 형태를 boxDecoration으로 지정한다
+      decoration: BoxDecoration(
+        //탭의 형태를 원의 형태로 변경
+        borderRadius: BorderRadius.circular(50),
+        //테두리의 색을 지정
+        /*border: Border.all(color: Colors.black, width: 1)*/
+      ),
+      //탭 내부 배치 형태를 지정
+      child: Align(
+          //배치 형태를 가운데 배치로 지정
+          alignment: Alignment.center,
+          //자식 위젯으로 아이콘 삽입
+          child: Icon(
+            //아이콘 타입 지정
+            icon,
+            //아이콘의 색 지정
+            color: Colors.grey,
+            size: 35,
+          )),
+    ),
+  );
+}
+
 Widget appBar(BuildContext context) {
   return AppBar(
     //배경색은 하얀색
@@ -20,70 +47,10 @@ Widget appBar(BuildContext context) {
           color: Color(0xffff7f41)),
       // 탭리스트에 탭 선언
       tabs: [
-        // 첫번쨰 탭인 홈 탭 선언
-        Tab(
-          // 콘테이너 선언을 통해 탭 선언
-          child: Container(
-            //탭의 형태를 boxDecoration으로 지정한다
-            decoration: BoxDecoration(
-                //탭의 형태를 원의 형태로 변경
-                borderRadius: BorderRadius.circular(50),
-                //테두리의 색을 지정
-                border: Border.all(color: Colors.black, width: 1)),
-            //탭 내부 배치 형태를 지정
-            child: Align(
-                //배치 형태를 가운데 배치로 지정
-                alignment: Alignment.center,
-                //자식 위젯으로 아이콘 삽입
-                child: Icon(
-                  //아이콘 타입 지정
-                  Icons.home_filled,
-                  //아이콘의 색 지정
-                  color: Colors.black,
-                )),
-          ),
-        ),
-        //이하 동문
-        Tab(
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Colors.black, width: 1)),
-            child: Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.star,
-                  color: Colors.black,
-                )),
-          ),
-        ),
-        Tab(
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Colors.black, width: 1)),
-            child: Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.school,
-                  color: Colors.black,
-                )),
-          ),
-        ),
-        Tab(
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Colors.black, width: 1)),
-            child: Align(
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ),
+        tabfunc(context, Icons.home_outlined),
+        tabfunc(context, Icons.star),
+        tabfunc(context, Icons.question_answer),
+        tabfunc(context, Icons.person_outline_rounded),
       ],
     ),
   );

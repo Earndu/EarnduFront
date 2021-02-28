@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'src/start.dart';
+import 'src/login.dart';
 
 //플루터 시작 부분
 void main() {
@@ -8,7 +8,7 @@ void main() {
       //앱을 시작하는 함수, 여기서부터 시작된다.
       debugShowCheckedModeBanner: false,
       title: 'Start',
-      home: start(),
+      home: loginPage(),
     ),
   );
 }

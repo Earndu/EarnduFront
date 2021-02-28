@@ -1,6 +1,5 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'sub_widget/home_widget.dart';
 import 'sub_widget/appbar.dart';
 import 'mypage.dart';
@@ -39,7 +38,8 @@ class _homePage extends State<homePage> {
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
           // 상단에 탭 생성
-          appBar: appBar(context),
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(60), child: appBar(context)),
           //홈, 찜목록, 퀴즈, 사용자 정보 탭에 대한 컨텐츠 설정
           body: TabBarView(children: [
             //홈 탭에 대한 컨텐츠로 컨테이너 타입으로 위젯 시작

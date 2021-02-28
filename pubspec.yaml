@@ -50,13 +50,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - image/audioTrack.png
-  - image/calculate.png
-  - image/camera.png
-  - image/menubook.png
-  - image/roller.png
-  - image/public.png
-  - image/videoCam.png
+  - image/login_image.png
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

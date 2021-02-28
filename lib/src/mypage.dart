@@ -9,6 +9,8 @@ class _myPage extends State<myPage> {
   @override
   String tmp = "";
   String userName = "";
+
+  //이미지랑 아이콘 둘 중 하나를 쓰기 위한 페이지
   void setImage(String img) {
     setState(() {
       if (tmp != "") {
