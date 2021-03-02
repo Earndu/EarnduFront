@@ -141,7 +141,7 @@ class start extends StatelessWidget {
                       child: Text('Let\'s go!'),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => homePage()));
+                            builder: (context) => mainPage()));
                       },
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(10),

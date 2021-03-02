@@ -51,7 +51,7 @@ flutter:
   uses-material-design: true
   assets:
   - image/login_image.png
-
+  - image/menubook.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

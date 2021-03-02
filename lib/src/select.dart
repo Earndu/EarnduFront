@@ -49,7 +49,7 @@ class _selectPage extends State<selectPage> {
       //터치시 화면 전환이 이루어지도록 한다. 이때 데이터를 갖고 이동한다.
       onTap: () {
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => homePage()));
+            .push(MaterialPageRoute(builder: (context) => mainPage()));
       },
     );
   }

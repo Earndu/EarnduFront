@@ -41,23 +41,15 @@ class _signUp_stateful extends State<signUp_stateful> {
     TextEditingController passWord = TextEditingController();
     TextEditingController fullName = TextEditingController();
     TextEditingController eMail = TextEditingController();
+    double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(
         child: Container(
-          width: 1000,
+          width: _width,
 
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(34)),
-              boxShadow: [
-                BoxShadow(
-                    color: const Color(0x29000000),
-                    offset: Offset(0, 3),
-                    blurRadius: 6,
-                    spreadRadius: 0)
-              ],
-              color: const Color(0xffffc12f)),
+          color: const Color(0xffffc12f),
           /*
                 
 
@@ -69,7 +61,7 @@ class _signUp_stateful extends State<signUp_stateful> {
               //첫번째로 들어가는 텍스트 Earndu
               Container(
                 //center로 구성되어 있기 때문에 위아래 마진만 조절
-                margin: const EdgeInsets.only(top: 35, bottom: 5),
+                margin: const EdgeInsets.only(top: 25, bottom: 5),
                 //자식 위젯은 텍스트, 전체적인 디자인은 zeplin에서 제공하는 형태에 맞춤
                 child: Text(
                   "Earndu",

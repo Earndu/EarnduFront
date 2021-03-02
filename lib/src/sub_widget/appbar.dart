@@ -5,13 +5,7 @@ Widget tabfunc(BuildContext context, IconData icon) {
     // 콘테이너 선언을 통해 탭 선언
     child: Container(
       //탭의 형태를 boxDecoration으로 지정한다
-      decoration: BoxDecoration(
-        //탭의 형태를 원의 형태로 변경
-        borderRadius: BorderRadius.circular(50),
-        //테두리의 색을 지정
-        /*border: Border.all(color: Colors.black, width: 1)*/
-      ),
-      //탭 내부 배치 형태를 지정
+
       child: Align(
           //배치 형태를 가운데 배치로 지정
           alignment: Alignment.center,
@@ -42,16 +36,15 @@ Widget appBar(BuildContext context) {
       indicatorSize: TabBarIndicatorSize.label,
       //탭을 클릭했을 시에 대한 설정
       indicator: BoxDecoration(
-
-          //전체적인 크기를 원의 형태로 변경
-          borderRadius: BorderRadius.circular(50),
-          //선택된 탭의 색을 변경
-          color: Color(0xffff7f41)),
+        //전체적인 크기를 원의 형태로 변경
+        borderRadius: BorderRadius.circular(50),
+        //선택된 탭의 색을 변경
+      ),
       // 탭리스트에 탭 선언
       tabs: [
         tabfunc(context, Icons.home_outlined),
-        tabfunc(context, Icons.star),
-        tabfunc(context, Icons.question_answer),
+        tabfunc(context, Icons.favorite_outline),
+        tabfunc(context, Icons.school),
         tabfunc(context, Icons.person_outline_rounded),
       ],
     ),
