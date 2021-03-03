@@ -38,7 +38,7 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
           AutoSizeText(
             sub,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 10,
               fontWeight: FontWeight.bold,
             ),
             overflow: TextOverflow.ellipsis,

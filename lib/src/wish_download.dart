@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'sub_widget/wish_down_widget.dart';
 
 //위시리스트, 다운로드리스트를 만들기위한 statefulwidget선언
 class wish_down extends StatefulWidget {
@@ -60,7 +61,9 @@ class _wish_down extends State<wish_down> {
                             vertical: 0, horizontal: 29),
                         decoration: BoxDecoration(
                             border: Border.all(
-                                color: const Color(0xff000000), width: 3)))
+                                color: const Color(0xff000000), width: 3))),
+                    // 리스트뷰가 들어갈 컨테이너
+                    Container(),
                   ],
                 ),
               ),
