@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 //과목이름 갱신용
+//
 @override
 Widget setSub(BuildContext context, String sub) {
   return Container(
@@ -52,6 +53,9 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
 @override
 Widget historyCard(BuildContext context, String sub, double wid_val) {
   return InkWell(
+    onTap: () {
+      print("$sub");
+    },
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 0),
       margin: const EdgeInsets.only(bottom: 5),

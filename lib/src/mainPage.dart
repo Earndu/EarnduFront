@@ -16,8 +16,6 @@ class _mainPage extends State<mainPage> {
   Widget build(BuildContext context) {
     //각각의 위젯을 위치를 디바이스에 맞게 조정하기 위해 스마트폰의 길이를 저장
 
-    //
-
     //마테리얼 앱 타입 반환
     return MaterialApp(
       debugShowCheckedModeBanner: false,
