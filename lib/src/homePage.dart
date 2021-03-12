@@ -18,7 +18,7 @@ class _home extends State<home> {
       home: Scaffold(
         body: Container(
           //배경색 맞춰주기 위해 색 지정
-          color: Colors.white,
+          color: const Color(0xfffbfbfb),
           // 전체적인 배치는 가운데 배치로
           child: Center(
             //내부 구성을 위해 다시 컨테이너로 묶는다.
@@ -33,22 +33,21 @@ class _home extends State<home> {
                     width: _width * 0.9,
                     height: _height * 0.25,
                     padding: const EdgeInsets.all(00),
-                    margin: const EdgeInsets.all(12),
+                    margin: const EdgeInsets.only(
+                        top: 45, left: 27, right: 27, bottom: 27),
                     //컨테이너 형태 지정
                     decoration: BoxDecoration(
                       //기울기 지정
-                      borderRadius: BorderRadius.circular(16),
-                      // 색지정
-                      //color: Colors.black,
+                      borderRadius: BorderRadius.circular(36),
                     ),
                     //컨테이너 내부 요소로 카드 선언
                     child: Card(
                         //그림자 밝기 지정
-                        elevation: 6,
+                        elevation: 4,
                         //카드를 형태 지정
                         shape: RoundedRectangleBorder(
                             //모서리를 둥글게 만들 것이다
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(36)),
                         //1차적으로 내부 구성을 열 타입으로 생성, 소개 멘트와 이미지가 들어갈것이다
                         child: Center(
                           child: Text("Tutorial",
@@ -64,14 +63,7 @@ class _home extends State<home> {
                 ),
 
                 //중간에 위치한 choose category를 작성하기 위해 사용
-                Container(
-                  alignment: Alignment(-0.8, 0.0),
-                  child: Text(
-                    'Choos category',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                setSub(context, 'Choose Category'),
 
                 //카테고리 컨테이너로 여기에Listview를 만들어 과목을 돌릴거임
                 Container(
@@ -93,7 +85,7 @@ class _home extends State<home> {
                   ),
                 ),
                 //과거 기록에 대한 제목을 작성하는 컨테이너를 함수로 호출
-                setSub(context, 'History'),
+                setSub(context, "Previous Learned Contents"),
                 //컨테이너 호출
                 Container(
                   //내부에 카드를 정렬시켜놓고 보이도록 호출

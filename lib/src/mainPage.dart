@@ -3,6 +3,7 @@ import 'sub_widget/appbar.dart';
 import 'mypage.dart';
 import 'homePage.dart';
 import 'wish_download.dart';
+import 'sub_widget/bottomBar.dart';
 
 //상태 변동이 수행되어야 하는 스테이트 풀 위젯 선언
 class mainPage extends StatefulWidget {
@@ -31,8 +32,9 @@ class _mainPage extends State<mainPage> {
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
           // 상단에 탭 생성
-          appBar: PreferredSize(
-              preferredSize: Size.fromHeight(60), child: appBar(context)),
+          //appBar: //PreferredSize(
+          //preferredSize: Size.fromHeight(60), child: appBar(context)),
+          bottomNavigationBar: customBar(context),
           //홈, 찜목록, 퀴즈, 사용자 정보 탭에 대한 컨텐츠 설정
           body: TabBarView(children: [
             //홈 탭에 대한 컨텐츠로 컨테이너 타입으로 위젯 시작
