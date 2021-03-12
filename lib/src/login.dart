@@ -22,7 +22,7 @@ class loginPage extends StatelessWidget {
       theme: ThemeData(primaryColor: Colors.grey[700]),
       home: Scaffold(
         //위젯이 키보드에 가려져 생기는 오류를 방지하기 위한 코드,
-        resizeToAvoidBottomPadding: false,
+        //resizeToAvoidBottomPadding: false,
         //기본적인 틀을 위한 컨테이너 생성
         body: Container(
           color: const Color(0xffffffff),

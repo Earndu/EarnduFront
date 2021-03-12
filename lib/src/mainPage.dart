@@ -18,7 +18,6 @@ class _mainPage extends State<mainPage> {
 
     //마테리얼 앱 타입 반환
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         //시각적 밀도 지정
         visualDensity: VisualDensity.adaptivePlatformDensity,
