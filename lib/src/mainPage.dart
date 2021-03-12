@@ -29,7 +29,7 @@ class _mainPage extends State<mainPage> {
         length: 4,
         // 자식 으로 스캐폴드 위젯 생성, 골자를 생성하는 것
         child: Scaffold(
-          resizeToAvoidBottomPadding: false,
+          //resizeToAvoidBottomPadding: false,
           // 상단에 탭 생성
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(60), child: appBar(context)),
