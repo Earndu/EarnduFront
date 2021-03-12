@@ -21,32 +21,71 @@ Widget tabfunc(BuildContext context, IconData icon) {
   );
 }
 
-Widget appBar(BuildContext context) {
-  return AppBar(
-    //배경색은 하얀색
-    backgroundColor: Colors.white,
-    //그라데이션 설정은 없도록
-    elevation: 0,
-    //탭 하단에 탭바를 생성하도록 선언
-    bottom: TabBar(
-      indicatorColor: Colors.white,
-      //선택되지 않았을 시, 디폴트 색은 하얀색으로
-      unselectedLabelColor: Colors.blue,
-      //탭 클릭 범위에 대한 설정
+@override
+Widget customBar(BuildContext context) {
+  return Container(
+    color: const Color(0xfff2f2f2),
+    height: 80,
+    padding: EdgeInsets.only(bottom: 10, top: 5),
+    child: TabBar(
       indicatorSize: TabBarIndicatorSize.label,
-      //탭을 클릭했을 시에 대한 설정
-      indicator: BoxDecoration(
-        //전체적인 크기를 원의 형태로 변경
-        borderRadius: BorderRadius.circular(50),
-        //선택된 탭의 색을 변경
-      ),
-      // 탭리스트에 탭 선언
+      indicatorColor: const Color(0xfff2f2f2),
+      indicatorWeight: 4,
+      labelColor: const Color(0xffff7f41),
+      unselectedLabelColor: Colors.black38,
       tabs: [
-        tabfunc(context, Icons.home_outlined),
-        tabfunc(context, Icons.favorite_outline),
-        tabfunc(context, Icons.school),
-        tabfunc(context, Icons.person_outline_rounded),
+        Tab(
+          icon: Icon(
+            Icons.home_outlined,
+            size: 30,
+          ),
+          text: 'home',
+        ),
+        Tab(
+          icon: Icon(
+            Icons.favorite,
+            size: 30,
+          ),
+          text: 'wish list',
+        ),
+        Tab(
+          icon: Icon(
+            Icons.school,
+            size: 30,
+          ),
+          text: 'quiz',
+        ),
+        Tab(
+          icon: Icon(
+            Icons.person,
+            size: 30,
+          ),
+          text: 'my page',
+        )
       ],
     ),
   );
 }
+// Widget appBar(BuildContext context) {
+//   return AppBar(
+//     //배경색은 하얀색
+//     backgroundColor: Colors.white,
+//     //그라데이션 설정은 없도록
+//     elevation: 0,
+//     //탭 하단에 탭바를 생성하도록 선언
+//     bottom: TabBar(
+//       labelColor: Colors.white, //텍스트와 아이콘 색상 변경
+//       unselectedLabelColor: Colors.white54,
+//       indicatorColor: Colors.white, //선택된 탭의 밑줄
+//       indicatorSize: TabBarIndicatorSize.label, //밑줄 너비
+//       indicatorWeight: 2, //밑줄 길이
+//       // 탭리스트에 탭 선언
+//       tabs: [
+//         tabfunc(context, Icons.home_outlined),
+//         tabfunc(context, Icons.favorite_outline),
+//         tabfunc(context, Icons.school),
+//         tabfunc(context, Icons.person_outline_rounded),
+//       ],
+//     ),
+//   );
+// }

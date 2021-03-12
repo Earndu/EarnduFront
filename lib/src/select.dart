@@ -67,7 +67,7 @@ class _selectPage extends State<selectPage> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //배경색은 우리가 기존에 사용하는 색 지정
-      color: const Color(0xffffc12f),
+      color: const Color(0xfffbfbfb),
       //메인은 스캐폴드 프레임을 가져다 쓴다
       home: Scaffold(
         //전체적인 구성이 가운데에 치우쳐 있기 때문에 center body구성
@@ -78,7 +78,7 @@ class _selectPage extends State<selectPage> {
             width: _width,
             height: _height,
             //색은 기존 디자인의 배경색
-            color: const Color(0xffffc12f),
+
             //컬럼 위젯을 사용해 내부의 구성요소들을 위젯으로 처리한다.
             child: Column(
               //전반적인 구성에 맞게 가운데로 위젯 정렬
@@ -90,10 +90,7 @@ class _selectPage extends State<selectPage> {
                   margin: const EdgeInsets.only(top: 30, bottom: 15),
                   child: Text(
                     "Choose daily contents",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 30),
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
                   ),
                 ),
                 //이후의 위젯은 함수로 처리

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
 import 'package:flutter_app/src/signup.dart';
 import 'mainPage.dart';
 import 'select.dart';
@@ -9,6 +10,8 @@ class loginPage extends StatelessWidget {
     //텍스트필드 컨트롤러 변수로 선언하여 받아올 수 있도록 지정
     TextEditingController userName = TextEditingController();
     TextEditingController passWord = TextEditingController();
+
+    final Color maincolor = Color(0xffff7f41);
     /*
     
 
@@ -22,7 +25,7 @@ class loginPage extends StatelessWidget {
         //resizeToAvoidBottomPadding: false,
         //기본적인 틀을 위한 컨테이너 생성
         body: Container(
-          color: const Color(0xffffc12f),
+          color: const Color(0xffffffff),
           child: Container(
             width: 500,
             //내부 구성을 배치하기 위해 컬럼 child선언
@@ -30,42 +33,35 @@ class loginPage extends StatelessWidget {
               children: <Widget>[
                 //아이콘들이 들어가기 위한 공간 선언
                 Container(
-                  width: 300,
-                  height: 261,
-                  margin: const EdgeInsets.only(
-                    top: 60,
-                  ),
+                  width: 235,
+                  height: 187,
+                  margin: const EdgeInsets.only(top: 126, bottom: 12),
                   child: Image.asset('image/login_image.png'),
                 ),
                 //첫번째 텍스트 라인
-                Container(
-                  //내부 구성에는 텍스트로 구성되어있음
-                  child: Text("Hello Student !",
-                      //텍스트 스타일, 그중에서 글씨 크기 및 색, 두께를 지정
-                      style: const TextStyle(
-                          color: const Color(0xffff7f41),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Arial",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 20.0),
-                      //텍스트 배치는 가운데로
-                      textAlign: TextAlign.center),
-                ),
                 //두번째 텍스트 라인
-                Text("Earndu",
-                    //마찬가지로 스타일은 첫번쨰 텍스트라인과 동일하게
-                    style: const TextStyle(
-                        color: const Color(0xffff7f41),
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "Arial",
+                Text.rich(TextSpan(children: <TextSpan>[
+                  TextSpan(
+                    text: 'Earn',
+                    style: TextStyle(
+                        color: const Color(0xffffc12f),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "MaiandraGD",
                         fontStyle: FontStyle.normal,
-                        fontSize: 40.0),
-                    textAlign: TextAlign.center),
+                        fontSize: 65.0),
+                  ),
+                  TextSpan(
+                    text: 'du',
+                    style: TextStyle(
+                        color: const Color(0xffff7f41),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'MaiandraGD',
+                        fontStyle: FontStyle.normal,
+                        fontSize: 65.0),
+                  ),
+                ])),
                 /*
-    
-
-    
-     */
+    */
                 //아이디 텍스트필드를 만들기 위한 컨테이너 선언
                 Container(
                   //디자인에 맞는 크기 지정
@@ -171,7 +167,7 @@ class loginPage extends StatelessWidget {
                   //내부 구성을 위한 컨테이너
                   child: Container(
                     //위, 아래의 두 위젯간의 거리를 두기 위한 마진
-                    margin: const EdgeInsets.all(7),
+                    margin: const EdgeInsets.all(12),
                     padding: const EdgeInsets.symmetric(vertical: 10),
 
                     //컨테이너의 크기는 버튼의 디자인에 맞게 선언
@@ -187,7 +183,7 @@ class loginPage extends StatelessWidget {
                               blurRadius: 6,
                               spreadRadius: 0),
                         ],
-                        color: const Color(0xffff7f41)),
+                        color: maincolor),
                     //내부엔 텍스트 위젯을 선언 후 디자인에 맞춘 설정
                     child: Text("Log in",
                         style: const TextStyle(
@@ -230,7 +226,7 @@ class loginPage extends StatelessWidget {
                               blurRadius: 6,
                               spreadRadius: 0)
                         ],
-                        color: const Color(0xffff7f41)),
+                        color: maincolor),
                     //텍스트는 signup, 나머지 양식은 디자인에 맞춤
                     child: Text("Sign up",
                         style: const TextStyle(

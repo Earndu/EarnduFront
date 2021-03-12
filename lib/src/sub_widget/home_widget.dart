@@ -7,7 +7,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 Widget setSub(BuildContext context, String sub) {
   return Container(
     margin: const EdgeInsets.only(bottom: 10),
-    alignment: Alignment(-0.8, 0.0),
+    alignment: Alignment(-0.72, 0.0),
     child: Text(
       '$sub',
       textAlign: TextAlign.right,
@@ -25,22 +25,24 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
       print('$sub');
     },
     child: Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(top: 7),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-      width: 70,
-      height: 50,
+      width: 74,
+      height: 79,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: const Color(0xffffc12f),
       ),
       child: Column(
         children: <Widget>[
-          Icon(iconVal),
+          Icon(
+            iconVal,
+            size: 40,
+          ),
           AutoSizeText(
             sub,
             style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
+              fontSize: 15,
             ),
             overflow: TextOverflow.ellipsis,
           ),
@@ -62,8 +64,8 @@ Widget historyCard(BuildContext context, String sub, double wid_val) {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
       ),
-      width: wid_val * 0.95,
-      height: 70,
+      width: 320,
+      height: 83,
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(
