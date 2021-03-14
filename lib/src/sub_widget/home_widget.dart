@@ -10,8 +10,7 @@ Widget setSub(BuildContext context, String sub) {
     alignment: Alignment(-0.72, 0.0),
     child: Text(
       '$sub',
-      textAlign: TextAlign.right,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
     ),
   );
 }
@@ -19,20 +18,22 @@ Widget setSub(BuildContext context, String sub) {
 @override
 //리스트 뷰 제작용
 Widget setListItem(BuildContext context, String sub, IconData iconVal) {
-  return InkWell(
-    //일단 임시로 해당 과목의 이름을
-    onTap: () {
-      print('$sub');
-    },
-    child: Container(
-      padding: const EdgeInsets.only(top: 7),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-      width: 74,
-      height: 79,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: const Color(0xffffc12f),
-      ),
+  return Container(
+    padding: const EdgeInsets.only(top: 7),
+    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+    width: 74,
+    height: 74,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(13)),
+        boxShadow: [
+          BoxShadow(
+              color: const Color(0x29000000),
+              offset: Offset(0, 3),
+              blurRadius: 6,
+              spreadRadius: 0)
+        ],
+        color: const Color(0xffffc12f)),
+    child: InkWell(
       child: Column(
         children: <Widget>[
           Icon(
@@ -48,39 +49,58 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
           ),
         ],
       ),
+      onTap: () {
+        print(sub);
+      },
     ),
   );
 }
 
 @override
 Widget historyCard(BuildContext context, String sub, double wid_val) {
-  return InkWell(
-    onTap: () {
-      print("$sub");
-    },
-    child: Container(
-      padding: const EdgeInsets.symmetric(vertical: 0),
-      margin: const EdgeInsets.only(bottom: 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      width: 320,
-      height: 83,
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-            //모서리를 둥글게 만들 것이다
-            borderRadius: BorderRadius.circular(10)),
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 0),
+    margin: const EdgeInsets.only(bottom: 5),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(16),
+    ),
+    width: 320,
+    height: 83,
+    child: InkWell(
+      onTap: () {
+        print("$sub");
+      },
+      child: Container(
+        width: 320,
+        height: 83,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(14)),
+          boxShadow: [
+            BoxShadow(
+                color: const Color(0x29000000),
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 0)
+          ],
+          color: const Color(0xffffffff),
+        ),
         child: Row(
           children: [
             Container(
-                padding: const EdgeInsets.all(3),
-                margin: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: const Color(0xffffc12f),
-                ),
-                child: Image.asset('image/menubook.png')),
+              width: 59,
+              height: 59,
+              padding: const EdgeInsets.all(3),
+              margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 17),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: const Color(0xffffc12f),
+              ),
+            ),
+            // child: Image.asset(
+            //   'image/menubook.png',
+            //   width: 50,
+            //   height: 50,
+            // )),
             Container(
               padding: const EdgeInsets.all(3),
               margin: const EdgeInsets.all(3),
@@ -88,7 +108,7 @@ Widget historyCard(BuildContext context, String sub, double wid_val) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    padding: const EdgeInsets.only(top: 5, bottom: 3),
+                    margin: const EdgeInsets.only(top: 11, bottom: 4),
                     child: Text('play with number!',
                         style: const TextStyle(
                             color: const Color(0xff000000),

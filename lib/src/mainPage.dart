@@ -37,7 +37,7 @@ class _mainPage extends State<mainPage> {
           body: TabBarView(children: [
             //홈 탭에 대한 컨텐츠로 컨테이너 타입으로 위젯 시작
             // home(),
-            Icon(Icons.home),
+            home(),
             wish_down(),
             Icon(Icons.home),
             //마지막 사용자 정보를 가져오는 컨테이너

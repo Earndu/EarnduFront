@@ -28,19 +28,19 @@ class _home extends State<home> {
               children: <Widget>[
                 //앱의 간단한 소개를 위한 부분을 컨테이너로 지정 후 내부에 카드선언할것임
 
-                InkWell(
-                  child: Container(
-                    width: _width * 0.9,
-                    height: _height * 0.25,
-                    padding: const EdgeInsets.all(00),
-                    margin: const EdgeInsets.only(
-                        top: 45, left: 27, right: 27, bottom: 27),
-                    //컨테이너 형태 지정
-                    decoration: BoxDecoration(
-                      //기울기 지정
-                      borderRadius: BorderRadius.circular(36),
-                    ),
-                    //컨테이너 내부 요소로 카드 선언
+                Container(
+                  width: _width * 0.9,
+                  height: _height * 0.25,
+                  padding: const EdgeInsets.all(00),
+                  margin: const EdgeInsets.only(
+                      top: 36, left: 27, right: 27, bottom: 27),
+                  //컨테이너 형태 지정
+                  decoration: BoxDecoration(
+                    //기울기 지정
+                    borderRadius: BorderRadius.circular(36),
+                  ),
+                  //컨테이너 내부 요소로 카드 선언
+                  child: InkWell(
                     child: Card(
                         //그림자 밝기 지정
                         elevation: 4,
@@ -68,7 +68,7 @@ class _home extends State<home> {
                 //카테고리 컨테이너로 여기에Listview를 만들어 과목을 돌릴거임
                 Container(
                   //컨테이너의 크기 지정
-                  height: _height / 8.4,
+                  height: _height / 8.2,
                   padding: const EdgeInsets.all(10),
                   // 리스트뷰 위젯 생성
                   child: ListView(
