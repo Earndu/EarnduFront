@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
+import 'package:flutter_app/src/selectImage.dart';
 import 'package:intl/intl.dart';
+import 'selectImage.dart';
 
 class signUp extends StatelessWidget {
   @override
@@ -24,6 +26,11 @@ class signUp_stateful extends StatefulWidget {
 }
 
 class _signUp_stateful extends State<signUp_stateful> {
+  Image imageFile = Image.asset(
+    'image/person.png',
+    width: 180,
+    height: 180,
+  );
   @override
   Widget build(BuildContext context) {
     DateTime _selectedDateTime = DateTime.now();
@@ -90,6 +97,7 @@ class _signUp_stateful extends State<signUp_stateful> {
 
  */
               InkWell(
+                //사진이 들어갈 컨테이너
                 child: Container(
                   margin: const EdgeInsets.only(top: 0, bottom: 20),
                   width: 180,
@@ -104,13 +112,18 @@ class _signUp_stateful extends State<signUp_stateful> {
                             spreadRadius: 0)
                       ],
                       color: const Color(0xffff7f41)),
-                  child: Icon(
-                    Icons.person_outline,
-                    size: 180,
-                    color: Colors.white,
-                  ),
+                  //
+                  child: imageFile,
                 ),
-                onTap: () {},
+                onTap: () async {
+                  final reuslt = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => selectImage()),
+                  );
+                  setState(() {
+                    imageFile = Image.asset(reuslt);
+                  });
+                },
               ),
 
               /*
@@ -335,6 +348,7 @@ class _signUp_stateful extends State<signUp_stateful> {
                     color: const Color(0xffffffff)),
                 //컨테이너 내부의 위젯으로 textfield 지정
                 child: CupertinoDateTextBox(
+                  initialValue: _selectedDateTime,
                   hintColor: Colors.grey,
                   onDateChange: onBirthdayChange,
                   hintText: ("Select your birthday"),

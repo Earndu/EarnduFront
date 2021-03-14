@@ -50,8 +50,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - image/login_image.png
-  - image/menubook.png
+  - image/
   fonts:
   - family: MaiandraGD
     fonts:

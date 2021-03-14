@@ -65,9 +65,9 @@ class _myPage extends State<myPage> {
                     textAlign: TextAlign.left),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                margin: const EdgeInsets.symmetric(vertical: 14),
-                height: 20,
+                padding: const EdgeInsets.symmetric(horizontal: 49),
+                margin: const EdgeInsets.symmetric(vertical: 17),
+                height: 25,
                 alignment: Alignment.centerLeft,
                 child: Text("Learning Status",
                     style: const TextStyle(
@@ -79,6 +79,7 @@ class _myPage extends State<myPage> {
                     textAlign: TextAlign.left),
               ),
               Container(
+                margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

@@ -35,7 +35,9 @@ class loginPage extends StatelessWidget {
                 Container(
                   width: 235,
                   height: 187,
-                  margin: const EdgeInsets.only(top: 126, bottom: 12),
+                  margin: const EdgeInsets.only(
+                    top: 126,
+                  ),
                   child: Image.asset('image/login_image.png'),
                 ),
                 //첫번째 텍스트 라인

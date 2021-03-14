@@ -18,6 +18,7 @@ class _mainPage extends State<mainPage> {
 
     //마테리얼 앱 타입 반환
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         //시각적 밀도 지정
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -35,7 +36,8 @@ class _mainPage extends State<mainPage> {
           //홈, 찜목록, 퀴즈, 사용자 정보 탭에 대한 컨텐츠 설정
           body: TabBarView(children: [
             //홈 탭에 대한 컨텐츠로 컨테이너 타입으로 위젯 시작
-            home(),
+            // home(),
+            Icon(Icons.home),
             wish_down(),
             Icon(Icons.home),
             //마지막 사용자 정보를 가져오는 컨테이너
