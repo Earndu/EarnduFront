@@ -20,7 +20,7 @@ class _home extends State<home> {
           //배경색 맞춰주기 위해 색 지정
           color: const Color(0xfffbfbfb),
           // 전체적인 배치는 가운데 배치로
-          child: Center(
+          child: SingleChildScrollView(
             //내부 구성을 위해 다시 컨테이너로 묶는다.
             // column형태로 컨텐츠 배치할것이기 떄문에 자식 위젯 지정
             child: Column(

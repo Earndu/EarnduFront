@@ -49,14 +49,14 @@ class _signUp_stateful extends State<signUp_stateful> {
     TextEditingController fullName = TextEditingController();
     TextEditingController eMail = TextEditingController();
     double _width = MediaQuery.of(context).size.width;
+    double _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Container(
-          width: _width,
-
-          color: const Color(0xffffffff),
+      body: Container(
+        width: _width,
+        height: _height,
+        color: const Color(0xffffffff),
+        child: SingleChildScrollView(
           /*
                 
 

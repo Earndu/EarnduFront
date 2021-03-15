@@ -21,14 +21,13 @@ class loginPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.grey[700]),
       home: Scaffold(
-        //위젯이 키보드에 가려져 생기는 오류를 방지하기 위한 코드,
-        //resizeToAvoidBottomPadding: false,
         //기본적인 틀을 위한 컨테이너 생성
         body: Container(
           color: const Color(0xffffffff),
-          child: Container(
-            width: 500,
-            //내부 구성을 배치하기 위해 컬럼 child선언
+          width: 500,
+          height: 812,
+          //내부 구성을 배치하기 위해 컬럼 child선언
+          child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 //아이콘들이 들어가기 위한 공간 선언
