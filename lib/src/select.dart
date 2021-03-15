@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'mainPage.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+import 'mainPage.dart';
+
 class selectData {
   final String selData;
   selectData(this.selData);
@@ -68,10 +70,10 @@ class _selectPage extends State<selectPage> {
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: Swiper(
-                      scale: 0.9,
+                      scale: 0.8,
                       viewportFraction: 0.75,
-                      control: SwiperControl(),
-                      pagination: SwiperPagination(),
+                      pagination:
+                          SwiperPagination(builder: SwiperPagination.rect),
                       itemCount: imgList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Image.asset(
@@ -81,6 +83,10 @@ class _selectPage extends State<selectPage> {
                       },
                       itemWidth: 300.0,
                       itemHeight: 300.0,
+                      onTap: (int index) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => mainPage()));
+                      },
                     ),
                   ),
                 ),

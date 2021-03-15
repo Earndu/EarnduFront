@@ -24,11 +24,8 @@ class signUp_stateful extends StatefulWidget {
 }
 
 class _signUp_stateful extends State<signUp_stateful> {
-  Image imageFile = Image.asset(
-    'image/person.png',
-    width: 180,
-    height: 180,
-  );
+  Image imageFile = Image.asset('image/person.png',
+      width: 180, height: 180, fit: BoxFit.fill);
   @override
   Widget build(BuildContext context) {
     DateTime _selectedDateTime = DateTime.now();

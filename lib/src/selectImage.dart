@@ -25,6 +25,10 @@ class selectImage extends StatelessWidget {
                 margin: const EdgeInsets.only(
                     top: 0, bottom: 20, left: 3, right: 3),
                 decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('image/Elephant_1.png'),
+                      fit: BoxFit.fill,
+                    ),
                     borderRadius: BorderRadius.circular(100),
                     boxShadow: [
                       BoxShadow(
@@ -35,7 +39,6 @@ class selectImage extends StatelessWidget {
                     ],
                     color: const Color(0xffff7f41)),
                 child: InkWell(
-                  child: Image.asset('image/Elephant_1.png'),
                   onTap: () {
                     Navigator.pop(context, 'image/Elephant_1.png');
                   },
