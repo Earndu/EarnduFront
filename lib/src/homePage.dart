@@ -9,8 +9,6 @@ class _home extends State<home> {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    double _top = MediaQuery.of(context).padding.top;
-    double _bottom = MediaQuery.of(context).padding.bottom;
 
     String sub = "";
     return MaterialApp(
