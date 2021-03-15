@@ -65,7 +65,6 @@ class _selectPage extends State<selectPage> {
                 Container(
                   height: 250,
                   width: 375,
-                  color: Color(0xfffbfbfb),
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: Swiper(

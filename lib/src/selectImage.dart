@@ -26,8 +26,6 @@ class selectImage extends StatelessWidget {
                 margin: const EdgeInsets.only(
                     top: 0, bottom: 20, left: 3, right: 3),
                 decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //     image: AssetImage('image/Flamingo_1'), fit: BoxFit.fill),
                     borderRadius: BorderRadius.circular(100),
                     boxShadow: [
                       BoxShadow(
@@ -38,9 +36,9 @@ class selectImage extends StatelessWidget {
                     ],
                     color: const Color(0xffff7f41)),
                 child: InkWell(
-                  child: Image.asset('image/Elephant_1.jpg'),
+                  child: Image.asset('image/Elephant_1.png'),
                   onTap: () {
-                    Navigator.pop(context, 'image/Elephant_1.jpg');
+                    Navigator.pop(context, 'image/Elephant_1.png');
                   },
                 ),
               ),
@@ -53,8 +51,6 @@ class selectImage extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         top: 0, bottom: 20, left: 3, right: 3),
                     decoration: BoxDecoration(
-                        // image: DecorationImage(
-                        //     image: AssetImage('image/Flamingo_1'), fit: BoxFit.fill),
                         borderRadius: BorderRadius.circular(100),
                         boxShadow: [
                           BoxShadow(
@@ -65,9 +61,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Flamingo_1.jpg'),
+                      child: Image.asset('image/Flamingo_1.png'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Flamingo_1.jpg');
+                        Navigator.pop(context, 'image/Flamingo_1.png');
                       },
                     ),
                   ),
@@ -77,8 +73,6 @@ class selectImage extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         top: 0, bottom: 20, left: 3, right: 3),
                     decoration: BoxDecoration(
-                        // image: DecorationImage(
-                        //     image: AssetImage('image/Flamingo_1'), fit: BoxFit.fill),
                         borderRadius: BorderRadius.circular(100),
                         boxShadow: [
                           BoxShadow(
@@ -89,9 +83,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Giraffe_1.jpg'),
+                      child: Image.asset('image/Giraffe_1.png'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Giraffe_1.jpg');
+                        Navigator.pop(context, 'image/Giraffe_1.png');
                       },
                     ),
                   ),
@@ -118,9 +112,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Hippo_1.jpg'),
+                      child: Image.asset('image/Hippo_1.png'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Hippo_1.jpg');
+                        Navigator.pop(context, 'image/Hippo_1.png');
                       },
                     ),
                   ),
@@ -140,9 +134,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Koala_1.jpg'),
+                      child: Image.asset('image/Koala_1.png'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Koala_1.jpg');
+                        Navigator.pop(context, 'image/Koala_1.png');
                       },
                     ),
                   ),
