@@ -102,16 +102,15 @@ class _signUp_stateful extends State<signUp_stateful> {
                   margin: const EdgeInsets.only(top: 0, bottom: 20),
                   width: 180,
                   height: 180,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: [
-                        BoxShadow(
-                            color: const Color(0x29000000),
-                            offset: Offset(0, 3),
-                            blurRadius: 6,
-                            spreadRadius: 0)
-                      ],
-                      color: const Color(0xffff7f41)),
+                  // decoration: BoxDecoration(
+                  //     //borderRadius: BorderRadius.circular(10),
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //           color: const Color(0x29000000),
+                  //           offset: Offset(0, 3),
+                  //           blurRadius: 6,
+                  //           spreadRadius: 0)
+                  //     ], color: const Color(0xffff7f41)),
                   //
                   child: imageFile,
                 ),

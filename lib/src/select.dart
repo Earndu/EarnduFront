@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'mainPage.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class selectData {
   final String selData;
@@ -15,44 +16,11 @@ class _selectPage extends State<selectPage> {
   @override
   selectData data;
 
-  //이미지 선택을 위한 컨테이너를 함수로 정의
-  Widget selectContents(
-      BuildContext context, String contentsVal, IconData contentsIcon) {
-    //inkwell방식을 채택해서 컨테이너 자체가 버튼의 역할을 할 수 있도록 지정
-    return InkWell(
-      //내부 구성으로 컨테이너를 선언
-      child: Container(
-        width: 160,
-        //디자인은 일단 임의로 지정
-        margin: const EdgeInsets.only(bottom: 40),
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xffff7f41), width: 4),
-            borderRadius: BorderRadius.circular(20)),
-        //내부 구성은 column 형태로 지정
-        child: Column(
-          //첫번째 구성요소는 아이콘으로 지정, 매개변수를 받아 표시한다
-          children: [
-            Icon(
-              contentsIcon,
-              size: 120,
-              color: const Color(0xffff7f41),
-            ),
-            //두번쨰 구성 요소는 텍스트로 지정, 매개변수를 받아 표시한다.
-            Text(
-              "$contentsVal",
-              style: TextStyle(color: Colors.white, fontSize: 15),
-            ),
-          ],
-        ),
-      ),
-      //터치시 화면 전환이 이루어지도록 한다. 이때 데이터를 갖고 이동한다.
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => mainPage()));
-      },
-    );
-  }
+  final List<String> imgList = [
+    "image/image.jpg",
+    "image/sound.jpg",
+    "image/read.jpg",
+  ];
 
   Widget build(BuildContext context) {
     //패딩 지정을 위해 앱의 가로 길이를 받아왓다
@@ -93,10 +61,31 @@ class _selectPage extends State<selectPage> {
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
                   ),
                 ),
+
+                Container(
+                  height: 250,
+                  width: 375,
+                  color: Color(0xfffbfbfb),
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Swiper(
+                      scale: 0.9,
+                      viewportFraction: 0.75,
+                      control: SwiperControl(),
+                      pagination: SwiperPagination(),
+                      itemCount: imgList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Image.asset(
+                          imgList[index],
+                          fit: BoxFit.contain,
+                        );
+                      },
+                      itemWidth: 300.0,
+                      itemHeight: 300.0,
+                    ),
+                  ),
+                ),
                 //이후의 위젯은 함수로 처리
-                selectContents(context, "Image contents", Icons.image_outlined),
-                selectContents(context, "Sound contents", Icons.mic_outlined),
-                selectContents(context, "Read contents", Icons.menu_book)
               ],
             ),
           ),

@@ -38,9 +38,9 @@ class selectImage extends StatelessWidget {
                     ],
                     color: const Color(0xffff7f41)),
                 child: InkWell(
-                  child: Image.asset('image/Elephant_1.png'),
+                  child: Image.asset('image/Elephant_1.jpg'),
                   onTap: () {
-                    Navigator.pop(context, 'image/Elephant_1.png');
+                    Navigator.pop(context, 'image/Elephant_1.jpg');
                   },
                 ),
               ),
@@ -65,9 +65,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Flamingo_1.png'),
+                      child: Image.asset('image/Flamingo_1.jpg'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Flamingo_1.png');
+                        Navigator.pop(context, 'image/Flamingo_1.jpg');
                       },
                     ),
                   ),
@@ -89,9 +89,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Giraffe_1.png'),
+                      child: Image.asset('image/Giraffe_1.jpg'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Giraffe_1.png');
+                        Navigator.pop(context, 'image/Giraffe_1.jpg');
                       },
                     ),
                   ),
@@ -118,9 +118,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Hippo_1.png'),
+                      child: Image.asset('image/Hippo_1.jpg'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Hippo_1.png');
+                        Navigator.pop(context, 'image/Hippo_1.jpg');
                       },
                     ),
                   ),
@@ -140,9 +140,9 @@ class selectImage extends StatelessWidget {
                         ],
                         color: const Color(0xffff7f41)),
                     child: InkWell(
-                      child: Image.asset('image/Koala_1.png'),
+                      child: Image.asset('image/Koala_1.jpg'),
                       onTap: () {
-                        Navigator.pop(context, 'image/Koala_1.png');
+                        Navigator.pop(context, 'image/Koala_1.jpg');
                       },
                     ),
                   ),
