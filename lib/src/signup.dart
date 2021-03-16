@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
+import 'package:flutter_app/src/selectImage.dart';
 import 'package:intl/intl.dart';
 import 'selectImage.dart';
 
@@ -24,8 +26,11 @@ class signUp_stateful extends StatefulWidget {
 }
 
 class _signUp_stateful extends State<signUp_stateful> {
-  Image imageFile = Image.asset('image/person.png',
-      width: 180, height: 180, fit: BoxFit.fill);
+  Image imageFile = Image.asset(
+    'image/person.png',
+    width: 180,
+    height: 180,
+  );
   @override
   Widget build(BuildContext context) {
     DateTime _selectedDateTime = DateTime.now();
@@ -86,6 +91,11 @@ class _signUp_stateful extends State<signUp_stateful> {
                   ),
                 ])),
               ),
+/*
+
+
+
+ */
 
               InkWell(
                 //사진이 들어갈 컨테이너
@@ -103,7 +113,7 @@ class _signUp_stateful extends State<signUp_stateful> {
                             spreadRadius: 0)
                       ],
                       color: const Color(0xffff7f41)),
-                  child: imageFile,
+                  child: ClipOval(child: imageFile),
                 ),
                 onTap: () async {
                   final reuslt = await Navigator.push(
@@ -111,7 +121,10 @@ class _signUp_stateful extends State<signUp_stateful> {
                     MaterialPageRoute(builder: (context) => selectImage()),
                   );
                   setState(() {
-                    imageFile = Image.asset(reuslt);
+                    imageFile = Image.asset(
+                      reuslt,
+                      fit: BoxFit.fill,
+                    );
                   });
                 },
               ),
