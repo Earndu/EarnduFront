@@ -64,11 +64,12 @@ class _wish_down extends State<wish_down> {
                                 color: const Color(0xffededed), width: 3))),
                     // 리스트뷰가 들어갈 컨테이너
                     Container(
-                      height: 230,
+                      height: 240,
                       width: 375,
                       child: ListView(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 27, vertical: 20),
+                          horizontal: 27,
+                        ),
                         children: <Widget>[
                           wish_list(context, 'Elementary Math', 'Orlando'),
                           wish_list(context, 'Basic English', 'Garry'),

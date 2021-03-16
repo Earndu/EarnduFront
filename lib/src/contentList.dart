@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flutter/cupertino.dart';
 
 class contentList extends StatelessWidget {
   @override
@@ -57,18 +59,18 @@ class _contentListStateful extends State<contentListStateful> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 27, vertical: 20),
                 children: <Widget>[
-                  wish_list(context, 'Elementary Math', 'Orlando'),
-                  wish_list(context, 'Basic English', 'Garry'),
-                  wish_list(context, 'History of world', 'Bob'),
-                  wish_list(context, 'Elementary Math', 'Orlando'),
-                  wish_list(context, 'Basic English', 'Garry'),
-                  wish_list(context, 'History of world', 'Bob'),
-                  wish_list(context, 'Elementary Math', 'Orlando'),
-                  wish_list(context, 'Basic English', 'Garry'),
-                  wish_list(context, 'History of world', 'Bob'),
-                  wish_list(context, 'Elementary Math', 'Orlando'),
-                  wish_list(context, 'Basic English', 'Garry'),
-                  wish_list(context, 'History of world', 'Bob'),
+                  contents(context, 'Elementary Math', 'Orlando'),
+                  contents(context, 'Basic English', 'Garry'),
+                  contents(context, 'History of world', 'Bob'),
+                  contents(context, 'Elementary Math', 'Orlando'),
+                  contents(context, 'Basic English', 'Garry'),
+                  contents(context, 'History of world', 'Bob'),
+                  contents(context, 'Elementary Math', 'Orlando'),
+                  contents(context, 'Basic English', 'Garry'),
+                  contents(context, 'History of world', 'Bob'),
+                  contents(context, 'Elementary Math', 'Orlando'),
+                  contents(context, 'Basic English', 'Garry'),
+                  contents(context, 'History of world', 'Bob'),
                 ],
               ),
             ),
@@ -79,7 +81,7 @@ class _contentListStateful extends State<contentListStateful> {
   }
 
   //리스트  요소 함수
-  Widget wish_list(BuildContext context, String subName, String tName) {
+  Widget contents(BuildContext context, String subName, String tName) {
     bool favoritePressed = false;
     return Container(
       width: 300,
@@ -162,6 +164,65 @@ class _contentListStateful extends State<contentListStateful> {
         ),
         onTap: () {
           print("object");
+          showCupertinoModalBottomSheet(
+              backgroundColor: Color(0xfffbfbfb),
+              expand: true,
+              context: context,
+              builder: (BuildContext context) {
+                return SingleChildScrollView(
+                  controller: ModalScrollController.of(context),
+                  child: Container(
+                    padding: const EdgeInsets.all(28),
+                    child: Column(
+                      children: [
+                        Container(
+                            child: Row(
+                          children: <Widget>[
+                            Container(
+                                width: 59,
+                                height: 59,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(13)),
+                                    color: const Color(0xffffc12f))),
+                            Container(
+                              height: 50,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                children: [
+                                  Container(
+                                      child: Text(subName,
+                                          style: const TextStyle(
+                                              decoration: TextDecoration.none,
+                                              color: const Color(0xff3d4047),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "Arial",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 20.0),
+                                          textAlign: TextAlign.left)),
+                                  Container(
+                                      margin: const EdgeInsets.only(top: 9),
+                                      alignment: Alignment.bottomLeft,
+                                      child: Text("Math",
+                                          style: const TextStyle(
+                                              decoration: TextDecoration.none,
+                                              color: const Color(0xff5c5d60),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "Arial",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 15.0),
+                                          textAlign: TextAlign.left)),
+                                ],
+                              ),
+                            )
+                          ],
+                        ))
+                      ],
+                    ),
+                  ),
+                );
+              });
         },
       ),
     );
