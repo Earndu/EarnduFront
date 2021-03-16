@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_app/src/contentList.dart';
+import 'package:flutter_app/src/sub_widget/mypage_widget.dart';
+import '../contentList.dart';
 
 //과목이름 갱신용
 //
@@ -50,7 +53,10 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
         ],
       ),
       onTap: () {
-        print(sub);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => contentListStateful(subName: sub)));
       },
     ),
   );
@@ -92,11 +98,15 @@ Widget historyCard(BuildContext context, String sub, double wid_val) {
               padding: const EdgeInsets.all(3),
               margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 17),
               decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('image/Elephant_1.png'),
+                  fit: BoxFit.fill,
+                ),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: const Color(0xffffc12f),
               ),
             ),
-            // child: Image.asset(
+            // child: Image.asset
             //   'image/menubook.png',
             //   width: 50,
             //   height: 50,

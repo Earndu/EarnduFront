@@ -76,10 +76,12 @@ class _selectPage extends State<selectPage> {
                           SwiperPagination(builder: SwiperPagination.rect),
                       itemCount: imgList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Image.asset(
-                          imgList[index],
-                          fit: BoxFit.contain,
-                        );
+                        return ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              imgList[index],
+                              fit: BoxFit.cover,
+                            ));
                       },
                       itemWidth: 300.0,
                       itemHeight: 300.0,

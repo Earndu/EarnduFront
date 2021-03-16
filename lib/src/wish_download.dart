@@ -32,7 +32,7 @@ class _wish_down extends State<wish_down> {
               //위시리스트를 작성하기 위한 컬럼 할당
               Container(
                 //위시리스트의 요소들이 들어가기 위한 공간 할당
-                height: 320,
+                height: 330,
                 //컨테이너 내부에 다시 컬럼 형태로 위젯 지정
                 child: Column(
                   //전체적인 배치는 왼쪽에 붙도록 지정
@@ -112,9 +112,17 @@ class _wish_down extends State<wish_down> {
                             border: Border.all(
                                 color: const Color(0xffededed), width: 3))),
                     Container(
-                      height: 230,
+                      height: 285,
                       width: 375,
-                      child: ListView(),
+                      child: ListView(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 27, vertical: 20),
+                        children: <Widget>[
+                          download_list(context, 'Elementary Math', 'Orlando'),
+                          download_list(context, 'Basic English', 'Garry'),
+                          download_list(context, 'History of world', 'Bob'),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -203,6 +211,119 @@ class _wish_down extends State<wish_down> {
                   setState(() {
                     favoritePressed = !favoritePressed;
                   });
+                },
+              ),
+            )
+          ],
+        ),
+        onTap: () {
+          print("object");
+        },
+      ),
+    );
+  }
+
+  //리스트  요소 함수
+  Widget download_list(BuildContext context, String subName, String tName) {
+    bool favoritePressed = false;
+    int remain = 0;
+    return Container(
+      width: 300,
+      height: 83,
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(14)),
+          boxShadow: [
+            BoxShadow(
+                color: const Color(0x29000000),
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 0)
+          ],
+          color: const Color(0xffffffff)),
+      child: InkWell(
+        child: Row(
+          children: <Widget>[
+            Container(
+                margin: const EdgeInsets.only(left: 17),
+                width: 59,
+                height: 59,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(13)),
+                    color: const Color(0xffffc12f))),
+            Container(
+              margin: const EdgeInsets.only(left: 17),
+              width: 150,
+              height: 83,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 11, bottom: 4),
+                    child: Text('$subName',
+                        style: const TextStyle(
+                            color: const Color(0xff000000),
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "Arial",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 15.0),
+                        textAlign: TextAlign.left),
+                  ),
+                  Container(
+                    child: Text("$tName",
+                        style: const TextStyle(
+                            color: const Color(0xff000000),
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Arial",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 10.0),
+                        textAlign: TextAlign.left),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 6),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: InkWell(
+                            child: Icon(
+                              Icons.delete,
+                              color: Color(0xffff7f41),
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                        Container(
+                          child: Text("$remain" + ' week later',
+                              style: const TextStyle(
+                                  color: const Color(0xff5c5d60),
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "Arial",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 10.0)),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              width: 30,
+              height: 60,
+              margin: const EdgeInsets.only(
+                left: 25,
+              ),
+              child: IconButton(
+                iconSize: 25.0,
+                icon: Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Color(
+                    0xffff7f41,
+                  ),
+                  size: 50,
+                ),
+                onPressed: () {
+                  print('Hello');
                 },
               ),
             )
