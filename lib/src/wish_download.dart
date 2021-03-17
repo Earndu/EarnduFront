@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 //위시리스트, 다운로드리스트를 만들기위한 statefulwidget선언
 class wish_down extends StatefulWidget {
@@ -137,22 +138,84 @@ class _wish_down extends State<wish_down> {
 
 //리스트  요소 함수
   Widget wish_list(BuildContext context, String subName, String tName) {
-    bool favoritePressed = false;
-    return Container(
-      width: 300,
-      height: 83,
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(14)),
-          boxShadow: [
-            BoxShadow(
-                color: const Color(0x29000000),
-                offset: Offset(0, 3),
-                blurRadius: 6,
-                spreadRadius: 0)
-          ],
-          color: const Color(0xffffffff)),
-      child: InkWell(
+    bool favoritePressed = true;
+    IconData data = Icons.favorite;
+    return InkWell(
+      onTap: () {
+        showCupertinoModalBottomSheet(
+            backgroundColor: Color(0xfffbfbfb),
+            expand: true,
+            context: context,
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                controller: ModalScrollController.of(context),
+                child: Container(
+                  padding: const EdgeInsets.all(28),
+                  child: Column(
+                    children: [
+                      Container(
+                          child: Row(
+                        children: <Widget>[
+                          Container(
+                              width: 59,
+                              height: 59,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(13)),
+                                  color: const Color(0xffffc12f))),
+                          Container(
+                            height: 50,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              children: [
+                                Container(
+                                    child: Text(subName,
+                                        style: const TextStyle(
+                                            decoration: TextDecoration.none,
+                                            color: const Color(0xff3d4047),
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Arial",
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 20.0),
+                                        textAlign: TextAlign.left)),
+                                Container(
+                                    margin: const EdgeInsets.only(top: 9),
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text("Math",
+                                        style: const TextStyle(
+                                            decoration: TextDecoration.none,
+                                            color: const Color(0xff5c5d60),
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Arial",
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 15.0),
+                                        textAlign: TextAlign.left)),
+                              ],
+                            ),
+                          )
+                        ],
+                      )),
+                      Container()
+                    ],
+                  ),
+                ),
+              );
+            });
+      },
+      child: Container(
+        width: 300,
+        height: 83,
+        margin: const EdgeInsets.symmetric(vertical: 20),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(14)),
+            boxShadow: [
+              BoxShadow(
+                  color: const Color(0x29000000),
+                  offset: Offset(0, 3),
+                  blurRadius: 6,
+                  spreadRadius: 0)
+            ],
+            color: const Color(0xffffffff)),
         child: Row(
           children: <Widget>[
             Container(
@@ -193,33 +256,30 @@ class _wish_down extends State<wish_down> {
                 ],
               ),
             ),
-            Container(
-              width: 30,
-              height: 50,
-              margin: const EdgeInsets.only(left: 25, top: 30),
-              child: IconButton(
-                iconSize: 25.0,
-                icon: favoritePressed == true
-                    ? Icon(
-                        Icons.favorite,
-                        color: Color(0xffff7f41),
-                      )
-                    : Icon(
-                        Icons.favorite_outline,
-                        color: Color(0xffff7f41),
-                      ),
-                onPressed: () {
-                  setState(() {
-                    favoritePressed = !favoritePressed;
-                  });
-                },
+            InkWell(
+              child: Container(
+                width: 50,
+                height: 50,
+                margin: const EdgeInsets.only(left: 25, top: 30),
+                child: Icon(
+                  Icons.favorite,
+                  color: Color(0xffff7f41),
+                ),
               ),
+              onTap: () {
+                setState(() {
+                  if (favoritePressed == true) {
+                    favoritePressed = !favoritePressed;
+                    data = Icons.favorite_outline;
+                  } else {
+                    favoritePressed = !favoritePressed;
+                    data = Icons.favorite;
+                  }
+                });
+              },
             )
           ],
         ),
-        onTap: () {
-          print("object");
-        },
       ),
     );
   }
@@ -290,7 +350,50 @@ class _wish_down extends State<wish_down> {
                               Icons.delete,
                               color: Color(0xffff7f41),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              showAlertDialog(context) {
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.delete,
+                                      size: 30,
+                                      color: Color(0xffff7f41),
+                                    ),
+                                    RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          style: const TextStyle(
+                                              color: const Color(0xffff2f2f),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "Arial",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 20.0),
+                                          text: "delete "),
+                                      TextSpan(
+                                          style: const TextStyle(
+                                              color: const Color(0xff3d4047),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "Arial",
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 20.0),
+                                          text: "this contents?")
+                                    ])),
+                                  ],
+                                );
+                                Widget remindButton = FlatButton(
+                                    child: Text("Remind me later"),
+                                    onPressed: () {});
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Notice"),
+                                  content: Text(
+                                      "Launching this missile will destroy the entire universe. Is this what you intended to do?"),
+                                  actions: [],
+                                );
+                              }
+
+                              ;
+                            },
                           ),
                         ),
                         Container(

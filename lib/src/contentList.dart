@@ -81,12 +81,13 @@ class _contentListStateful extends State<contentListStateful> {
   }
 
   //리스트  요소 함수
+  //이미지 매개변수  추가해서 이미지또한 들어갈 수 있게 하자
   Widget contents(BuildContext context, String subName, String tName) {
     bool favoritePressed = false;
     return Container(
       width: 300,
       height: 83,
-      margin: const EdgeInsets.symmetric(vertical: 20),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(14)),
           boxShadow: [
@@ -217,7 +218,8 @@ class _contentListStateful extends State<contentListStateful> {
                               ),
                             )
                           ],
-                        ))
+                        )),
+                        Container()
                       ],
                     ),
                   ),

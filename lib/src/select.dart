@@ -17,7 +17,6 @@ class selectPage extends StatefulWidget {
 class _selectPage extends State<selectPage> {
   @override
   selectData data;
-
   final List<String> imgList = [
     "image/image.jpg",
     "image/sound.jpg",
@@ -55,6 +54,7 @@ class _selectPage extends State<selectPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
 //첫번쨰 위젯은 컨테이너로 안에 텍스트를 받아들여 구성
+
                 Container(
                   height: 50,
                   margin: const EdgeInsets.only(top: 30, bottom: 15),
