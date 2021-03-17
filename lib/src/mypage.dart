@@ -11,7 +11,7 @@ class _myPage extends State<myPage> {
   @override
   String tmp = "";
   String userName = "";
-
+  int cnt = 0;
   //이미지랑 아이콘 둘 중 하나를 쓰기 위한 페이지
   void setImage(String img) {
     setState(() {
@@ -112,6 +112,7 @@ class _myPage extends State<myPage> {
                           ),
                         ),
                         onTap: () {
+                          cnt = 0;
                           setState(() {});
                         },
                       ),
@@ -143,6 +144,7 @@ class _myPage extends State<myPage> {
                           ),
                         ),
                         onTap: () {
+                          cnt = 1;
                           setState(() {});
                         },
                       ),
@@ -174,6 +176,7 @@ class _myPage extends State<myPage> {
                           ),
                         ),
                         onTap: () {
+                          cnt = 2;
                           setState(() {});
                         },
                       ),
@@ -189,7 +192,6 @@ class _myPage extends State<myPage> {
 
     Widget rectChart(BuildContext context) {
       int touchedIndex;
-
       List<PieChartSectionData> showingSections() {
         return List.generate(4, (i) {
           final isTouched = i == touchedIndex;
@@ -200,7 +202,7 @@ class _myPage extends State<myPage> {
               return PieChartSectionData(
                 color: const Color(0xff0293ee),
                 value: 40,
-                title: '40%',
+                title: 'Math',
                 radius: radius,
                 titleStyle: TextStyle(
                     fontSize: fontSize,
@@ -211,7 +213,7 @@ class _myPage extends State<myPage> {
               return PieChartSectionData(
                 color: const Color(0xfff8b250),
                 value: 30,
-                title: '30%',
+                title: 'English',
                 radius: radius,
                 titleStyle: TextStyle(
                     fontSize: fontSize,
@@ -222,7 +224,7 @@ class _myPage extends State<myPage> {
               return PieChartSectionData(
                 color: const Color(0xff845bef),
                 value: 15,
-                title: '15%',
+                title: 'History',
                 radius: radius,
                 titleStyle: TextStyle(
                     fontSize: fontSize,
@@ -233,7 +235,7 @@ class _myPage extends State<myPage> {
               return PieChartSectionData(
                 color: const Color(0xff13d38e),
                 value: 15,
-                title: '15%',
+                title: 'Science',
                 radius: radius,
                 titleStyle: TextStyle(
                     fontSize: fontSize,
