@@ -15,14 +15,24 @@ class selectImage extends StatelessWidget {
               Container(
                 //형식에 맞게 마진 지정
                 margin: const EdgeInsets.only(top: 54, bottom: 38),
-                child: Text("choose your character",
-                    style: const TextStyle(
-                        color: const Color(0xffff7f41),
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "Arial",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 25.0),
-                    textAlign: TextAlign.left),
+                child: Text(
+                  "choose your character",
+                  style: const TextStyle(
+                    color: const Color(0xffff7f41),
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "Arial",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 25.0,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: const Color(0x29000000),
+                        offset: Offset(5.0, 5.0),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.left,
+                ),
               ),
               //코끼리 이미지가 들어갈 컨테이너
               Container(

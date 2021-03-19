@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +25,7 @@ class contentListStateful extends StatefulWidget {
 class _contentListStateful extends State<contentListStateful> {
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         width: 375,
@@ -53,7 +56,7 @@ class _contentListStateful extends State<contentListStateful> {
                     border:
                         Border.all(color: const Color(0xffededed), width: 3))),
             Container(
-              height: 680,
+              height: _height * 0.88,
               width: 375,
               child: ListView(
                 padding:

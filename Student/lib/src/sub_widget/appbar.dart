@@ -25,7 +25,7 @@ Widget tabfunc(BuildContext context, IconData icon) {
 Widget customBar(BuildContext context) {
   return Container(
     color: const Color(0xfff2f2f2),
-    height: 78,
+    height: 70,
     padding: EdgeInsets.only(bottom: 2, top: 5),
     child: TabBar(
       labelStyle: TextStyle(fontSize: 10),

@@ -22,6 +22,11 @@ class _selectPage extends State<selectPage> {
     "image/sound.jpg",
     "image/read.jpg",
   ];
+  final List<String> nameList = [
+    "Image Contents",
+    "Sound Contents",
+    "Read Contents"
+  ];
 
   Widget build(BuildContext context) {
     //패딩 지정을 위해 앱의 가로 길이를 받아왓다
@@ -60,15 +65,25 @@ class _selectPage extends State<selectPage> {
                   margin: const EdgeInsets.only(top: 30, bottom: 15),
                   child: Text(
                     "Choose daily contents",
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 30,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 10.0,
+                          color: const Color(0x29000000),
+                          offset: Offset(5.0, 5.0),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-
+                //이미지와 텍스트를 가져와 swiper형태로 출력하는 컨테이너 구성
                 Container(
-                  height: 250,
+                  height: 300,
                   width: 375,
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(5),
                     child: Swiper(
                       scale: 0.8,
                       viewportFraction: 0.75,
@@ -76,12 +91,34 @@ class _selectPage extends State<selectPage> {
                           SwiperPagination(builder: SwiperPagination.rect),
                       itemCount: imgList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              imgList[index],
-                              fit: BoxFit.cover,
-                            ));
+                        return Column(
+                          children: <Widget>[
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                imgList[index],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Text(
+                              nameList[index],
+                              style: const TextStyle(
+                                color: const Color(0xff3d4047),
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Arial",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 30.0,
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 5.0,
+                                    color: const Color(0x29000000),
+                                    offset: Offset(5.0, 5.0),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        );
                       },
                       itemWidth: 300.0,
                       itemHeight: 300.0,

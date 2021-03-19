@@ -13,7 +13,17 @@ Widget setSub(BuildContext context, String sub) {
     alignment: Alignment(-0.72, 0.0),
     child: Text(
       '$sub',
-      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+      style: TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+        shadows: [
+          Shadow(
+            blurRadius: 10.0,
+            color: const Color(0x29000000),
+            offset: Offset(5.0, 5.0),
+          ),
+        ],
+      ),
     ),
   );
 }
