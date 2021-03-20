@@ -6,7 +6,7 @@ class wish_down extends StatefulWidget {
   State<StatefulWidget> createState() => _wish_down();
 }
 
-/*클래스로 ㅇ*/
+/*클래스로*/
 //상태변화를 위한 선언
 class _wish_down extends State<wish_down> {
   Widget build(BuildContext context) {
@@ -33,11 +33,11 @@ class _wish_down extends State<wish_down> {
               //위시리스트를 작성하기 위한 컬럼 할당
               Container(
                 //위시리스트의 요소들이 들어가기 위한 공간 할당
-                height: 330,
+                height: 690,
                 //컨테이너 내부에 다시 컬럼 형태로 위젯 지정
-                child: Column(
+                child: ListView(
                   //전체적인 배치는 왼쪽에 붙도록 지정
-                  crossAxisAlignment: CrossAxisAlignment.start,
+
                   //
                   children: [
                     //텍스트가 들어갈 컨테이너
@@ -63,34 +63,9 @@ class _wish_down extends State<wish_down> {
                         decoration: BoxDecoration(
                             border: Border.all(
                                 color: const Color(0xffededed), width: 3))),
-                    // 리스트뷰가 들어갈 컨테이너
-                    Container(
-                      height: 240,
-                      width: 375,
-                      child: ListView(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 27,
-                        ),
-                        children: <Widget>[
-                          wish_list(context, 'Elementary Math', 'Orlando'),
-                          wish_list(context, 'Basic English', 'Garry'),
-                          wish_list(context, 'History of world', 'Bob'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              //다운로드 리스트를 작성하기 위한 컬럼 할당
-              Container(
-                //높이는 위시리스트와 동일하게
-                height: 350,
-                //컬럼형태로 내부 위젯의 배치 지정
-                child: Column(
-                  //전반적인 위젯의 위치는 왼쪽으로
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //텍스트가 들어갈 컨테이너
+                    wish_list(context, 'Elementary Math', 'Orlando'),
+                    wish_list(context, 'Basic English', 'Garry'),
+                    wish_list(context, 'History of world', 'Bob'),
                     Container(
                       width: _width,
                       margin: const EdgeInsets.symmetric(
@@ -113,19 +88,19 @@ class _wish_down extends State<wish_down> {
                         decoration: BoxDecoration(
                             border: Border.all(
                                 color: const Color(0xffededed), width: 3))),
+                    //텍스트 밑의 바가 들어갈 컨테이너
                     Container(
-                      height: 285,
-                      width: 375,
-                      child: ListView(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 27, vertical: 20),
-                        children: <Widget>[
-                          download_list(context, 'Elementary Math', 'Orlando'),
-                          download_list(context, 'Basic English', 'Garry'),
-                          download_list(context, 'History of world', 'Bob'),
-                        ],
-                      ),
-                    ),
+                        width: 320,
+                        height: 0,
+                        margin: const EdgeInsets.symmetric(horizontal: 29),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color(0xffededed), width: 3))),
+                    download_list(context, 'Elementary Math', 'Orlando'),
+                    download_list(context, 'Basic English', 'Garry'),
+                    download_list(context, 'History of world', 'Bob'),
+
+                    // 리스트뷰가 들어갈 컨테이너
                   ],
                 ),
               ),
@@ -205,7 +180,7 @@ class _wish_down extends State<wish_down> {
       child: Container(
         width: 300,
         height: 83,
-        margin: const EdgeInsets.symmetric(vertical: 20),
+        margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(14)),
             boxShadow: [
@@ -289,9 +264,9 @@ class _wish_down extends State<wish_down> {
     bool favoritePressed = false;
     int remain = 0;
     return Container(
-      width: 300,
+      width: 280,
       height: 83,
-      margin: const EdgeInsets.symmetric(vertical: 20),
+      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(14)),
           boxShadow: [

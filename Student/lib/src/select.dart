@@ -18,9 +18,9 @@ class _selectPage extends State<selectPage> {
   @override
   selectData data;
   final List<String> imgList = [
-    "image/image.jpg",
-    "image/sound.jpg",
-    "image/read.jpg",
+    "image/image.png",
+    "image/sound.png",
+    "image/read.png",
   ];
   final List<String> nameList = [
     "Image Contents",
