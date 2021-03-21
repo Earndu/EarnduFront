@@ -18,9 +18,9 @@ class _selectPage extends State<selectPage> {
   @override
   selectData data;
   final List<String> imgList = [
-    "image/image.png",
-    "image/sound.png",
-    "image/read.png",
+    "image/Hippo_3.png",
+    "image/Flamingo_3.png",
+    "image/Koala_3.png",
   ];
   final List<String> nameList = [
     "Image Contents",
@@ -123,6 +123,7 @@ class _selectPage extends State<selectPage> {
                       itemWidth: 300.0,
                       itemHeight: 300.0,
                       onTap: (int index) {
+                        if (index == 1) ;
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => mainPage()));
                       },

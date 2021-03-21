@@ -116,11 +116,6 @@ Widget historyCard(BuildContext context, String sub, double wid_val) {
                 color: const Color(0xffffc12f),
               ),
             ),
-            // child: Image.asset
-            //   'image/menubook.png',
-            //   width: 50,
-            //   height: 50,
-            // )),
             Container(
               padding: const EdgeInsets.all(3),
               margin: const EdgeInsets.all(3),
