@@ -40,23 +40,21 @@ class _home extends State<home> {
                   //컨테이너 내부 요소로 카드 선언
                   child: InkWell(
                     child: Card(
-                        //그림자 밝기 지정
-                        elevation: 4,
-                        //카드를 형태 지정
-                        shape: RoundedRectangleBorder(
-                            //모서리를 둥글게 만들 것이다
-                            borderRadius: BorderRadius.circular(36)),
-                        //1차적으로 내부 구성을 열 타입으로 생성, 소개 멘트와 이미지가 들어갈것이다
-                        child: Center(
-                          child: Text("Tutorial",
-                              style: const TextStyle(
-                                  color: const Color(0xffffc12f),
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "Arial",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 40.0),
-                              textAlign: TextAlign.left),
-                        )),
+                      //그림자 밝기 지정
+                      elevation: 4,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      //카드를 형태 지정
+                      shape: RoundedRectangleBorder(
+                          //모서리를 둥글게 만들 것이다
+                          borderRadius: BorderRadius.circular(36)),
+                      //1차적으로 내부 구성을 열 타입으로 생성, 소개 멘트와 이미지가 들어갈것이다
+                      child: Center(
+                          child: Image.asset(
+                        'image/image_tutorial.png',
+                        width: 350,
+                        fit: BoxFit.cover,
+                      )),
+                    ),
                   ),
                 ),
 

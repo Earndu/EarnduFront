@@ -167,7 +167,6 @@ class _contentListStateful extends State<contentListStateful> {
           ],
         ),
         onTap: () {
-          print("object");
           showCupertinoModalBottomSheet(
               backgroundColor: Color(0xfffbfbfb),
               expand: true,
