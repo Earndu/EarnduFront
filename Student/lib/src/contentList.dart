@@ -16,7 +16,11 @@ class contentList extends StatelessWidget {
 
 class contentListStateful extends StatefulWidget {
   final String subName;
-  contentListStateful({Key key, this.subName}) : super(key: key);
+
+  contentListStateful({
+    Key key,
+    this.subName,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _contentListStateful();

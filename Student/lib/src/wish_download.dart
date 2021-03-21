@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/contents.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'contents.dart';
 
 //위시리스트, 다운로드리스트를 만들기위한 statefulwidget선언
 class wish_down extends StatefulWidget {
@@ -10,6 +12,25 @@ class wish_down extends StatefulWidget {
 //상태변화를 위한 선언
 class _wish_down extends State<wish_down> {
   Widget build(BuildContext context) {
+    //위시리스트 맵선언
+
+    final List<String> wish_arr_sub = List();
+    final List<String> wish_arr_teacher = List();
+    wish_arr_sub.add('Elementary Math');
+    wish_arr_sub.add('Elementary Math');
+    wish_arr_sub.add('Elementary Math');
+    wish_arr_teacher.add('Orlando');
+    wish_arr_teacher.add('Orlando');
+    wish_arr_teacher.add('Orlando');
+
+    List<String> down_arr_sub = List();
+    List<String> down_arr_teacher = List();
+    down_arr_sub.add('value');
+    down_arr_sub.add('value');
+    down_arr_sub.add('value');
+    down_arr_teacher.add('value');
+    down_arr_teacher.add('value');
+    down_arr_teacher.add('value');
     //데이터가 들어간다면 아마
     //너비 및 높이를 계산하기 위한 변수 할당
     double _height = MediaQuery.of(context).size.height;
@@ -63,9 +84,11 @@ class _wish_down extends State<wish_down> {
                         decoration: BoxDecoration(
                             border: Border.all(
                                 color: const Color(0xffededed), width: 3))),
-                    wish_list(context, 'Elementary Math', 'Orlando'),
-                    wish_list(context, 'Basic English', 'Garry'),
-                    wish_list(context, 'History of world', 'Bob'),
+
+                    for (int i = 0; i < wish_arr_sub.length; i++)
+                      wish_list(context, wish_arr_sub[i], wish_arr_teacher[i],
+                          wish_arr_sub, wish_arr_teacher),
+
                     Container(
                       width: _width,
                       margin: const EdgeInsets.symmetric(
@@ -96,10 +119,9 @@ class _wish_down extends State<wish_down> {
                         decoration: BoxDecoration(
                             border: Border.all(
                                 color: const Color(0xffededed), width: 3))),
-                    download_list(context, 'Elementary Math', 'Orlando'),
-                    download_list(context, 'Basic English', 'Garry'),
-                    download_list(context, 'History of world', 'Bob'),
-
+                    for (int i = 0; i < down_arr_sub.length; i++)
+                      download_list(
+                          context, down_arr_sub[i], down_arr_teacher[i]),
                     // 리스트뷰가 들어갈 컨테이너
                   ],
                 ),
@@ -111,8 +133,9 @@ class _wish_down extends State<wish_down> {
     );
   }
 
-//리스트  요소 함수
-  Widget wish_list(BuildContext context, String subName, String tName) {
+  //리스트  요소 함수
+  Widget wish_list(BuildContext context, String subName, String tName,
+      List<String> sList, List<String> tList) {
     bool favoritePressed = true;
     IconData data = Icons.favorite;
     return InkWell(
@@ -242,15 +265,7 @@ class _wish_down extends State<wish_down> {
                 ),
               ),
               onTap: () {
-                setState(() {
-                  if (favoritePressed == true) {
-                    favoritePressed = !favoritePressed;
-                    data = Icons.favorite_outline;
-                  } else {
-                    favoritePressed = !favoritePressed;
-                    data = Icons.favorite;
-                  }
-                });
+                setState(() {});
               },
             )
           ],
@@ -403,6 +418,11 @@ class _wish_down extends State<wish_down> {
                 ),
                 onPressed: () {
                   print('Hello');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => contentsPageStateful(
+                              contentsName: subName, contentsType: 1)));
                 },
               ),
             )
