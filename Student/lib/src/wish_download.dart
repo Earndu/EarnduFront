@@ -3,6 +3,7 @@ import 'package:flutter_app/src/contents.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'contents.dart';
 import 'sub_widget/wish_down_widget.dart';
+import 'package:provider/provider.dart';
 
 //위시리스트, 다운로드리스트를 만들기위한 statefulwidget선언
 class wish_down extends StatefulWidget {
