@@ -1,6 +1,7 @@
 //컨텐츠 내용을 표시하는 페이지 컨텐츠 타입에 따라 표시되는 내용이 다르다.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class contentsPage extends StatelessWidget {
   @override
@@ -27,6 +28,13 @@ class _contentsPageStateful extends State<contentsPageStateful> {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
+    List<String> imgList = [
+      'image/math_1.png',
+      'image/math_2.png',
+      'image/math_3.png',
+      'image/math_4.png',
+      'image/math_5.png',
+    ];
     return Scaffold(
       body: Container(
         width: _width,
@@ -54,6 +62,11 @@ class _contentsPageStateful extends State<contentsPageStateful> {
                 decoration: BoxDecoration(
                     border:
                         Border.all(color: const Color(0xffededed), width: 3))),
+            Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: 300,
+                height: 600,
+                child: imageContents(context, 1, imgList)),
           ],
         )),
       ),
@@ -68,7 +81,23 @@ class _contentsPageStateful extends State<contentsPageStateful> {
     return Container();
   }
 
-  Widget imageContents(BuildContext context, int contentsType) {
-    return Container();
+  Widget imageContents(
+      BuildContext context, int contentsType, List<String> imgList) {
+    return Scaffold(
+      body: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: imgList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+              margin: const EdgeInsets.only(bottom: 30),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    imgList[index],
+                    fit: BoxFit.fill,
+                  )));
+        },
+      ),
+    );
   }
 }

@@ -163,7 +163,7 @@ class _contentListStateful extends State<contentListStateful> {
                       ),
                 onPressed: () {
                   setState(() {
-                    favoritePressed = !favoritePressed;
+                    FlutterDialog(context);
                   });
                 },
               ),
@@ -234,5 +234,51 @@ class _contentListStateful extends State<contentListStateful> {
         },
       ),
     );
+  }
+
+  void FlutterDialog(BuildContext context) {
+    // final earndu = Provider.of<earnduData>(context);
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //Dialog Main Title
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Text("Wish List"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Get this content?",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Yes"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              new FlatButton(
+                child: new Text("No"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
   }
 }

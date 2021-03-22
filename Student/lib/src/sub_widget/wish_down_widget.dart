@@ -136,7 +136,7 @@ Widget wish_list(BuildContext context, String subName, String tName,
                 color: Color(0xffff7f41),
               ),
             ),
-            onTap: () => FlutterDialog(context, subName, tName),
+            onTap: () => FlutterDialog(context),
           )
         ],
       ),
@@ -211,7 +211,7 @@ Widget download_list(BuildContext context, String subName, String tName) {
                             color: Color(0xffff7f41),
                           ),
                           onTap: () {
-                            FlutterDialog(context, subName, tName);
+                            FlutterDialog(context);
                           },
                         ),
                       ),
@@ -265,8 +265,8 @@ Widget download_list(BuildContext context, String subName, String tName) {
   );
 }
 
-void FlutterDialog(BuildContext context, String subName, String tName) {
-  final earndu = Provider.of<earnduData>(context);
+void FlutterDialog(BuildContext context) {
+  // final earndu = Provider.of<earnduData>(context);
   showDialog(
       context: context,
       //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
@@ -303,7 +303,6 @@ void FlutterDialog(BuildContext context, String subName, String tName) {
               child: new Text("No"),
               onPressed: () {
                 Navigator.pop(context);
-                earndu.deleteContents(subName, tName);
               },
             ),
           ],

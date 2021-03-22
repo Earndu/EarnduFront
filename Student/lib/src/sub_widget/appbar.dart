@@ -52,10 +52,10 @@ Widget customBar(BuildContext context) {
         ),
         Tab(
           icon: Icon(
-            Icons.school,
+            Icons.file_download,
             size: 30,
           ),
-          text: 'quiz',
+          text: 'Download',
         ),
         Tab(
           icon: Icon(
@@ -68,26 +68,3 @@ Widget customBar(BuildContext context) {
     ),
   );
 }
-// Widget appBar(BuildContext context) {
-//   return AppBar(
-//     //배경색은 하얀색
-//     backgroundColor: Colors.white,
-//     //그라데이션 설정은 없도록
-//     elevation: 0,
-//     //탭 하단에 탭바를 생성하도록 선언
-//     bottom: TabBar(
-//       labelColor: Colors.white, //텍스트와 아이콘 색상 변경
-//       unselectedLabelColor: Colors.white54,
-//       indicatorColor: Colors.white, //선택된 탭의 밑줄
-//       indicatorSize: TabBarIndicatorSize.label, //밑줄 너비
-//       indicatorWeight: 2, //밑줄 길이
-//       // 탭리스트에 탭 선언
-//       tabs: [
-//         tabfunc(context, Icons.home_outlined),
-//         tabfunc(context, Icons.favorite_outline),
-//         tabfunc(context, Icons.school),
-//         tabfunc(context, Icons.person_outline_rounded),
-//       ],
-//     ),
-//   );
-// }

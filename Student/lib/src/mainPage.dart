@@ -3,8 +3,6 @@ import 'sub_widget/appbar.dart';
 import 'mypage.dart';
 import 'tutorial.dart';
 import 'sub_widget/wish_down_widget.dart';
-
-import 'wish_download.dart';
 import 'sub_widget/home_widget.dart';
 
 //상태 변동이 수행되어야 하는 스테이트 풀 위젯 선언
@@ -212,11 +210,44 @@ class _mainPage extends State<mainPage> {
                                   wish_arr_teacher[i],
                                   wish_arr_sub,
                                   wish_arr_teacher),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            //wish_down(),
+            MaterialApp(
+              //디버그 표시는 제거
+              debugShowCheckedModeBanner: false,
+              //스캐폴드 위젯을 통해 기본 골자를 구성
+              home: Scaffold(
+                //전체적인 틀을 잡기 위한 컨테이너를 선언
+                body: Container(
+                  //색은 앱 바에 맞춰서 흰색으로
+                  color: Colors.white,
+                  //너비는 지원 기기에 맞게 설정
+                  width: _width,
+                  //컬럼 형태로 위젯을 배치하도록 했다
+                  child: Column(
+                    children: [
+                      //위시리스트를 작성하기 위한 컬럼 할당
+                      Container(
+                        //위시리스트의 요소들이 들어가기 위한 공간 할당
+                        height: 690,
+                        //컨테이너 내부에 다시 컬럼 형태로 위젯 지정
+                        child: ListView(
+                          //전체적인 배치는 왼쪽에 붙도록 지정
 
+                          //
+                          children: [
+                            //텍스트가 들어갈 컨테이너
                             Container(
                               width: _width,
                               margin: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 29),
+                                  vertical: 32, horizontal: 29),
                               child: Text("Download list",
                                   style: const TextStyle(
                                       color: const Color(0xff000000),
@@ -226,7 +257,7 @@ class _mainPage extends State<mainPage> {
                                       fontSize: 20.0),
                                   textAlign: TextAlign.left),
                             ),
-                            //텍스트 밑의 바가 들어갈 컨테이너
+                            //텍스트 밑에 있는 바가 들어갈 컨테이너
                             Container(
                                 width: 320,
                                 height: 0,
@@ -236,19 +267,11 @@ class _mainPage extends State<mainPage> {
                                     border: Border.all(
                                         color: const Color(0xffededed),
                                         width: 3))),
-                            //텍스트 밑의 바가 들어갈 컨테이너
-                            Container(
-                                width: 320,
-                                height: 0,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 29),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: const Color(0xffededed),
-                                        width: 3))),
+
                             for (int i = 0; i < down_arr_sub.length; i++)
                               download_list(context, down_arr_sub[i],
                                   down_arr_teacher[i]),
+
                             // 리스트뷰가 들어갈 컨테이너
                           ],
                         ),
@@ -258,7 +281,6 @@ class _mainPage extends State<mainPage> {
                 ),
               ),
             ),
-            Icon(Icons.home),
             //마지막 사용자 정보를 가져오는 컨테이너
             myPage()
           ]),

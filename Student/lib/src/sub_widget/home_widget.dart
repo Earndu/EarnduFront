@@ -77,7 +77,7 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
 Widget historyCard(BuildContext context, String sub, double wid_val) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 0),
-    margin: const EdgeInsets.only(bottom: 5),
+    margin: const EdgeInsets.only(bottom: 10),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(16),
     ),
