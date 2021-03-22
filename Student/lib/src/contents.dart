@@ -1,3 +1,5 @@
+//컨텐츠 내용을 표시하는 페이지 컨텐츠 타입에 따라 표시되는 내용이 다르다.
+
 import 'package:flutter/material.dart';
 
 class contentsPage extends StatelessWidget {

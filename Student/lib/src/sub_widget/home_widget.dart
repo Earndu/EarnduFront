@@ -72,6 +72,7 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
   );
 }
 
+//히스토리카드 제작용
 @override
 Widget historyCard(BuildContext context, String sub, double wid_val) {
   return Container(

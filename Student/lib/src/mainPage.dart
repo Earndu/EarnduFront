@@ -128,6 +128,7 @@ class _mainPage extends State<mainPage> {
                 ),
               ),
             ),
+            //위시리스트와 다운로드 리스트가 들어가기 위한 페이지
             wish_down(),
             Icon(Icons.home),
             //마지막 사용자 정보를 가져오는 컨테이너

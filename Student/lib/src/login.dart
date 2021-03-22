@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main.dart';
 import 'package:flutter_app/src/signup.dart';
 import 'package:provider/provider.dart';
 import 'data.dart';
-import 'mainPage.dart';
 import 'select.dart';
 
 class loginPage extends StatelessWidget {

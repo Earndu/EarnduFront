@@ -1,23 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/data.dart';
+import 'package:provider/provider.dart';
+import '../contents.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-Widget wish_list(BuildContext context, String subName, String tName) {
-  IconData favorite = Icons.favorite;
-
-  return Container(
-    width: 300,
-    height: 83,
-    margin: const EdgeInsets.symmetric(vertical: 20),
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(14)),
-        boxShadow: [
-          BoxShadow(
-              color: const Color(0x29000000),
-              offset: Offset(0, 3),
-              blurRadius: 6,
-              spreadRadius: 0)
-        ],
-        color: const Color(0xffffffff)),
-    child: InkWell(
+//리스트  요소 함수
+Widget wish_list(BuildContext context, String subName, String tName,
+    List<String> sList, List<String> tList) {
+  bool favoritePressed = true;
+  IconData data = Icons.favorite;
+  return InkWell(
+    onTap: () {
+      showCupertinoModalBottomSheet(
+          backgroundColor: Color(0xfffbfbfb),
+          expand: true,
+          context: context,
+          builder: (BuildContext context) {
+            return SingleChildScrollView(
+              controller: ModalScrollController.of(context),
+              child: Container(
+                padding: const EdgeInsets.all(28),
+                child: Column(
+                  children: [
+                    Container(
+                        child: Row(
+                      children: <Widget>[
+                        Container(
+                            width: 59,
+                            height: 59,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(13)),
+                                color: const Color(0xffffc12f))),
+                        Container(
+                          height: 50,
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            children: [
+                              Container(
+                                  child: Text(subName,
+                                      style: const TextStyle(
+                                          decoration: TextDecoration.none,
+                                          color: const Color(0xff3d4047),
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "Arial",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 20.0),
+                                      textAlign: TextAlign.left)),
+                              Container(
+                                  margin: const EdgeInsets.only(top: 9),
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text("Math",
+                                      style: const TextStyle(
+                                          decoration: TextDecoration.none,
+                                          color: const Color(0xff5c5d60),
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "Arial",
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 15.0),
+                                      textAlign: TextAlign.left)),
+                            ],
+                          ),
+                        )
+                      ],
+                    )),
+                    Container()
+                  ],
+                ),
+              ),
+            );
+          });
+    },
+    child: Container(
+      width: 300,
+      height: 83,
+      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(14)),
+          boxShadow: [
+            BoxShadow(
+                color: const Color(0x29000000),
+                offset: Offset(0, 3),
+                blurRadius: 6,
+                spreadRadius: 0)
+          ],
+          color: const Color(0xffffffff)),
       child: Row(
         children: <Widget>[
           Container(
@@ -58,24 +125,188 @@ Widget wish_list(BuildContext context, String subName, String tName) {
               ],
             ),
           ),
+          InkWell(
+            child: Container(
+              width: 50,
+              height: 50,
+              margin: const EdgeInsets.only(left: 25, top: 30),
+              child: Icon(
+                Icons.favorite,
+                size: 30,
+                color: Color(0xffff7f41),
+              ),
+            ),
+            onTap: () => FlutterDialog(context, subName, tName),
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+//다운로드 리스트  요소 함수
+Widget download_list(BuildContext context, String subName, String tName) {
+  bool favoritePressed = false;
+  int remain = 0;
+  return Container(
+    width: 280,
+    height: 83,
+    margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(14)),
+        boxShadow: [
+          BoxShadow(
+              color: const Color(0x29000000),
+              offset: Offset(0, 3),
+              blurRadius: 6,
+              spreadRadius: 0)
+        ],
+        color: const Color(0xffffffff)),
+    child: InkWell(
+      child: Row(
+        children: <Widget>[
           Container(
-            width: 20,
-            margin: const EdgeInsets.only(left: 20, top: 30),
+              margin: const EdgeInsets.only(left: 17),
+              width: 59,
+              height: 59,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
+                  color: const Color(0xffffc12f))),
+          Container(
+            margin: const EdgeInsets.only(left: 17),
+            width: 150,
+            height: 83,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 11, bottom: 4),
+                  child: Text('$subName',
+                      style: const TextStyle(
+                          color: const Color(0xff000000),
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "Arial",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 15.0),
+                      textAlign: TextAlign.left),
+                ),
+                Container(
+                  child: Text("$tName",
+                      style: const TextStyle(
+                          color: const Color(0xff000000),
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Arial",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 10.0),
+                      textAlign: TextAlign.left),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 6),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        child: InkWell(
+                          child: Icon(
+                            Icons.delete,
+                            color: Color(0xffff7f41),
+                          ),
+                          onTap: () {
+                            FlutterDialog(context, subName, tName);
+                          },
+                        ),
+                      ),
+                      Container(
+                        child: Text("$remain" + ' week later',
+                            style: const TextStyle(
+                                color: const Color(0xff5c5d60),
+                                fontWeight: FontWeight.w400,
+                                fontFamily: "Arial",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 10.0)),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          //컨텐츠 이용 페이지로 이동
+          Container(
+            width: 30,
+            height: 60,
+            margin: const EdgeInsets.only(
+              left: 25,
+            ),
             child: IconButton(
-              icon: Icon(favorite),
-              color: Color(0xffff7f41),
+              iconSize: 25.0,
+              icon: Icon(
+                Icons.keyboard_arrow_right,
+                color: Color(
+                  0xffff7f41,
+                ),
+                size: 50,
+              ),
               onPressed: () {
-                if (favorite == Icons.favorite) {
-                  favorite = Icons.favorite_outline;
-                } else {
-                  favorite = Icons.favorite;
-                }
+                print('Hello');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => contentsPageStateful(
+                            contentsName: subName, contentsType: 1)));
               },
             ),
           )
         ],
       ),
-      onTap: () {},
+      onTap: () {
+        print("object");
+      },
     ),
   );
+}
+
+void FlutterDialog(BuildContext context, String subName, String tName) {
+  final earndu = Provider.of<earnduData>(context);
+  showDialog(
+      context: context,
+      //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          //Dialog Main Title
+          title: Column(
+            children: <Widget>[
+              new Text("Delete"),
+            ],
+          ),
+          //
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Delete this contents?",
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Yes"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            new FlatButton(
+              child: new Text("No"),
+              onPressed: () {
+                Navigator.pop(context);
+                earndu.deleteContents(subName, tName);
+              },
+            ),
+          ],
+        );
+      });
 }
