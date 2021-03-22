@@ -34,6 +34,8 @@ class _selectPage extends State<selectPage> {
     //패딩 지정을 위해 앱의 가로 길이를 받아왓다
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
+
+    int tutorialCount = 0;
     //머티리얼 앱을 반환하도록 설정
     return MaterialApp(
       //거지같은 디버그 줄 제거
@@ -124,13 +126,17 @@ class _selectPage extends State<selectPage> {
                       },
                       itemWidth: 300.0,
                       itemHeight: 300.0,
-                      onTap: (int index) async {
-                        if (index == 1) ;
-
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => mainPage()));
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => appTutorial()));
+                      onTap: (int index) {
+                        if (tutorialCount == 0) {
+                          tutorialCount += 1;
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => mainPage()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => appTutorial()));
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => mainPage()));
+                        }
                       },
                     ),
                   ),
