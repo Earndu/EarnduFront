@@ -31,9 +31,14 @@ dependencies:
   fl_chart: ^0.12.3
   share:
   intl:
+  #달력 맹글기용
   cupertino_date_textbox:
+  # 컨텐츠 소개 시, 아래에서 올라오는 모습으로
   modal_bottom_sheet: ^1.0.0+1
+  #데이터를  하나로 모아놓는  역할을 위한  용도
   provider: ^4.3.3
+  #튜토리얼을 한번만 진행하기 위한 용도
+  shared_preferences: ^0.5.12+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

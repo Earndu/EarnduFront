@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'appTutorial.dart';
 import 'mainPage.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'mainPage.dart';
+import 'tutorial.dart';
 
 class selectData {
   final String selData;
@@ -122,10 +124,13 @@ class _selectPage extends State<selectPage> {
                       },
                       itemWidth: 300.0,
                       itemHeight: 300.0,
-                      onTap: (int index) {
+                      onTap: (int index) async {
                         if (index == 1) ;
+
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => mainPage()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => appTutorial()));
                       },
                     ),
                   ),
