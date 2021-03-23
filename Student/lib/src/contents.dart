@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class contentsPage extends StatelessWidget {
   @override
@@ -41,6 +43,7 @@ class _contentsPageStateful extends State<contentsPageStateful> {
     ];
 
     String ContentName = "sound/RunningMate.mp3";
+    String readcontentsName = 'read/summary.md';
 
     return Scaffold(
       body: Container(
@@ -73,7 +76,7 @@ class _contentsPageStateful extends State<contentsPageStateful> {
               Container(
                   margin: const EdgeInsets.only(top: 10),
                   width: 300,
-                  height: 600,
+                  height: 670,
                   child: imageContents(context, 1, imgList))
             else if (contentsVal == 2)
               Container(
@@ -85,8 +88,8 @@ class _contentsPageStateful extends State<contentsPageStateful> {
               Container(
                   margin: const EdgeInsets.only(top: 10),
                   width: 300,
-                  height: 600,
-                  child: soundContents(context, 1, ContentName, _play))
+                  height: 670,
+                  child: readContents(context, 1, readcontentsName))
           ],
         )),
       ),
@@ -118,8 +121,24 @@ class _contentsPageStateful extends State<contentsPageStateful> {
     );
   }
 
-  Widget readContents(BuildContext context, int contentsType) {
-    return Container();
+//마크다운  파일을 가져오기 위한  함수 Future는 값이 할당되고 나서 타입이 결정
+  Future<String> getFileData(String path) async {
+    return await rootBundle.loadString(path);
+  }
+
+  Widget readContents(
+      BuildContext context, int contentsType, String readcontentName) {
+    return Center(
+      child: FutureBuilder(
+        future: getFileData(readcontentName),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Text('Loading Markdown Info...');
+          }
+          return Markdown(data: snapshot.data);
+        },
+      ),
+    );
   }
 
   Widget imageContents(
