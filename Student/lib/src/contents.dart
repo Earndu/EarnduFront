@@ -32,7 +32,7 @@ class _contentsPageStateful extends State<contentsPageStateful> {
 
   @override
   Widget build(BuildContext context) {
-    int contentsVal = 2;
+    int contentsVal = 3;
     double _width = MediaQuery.of(context).size.width;
     List<String> imgList = [
       'image/math_1.png',
