@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +25,8 @@ class contentListStateful extends StatefulWidget {
 }
 
 class _contentListStateful extends State<contentListStateful> {
-  List<bool> study = [false, false, false];
+  var favoritePressed = [false, false, false, false, false, false];
+
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
@@ -66,9 +65,12 @@ class _contentListStateful extends State<contentListStateful> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 27, vertical: 20),
                 children: <Widget>[
-                  contents(context, 'Elementary Math', 'Orlando', study[0]),
-                  contents(context, 'Basic English', 'Garry', study[1]),
-                  contents(context, 'History of world', 'Bob', study[2]),
+                  contents(context, 'Elementary Math', 'Orlando', 0),
+                  contents(context, 'Basic English', 'Garry', 1),
+                  contents(context, 'History of world', 'Bob', 2),
+                  contents(context, 'Elementary Math', 'Orlando', 3),
+                  contents(context, 'Basic English', 'Garry', 4),
+                  contents(context, 'History of world', 'Bob', 5),
                 ],
               ),
             ),
@@ -80,8 +82,8 @@ class _contentListStateful extends State<contentListStateful> {
 
   //리스트  요소 함수
   //이미지 매개변수  추가해서 이미지또한 들어갈 수 있게 하자
-  Widget contents(BuildContext context, String subName, String tName,
-      bool favoritePressed) {
+  Widget contents(
+      BuildContext context, String subName, String tName, int indexNum) {
     return Container(
       width: 300,
       height: 83,
@@ -143,7 +145,7 @@ class _contentListStateful extends State<contentListStateful> {
               margin: const EdgeInsets.only(left: 25, top: 30),
               child: IconButton(
                 iconSize: 25.0,
-                icon: favoritePressed
+                icon: favoritePressed[indexNum]
                     ? Icon(
                         Icons.favorite,
                         color: Color(0xffff7f41),
@@ -154,7 +156,13 @@ class _contentListStateful extends State<contentListStateful> {
                       ),
                 onPressed: () {
                   setState(() {
-                    favoritePressed = !favoritePressed;
+                    if (!favoritePressed[indexNum]) {
+                      //데이터에 추가를 해야겠다
+                      favoritePressed[indexNum] = !favoritePressed[indexNum];
+                    } else {
+                      //데이터를 삭제한다.
+                      favoritePressed[indexNum] = !favoritePressed[indexNum];
+                    }
                   });
                 },
               ),
@@ -225,51 +233,5 @@ class _contentListStateful extends State<contentListStateful> {
         },
       ),
     );
-  }
-
-  void FlutterDialog(BuildContext context) {
-    // final earndu = Provider.of<earnduData>(context);
-    showDialog(
-        context: context,
-        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            //Dialog Main Title
-            title: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Text("Wish List"),
-              ],
-            ),
-            //
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Get this content?",
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Yes"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              new FlatButton(
-                child: new Text("No"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
   }
 }

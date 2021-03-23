@@ -27,8 +27,10 @@ class contentsPageStateful extends StatefulWidget {
 //일단 제목은 이전 페이지의 터치로부터 가져오는 것이며, 내용 자체는 provider에서 가져오는 것으로 진행
 class _contentsPageStateful extends State<contentsPageStateful> {
   bool _play = false;
+
   @override
   Widget build(BuildContext context) {
+    int contentsVal = 2;
     double _width = MediaQuery.of(context).size.width;
     List<String> imgList = [
       'image/math_1.png',
@@ -67,12 +69,24 @@ class _contentsPageStateful extends State<contentsPageStateful> {
                 decoration: BoxDecoration(
                     border:
                         Border.all(color: const Color(0xffededed), width: 3))),
-            Container(
-                margin: const EdgeInsets.only(top: 10),
-                width: 300,
-                height: 600,
-                child: imageContents(context, 1, imgList)),
-            soundContents(context, 1, ContentName, _play)
+            if (contentsVal == 1)
+              Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  width: 300,
+                  height: 600,
+                  child: imageContents(context, 1, imgList))
+            else if (contentsVal == 2)
+              Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  width: 300,
+                  height: 600,
+                  child: soundContents(context, 1, ContentName, _play))
+            else
+              Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  width: 300,
+                  height: 600,
+                  child: soundContents(context, 1, ContentName, _play))
           ],
         )),
       ),
@@ -88,6 +102,7 @@ class _contentsPageStateful extends State<contentsPageStateful> {
           backgroundColor: Color(0xffff7f41),
           child: Icon(
             _play ? Icons.pause : Icons.play_arrow,
+            size: 230,
           ),
           onPressed: () {
             setState(() {
