@@ -1,13 +1,14 @@
 //컨텐츠 내용을 표시하는 페이지 컨텐츠 타입에 따라 표시되는 내용이 다르다.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class contentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(primaryColor: Colors.orange),
       home: contentsPageStateful(),
     );
   }
@@ -25,6 +26,7 @@ class contentsPageStateful extends StatefulWidget {
 
 //일단 제목은 이전 페이지의 터치로부터 가져오는 것이며, 내용 자체는 provider에서 가져오는 것으로 진행
 class _contentsPageStateful extends State<contentsPageStateful> {
+  bool _play = false;
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
@@ -35,6 +37,9 @@ class _contentsPageStateful extends State<contentsPageStateful> {
       'image/math_4.png',
       'image/math_5.png',
     ];
+
+    String ContentName = "sound/RunningMate.mp3";
+
     return Scaffold(
       body: Container(
         width: _width,
@@ -67,14 +72,35 @@ class _contentsPageStateful extends State<contentsPageStateful> {
                 width: 300,
                 height: 600,
                 child: imageContents(context, 1, imgList)),
+            soundContents(context, 1, ContentName, _play)
           ],
         )),
       ),
     );
   }
 
-  Widget soundContents(BuildContext context, int contentsType) {
-    return Container();
+  Widget soundContents(
+      BuildContext context, int contentsType, String contentsName, bool play) {
+    return AudioWidget.assets(
+      path: "sound/RunningMate.mp3",
+      play: _play,
+      child: FloatingActionButton(
+          backgroundColor: Color(0xffff7f41),
+          child: Icon(
+            _play ? Icons.pause : Icons.play_arrow,
+          ),
+          onPressed: () {
+            setState(() {
+              _play = !_play;
+            });
+          }),
+      onReadyToPlay: (duration) {
+        //onReadyToPlay
+      },
+      onPositionChanged: (current, duration) {
+        //onPositionChanged
+      },
+    );
   }
 
   Widget readContents(BuildContext context, int contentsType) {

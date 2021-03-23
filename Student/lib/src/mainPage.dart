@@ -118,6 +118,7 @@ class _mainPage extends State<mainPage> {
                           //컨테이너의 크기 지정
                           height: _height / 8.2,
                           padding: const EdgeInsets.all(7),
+                          margin: const EdgeInsets.only(bottom: 7),
                           // 리스트뷰 위젯 생성
                           child: ListView(
                             //가로로 스크롤 할 수 있게 지정

@@ -33,7 +33,7 @@ Widget setSub(BuildContext context, String sub) {
 Widget setListItem(BuildContext context, String sub, IconData iconVal) {
   return Container(
     padding: const EdgeInsets.only(top: 7),
-    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
     width: 74,
     height: 74,
     decoration: BoxDecoration(

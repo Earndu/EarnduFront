@@ -27,6 +27,7 @@ class contentListStateful extends StatefulWidget {
 }
 
 class _contentListStateful extends State<contentListStateful> {
+  List<bool> study = [false, false, false];
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
@@ -61,23 +62,13 @@ class _contentListStateful extends State<contentListStateful> {
                         Border.all(color: const Color(0xffededed), width: 3))),
             Container(
               height: _height * 0.88,
-              width: 375,
               child: ListView(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 27, vertical: 20),
                 children: <Widget>[
-                  contents(context, 'Elementary Math', 'Orlando'),
-                  contents(context, 'Basic English', 'Garry'),
-                  contents(context, 'History of world', 'Bob'),
-                  contents(context, 'Elementary Math', 'Orlando'),
-                  contents(context, 'Basic English', 'Garry'),
-                  contents(context, 'History of world', 'Bob'),
-                  contents(context, 'Elementary Math', 'Orlando'),
-                  contents(context, 'Basic English', 'Garry'),
-                  contents(context, 'History of world', 'Bob'),
-                  contents(context, 'Elementary Math', 'Orlando'),
-                  contents(context, 'Basic English', 'Garry'),
-                  contents(context, 'History of world', 'Bob'),
+                  contents(context, 'Elementary Math', 'Orlando', study[0]),
+                  contents(context, 'Basic English', 'Garry', study[1]),
+                  contents(context, 'History of world', 'Bob', study[2]),
                 ],
               ),
             ),
@@ -89,8 +80,8 @@ class _contentListStateful extends State<contentListStateful> {
 
   //리스트  요소 함수
   //이미지 매개변수  추가해서 이미지또한 들어갈 수 있게 하자
-  Widget contents(BuildContext context, String subName, String tName) {
-    bool favoritePressed = false;
+  Widget contents(BuildContext context, String subName, String tName,
+      bool favoritePressed) {
     return Container(
       width: 300,
       height: 83,
@@ -152,7 +143,7 @@ class _contentListStateful extends State<contentListStateful> {
               margin: const EdgeInsets.only(left: 25, top: 30),
               child: IconButton(
                 iconSize: 25.0,
-                icon: favoritePressed == true
+                icon: favoritePressed
                     ? Icon(
                         Icons.favorite,
                         color: Color(0xffff7f41),
@@ -163,7 +154,7 @@ class _contentListStateful extends State<contentListStateful> {
                       ),
                 onPressed: () {
                   setState(() {
-                    FlutterDialog(context);
+                    favoritePressed = !favoritePressed;
                   });
                 },
               ),
