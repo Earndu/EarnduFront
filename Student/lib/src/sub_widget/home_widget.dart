@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_app/src/contentList.dart';
-import 'package:flutter_app/src/sub_widget/mypage_widget.dart';
 import '../contentList.dart';
 
 //과목이름 갱신용
