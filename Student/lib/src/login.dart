@@ -12,13 +12,15 @@ class loginPage extends StatelessWidget {
     TextEditingController passWord = TextEditingController();
 
     final Color maincolor = Color(0xffff7f41);
+
+    int log_in_count = 0;
     /*
     
 
     
      */
-    return ChangeNotifierProvider<earnduData>(
-      create: (context) => earnduData(),
+    return ChangeNotifierProvider<student>(
+      create: (context) => student(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.grey[700]),
@@ -199,8 +201,12 @@ class loginPage extends StatelessWidget {
                     ),
                     //터치시 상호작용의 정의, 현재는 바로 메인페이지로 이동되도록 선언했다.
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => selectPage()));
+                      if (log_in_count == 0) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => selectPage()));
+                      } else {
+                        FlutterDialog(context);
+                      }
                     },
                   ),
                   /*
@@ -252,5 +258,44 @@ class loginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void FlutterDialog(BuildContext context) {
+    // final earndu = Provider.of<earnduData>(context);
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //Dialog Main Title
+            title: Column(
+              children: <Widget>[
+                new Text("Error"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "ID or  Password error",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Ok"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
   }
 }

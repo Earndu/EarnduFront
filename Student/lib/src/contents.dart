@@ -135,7 +135,12 @@ class _contentsPageStateful extends State<contentsPageStateful> {
           if (!snapshot.hasData) {
             return Text('Loading Markdown Info...');
           }
-          return Markdown(data: snapshot.data);
+          return Markdown(
+            data: snapshot.data,
+            selectable: true,
+            imageDirectory:
+                "https://raw.githubusercontent.com/Seokhwan-Kwon/DeepLearning-DSC/main/week04/img/ans.jpg",
+          );
         },
       ),
     );

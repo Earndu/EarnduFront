@@ -1,6 +1,8 @@
 # 10장
 ## 트랜잭션
 
+<img src="https://raw.githubusercontent.com/Seokhwan-Kwon/DeepLearning-DSC/main/week04/img/ans.jpg">
+
 ### 트랜잭션의 개념
 * 하나의 작업을 수행하기 위해 필요한 데이터베이스 연산들을 모아놓은 것
 * 작업 수행에 필요한 SQL 문들의 모임
@@ -183,3 +185,5 @@
 ### 2단계 로킹 규약
 * 확장단계
 * 축소단계
+
+
