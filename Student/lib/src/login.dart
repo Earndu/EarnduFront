@@ -92,7 +92,7 @@ class loginPage extends StatelessWidget {
                         color: const Color(0xffffffff)),
                     //컨테이너에 들어갈 텍스트필드 선언
                     child: TextField(
-                      cursorColor: const Color(0xffff7f41),
+                      //cursorColor: const Color(0xffff7f41),
                       controller: userName,
                       //아이디는 자동완성기능 추가
                       autocorrect: true,

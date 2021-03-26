@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter_app/src/selectImage.dart';
 import 'package:intl/intl.dart';
 import 'selectImage.dart';
+
+import 'package:crypto/crypto.dart';
 
 class signUp extends StatelessWidget {
   @override
@@ -31,6 +35,10 @@ class _signUp_stateful extends State<signUp_stateful> {
     width: 180,
     height: 180,
   );
+  TextEditingController userName = TextEditingController();
+  TextEditingController passWord = TextEditingController();
+  TextEditingController fullName = TextEditingController();
+  TextEditingController eMail = TextEditingController();
   @override
   Widget build(BuildContext context) {
     DateTime _selectedDateTime = DateTime.now();
@@ -44,10 +52,7 @@ class _signUp_stateful extends State<signUp_stateful> {
     }
 
 //각각의 텍스트를확인할 때는 userName.text처럼 값을 가져올 수 있다.
-    TextEditingController userName = TextEditingController();
-    TextEditingController passWord = TextEditingController();
-    TextEditingController fullName = TextEditingController();
-    TextEditingController eMail = TextEditingController();
+
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
@@ -168,6 +173,8 @@ class _signUp_stateful extends State<signUp_stateful> {
                     ),
                     //힌트텍스트의 색을 회색으로 지정
                     hintStyle: TextStyle(color: const Color(0xffbbbbbb)),
+                    filled: true,
+                    fillColor: Colors.white70,
                     //터치되지 않았을 때의 전체적인 경계 지정
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -206,6 +213,7 @@ class _signUp_stateful extends State<signUp_stateful> {
                     color: const Color(0xffffffff)),
                 //컨테이너 내부의 위젯으로 textfield 지정
                 child: TextField(
+                  obscureText: true,
                   //커서의 색은 회색으로
                   //컨트롤러 설정을 통해 텍스트 필드의 값을 받아온다
                   controller: passWord,
@@ -385,6 +393,8 @@ class _signUp_stateful extends State<signUp_stateful> {
                 ),
                 onTap: () {
                   print(_selectedDateTime);
+                  var byte = utf8.encode(passWord.text);
+                  var pwdData = sha256.convert(byte);
                   Navigator.of(context, rootNavigator: true).pop(context);
                 },
               )

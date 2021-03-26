@@ -95,8 +95,18 @@ Widget historyCard(BuildContext context, String sub, double wid_val) {
     child: InkWell(
       onTap: () {
         if (contentVal == 1) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  contentsPageStateful(contentsName: sub, contentsType: 1)));
         } else if (contentVal == 2) {
-        } else {}
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  contentsPageStateful(contentsName: sub, contentsType: 2)));
+        } else {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  contentsPageStateful(contentsName: sub, contentsType: 3)));
+        }
         print("$sub");
       },
       child: Container(
