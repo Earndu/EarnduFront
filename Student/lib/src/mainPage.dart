@@ -23,20 +23,20 @@ class _mainPage extends State<mainPage> {
     final List<String> wish_arr_sub = List();
     final List<String> wish_arr_teacher = List();
     wish_arr_sub.add('Elementary Math');
-    wish_arr_sub.add('Elementary Math');
-    wish_arr_sub.add('Elementary Math');
+    wish_arr_sub.add('Basic English');
+    wish_arr_sub.add('Daily French');
     wish_arr_teacher.add('Orlando');
-    wish_arr_teacher.add('Orlando');
-    wish_arr_teacher.add('Orlando');
+    wish_arr_teacher.add('Emily');
+    wish_arr_teacher.add('Bob');
 
     List<String> down_arr_sub = List();
     List<String> down_arr_teacher = List();
-    down_arr_sub.add('value');
-    down_arr_sub.add('value');
-    down_arr_sub.add('value');
-    down_arr_teacher.add('value');
-    down_arr_teacher.add('value');
-    down_arr_teacher.add('value');
+    down_arr_sub.add('Power flutter');
+    down_arr_sub.add('Team Teaching');
+    down_arr_sub.add('Happy life');
+    down_arr_teacher.add('Orlando');
+    down_arr_teacher.add('Garry');
+    down_arr_teacher.add('Kennedy');
     String sub = "";
     //마테리얼 앱 타입 반환
     return MaterialApp(
