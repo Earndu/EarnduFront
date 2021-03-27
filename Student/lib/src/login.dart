@@ -4,6 +4,12 @@ import 'package:provider/provider.dart';
 import 'data.dart';
 import 'select.dart';
 
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+
+import 'data.dart';
+
+
 class loginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     //현재 페이지에서 요구되는 데이터는 각각 username, password이므로 이를
@@ -247,6 +253,8 @@ class loginPage extends StatelessWidget {
                           textAlign: TextAlign.center),
                     ),
                     onTap: () {
+                      var byte = utf8.encode(passWord.text);
+                      var pwdData = sha256.convert(byte);
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => signUp()));
                     },

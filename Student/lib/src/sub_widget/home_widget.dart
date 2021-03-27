@@ -5,7 +5,6 @@ import '../contentList.dart';
 import '../contents.dart';
 
 //과목이름 갱신용
-//
 @override
 Widget setSub(BuildContext context, String sub) {
   return Container(

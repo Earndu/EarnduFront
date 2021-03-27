@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/data.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class contentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: contentListStateful(),
+    return ChangeNotifierProvider<student>(
+      create: (context) => student(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: contentListStateful(),
+      ),
     );
   }
 }
@@ -83,7 +88,11 @@ class _contentListStateful extends State<contentListStateful> {
   //리스트  요소 함수
   //이미지 매개변수  추가해서 이미지또한 들어갈 수 있게 하자
   Widget contents(
-      BuildContext context, String subName, String tName, int indexNum) {
+    BuildContext context,
+    String subName,
+    String tName,
+    int indexNum,
+  ) {
     return Container(
       width: 300,
       height: 83,
