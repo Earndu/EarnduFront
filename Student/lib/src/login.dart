@@ -20,14 +20,13 @@ class loginPage extends StatelessWidget {
 
     final Color maincolor = Color(0xffff7f41);
 
-    int log_in_count = 0;
     /*
-    
-
-    
      */
 
     HttpOverrides.global = new MyHttpOverrides();
+
+    // 어플 실행 시 인터넷 되는지 확인하고,
+    // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -209,32 +208,52 @@ class loginPage extends StatelessWidget {
                   ),
                   //터치시 상호작용의 정의, 현재는 바로 메인페이지로 이동되도록 선언했다.
                   onTap: () {
-                    if (log_in_count == 0) {
-                      var byte = utf8.encode(passWord.text);
-                      String pwdData = sha256.convert(byte).toString();
+                    var byte = utf8.encode(passWord.text);
+                    String pwdData = sha256.convert(byte).toString();
 
-                      Student.postRequest(userName.text, pwdData).then((data) {
-                        if (data['status_code'] == 200) {
-                          if (Student.username == null) {
-                            Student.setUsername(data['data']['user_data']['username']);
-                            Student.setFullName(data['data']['user_data']['fullname']);
-                            Student.setBirthday(DateTime.parse(data['data']['user_data']['birthday']));
-                            Student.setEmail(data['data']['user_data']['email']);
-                            Student.setImageId(data['data']['user_data']['image_id']);
-                          }
-
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => selectPage()));
-                        } else {
-                          FlutterDialog(context);
+                    Student.postRequest(userName.text, pwdData).then((response) {
+                      if (response['status_code'] == 200) {
+                        Map data = response['data'];
+                        if (Student.username == null) {
+                          Student.setUsername(data['user_data']['username']);
+                          Student.setFullName(data['user_data']['fullname']);
+                          Student.setBirthday(DateTime.parse(data['user_data']['birthday']));
+                          Student.setEmail(data['user_data']['email']);
+                          Student.setImageId(data['user_data']['image_id']);
                         }
-                      }).catchError((error) {
-                        print(error);
+
+                        for (String type in data['content_list'].keys) {
+                          print('type: $type');
+                          for (String category in data['content_list'][type].keys) {
+                            print('category: $category');
+                            for (Map content in data['content_list'][type][category]) {
+                              Contents.totalList.add(Contents.fromJson(content, type, category));
+                            }
+                          }
+                        }
+                        print('Total List: ${Contents.totalList.length}');
+
+                        for (Map content in data['wish_list']) {
+                          Contents.downloadList.add(Contents.detailFromJson(content));
+                        }
+                        print('Download List: ${Contents.downloadList.length}');
+
+                        for (Map curriculum in data['curriculum']) {
+                          Curriculum.list.add(Curriculum.fromJson(curriculum));
+                        }
+                        print('Curriculum List: ${Curriculum.list.length}');
+
+                        // 뒤로가기 눌렀을 때 다시 로그인창 뜨지 않도록
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => selectPage()));
+                      } else {
                         FlutterDialog(context);
-                      });
-                    } else {
+                      }
+                    }).catchError((error) {
+                      print(error);
                       FlutterDialog(context);
-                    }
+                    });
                   },
                 ),
                 /*

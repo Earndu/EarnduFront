@@ -102,8 +102,8 @@ class Contents {
   static List<Contents> downloadList = List();
 
   int id = null;
-  int category = null;
-  int type = null;
+  String category = null;
+  String type = null;
   String title = null;
   int level = null;
   String content = null;
@@ -125,18 +125,13 @@ class Contents {
     this.score = score;
   }*/
 
-  Contents({
-    this.id, this.category, this.type, this.title, this.level,
-    this.content, this.res_image, this.res_sound
-  });
-
-  Contents.fromJson(Map<String, dynamic> data) {
-    id = data['id'];
-    category = data['category'];
-    type = data['type'];
-    title = data['title'];
-    level = data['level'];
-    teacher = Teacher.fromJson(data['teacher']);
+  Contents.fromJson(Map<String, dynamic> data, String type, String category) {
+    this.id = data['id'];
+    this.category = (category == null) ? data['category'] : category;
+    this.type = (type == null) ? data['type'] : type;
+    this.title = data['title'];
+    this.level = data['level'];
+    this.teacher = Teacher.fromJson(data['teacher']);
   }
 
   Contents.detailFromJson(Map<String, dynamic> data) {
@@ -151,8 +146,24 @@ class Contents {
     res_image = data['res_image'].toString().split('<SEP>');
   }
 
-  void printContents() {
-    print(this.id);
+  static List<Contents> getType(String type) {
+    List<Contents> ret = List();
+    for (Contents content in Contents.totalList) {
+      if (content.type == type) {
+        ret.add(content);
+      }
+    }
+    return ret;
+  }
+
+  static List<Contents> getDetailType(String type) {
+    List<Contents> ret = List();
+    for (Contents content in Contents.downloadList) {
+      if (content.type == type) {
+        ret.add(content);
+      }
+    }
+    return ret;
   }
 }
 
