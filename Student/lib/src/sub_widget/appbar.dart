@@ -22,12 +22,13 @@ Widget tabfunc(BuildContext context, IconData icon) {
 }
 
 @override
-Widget customBar(BuildContext context) {
+Widget customBar(BuildContext context, TabController controller) {
   return Container(
     color: const Color(0xfff2f2f2),
     height: 70,
     padding: EdgeInsets.only(bottom: 2, top: 5),
     child: TabBar(
+      controller: controller,
       labelStyle: TextStyle(fontSize: 10),
       labelPadding: const EdgeInsets.only(top: 4),
       indicatorSize: TabBarIndicatorSize.label,
@@ -65,6 +66,11 @@ Widget customBar(BuildContext context) {
           text: 'my page',
         )
       ],
+      onTap: (index) {
+        if (index == 0) {
+
+        }
+      },
     ),
   );
 }

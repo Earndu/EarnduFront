@@ -3,6 +3,7 @@ import 'package:flutter_app/src/data.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'mainPage.dart';
 
 class contentList extends StatelessWidget {
   @override
@@ -28,9 +29,12 @@ class contentListStateful extends StatefulWidget {
 
 class _contentListStateful extends State<contentListStateful> {
   var favoritePressed = [false, false, false, false, false, false];
-
+  
   @override
   Widget build(BuildContext context) {
+    final String category = widget.subName;
+    List<Content> contentList = Content.getByCategory(category);
+
     double _height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -44,7 +48,7 @@ class _contentListStateful extends State<contentListStateful> {
               margin: const EdgeInsets.only(bottom: 12),
               alignment: Alignment.topLeft,
               child: // Mathsub
-                  Text(widget.subName,
+                  Text(category,
                       style: const TextStyle(
                           color: const Color(0xff3d4047),
                           fontWeight: FontWeight.w700,
@@ -66,13 +70,10 @@ class _contentListStateful extends State<contentListStateful> {
               child: ListView(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 27, vertical: 20),
-                children: <Widget>[
-                  contents(context, 'Elementary Math', 'Orlando', 0),
-                  contents(context, 'Basic English', 'Garry', 1),
-                  contents(context, 'History of world', 'Bob', 2),
-                  contents(context, 'Elementary Math', 'Orlando', 3),
-                  contents(context, 'Basic English', 'Garry', 4),
-                  contents(context, 'History of world', 'Bob', 5),
+                children:
+                <Widget>[
+                  for (Content content in contentList)
+                    contents(context, content.title, content.teacher.fullname, content.id)
                 ],
               ),
             ),
@@ -88,7 +89,7 @@ class _contentListStateful extends State<contentListStateful> {
     BuildContext context,
     String subName,
     String tName,
-    int indexNum,
+    int contentId,
   ) {
     return Container(
       width: 300,
@@ -151,7 +152,7 @@ class _contentListStateful extends State<contentListStateful> {
               margin: const EdgeInsets.only(left: 25, top: 30),
               child: IconButton(
                 iconSize: 25.0,
-                icon: favoritePressed[indexNum]
+                icon: Content.wishList.contains(contentId)
                     ? Icon(
                         Icons.favorite,
                         color: Color(0xffff7f41),
@@ -162,12 +163,12 @@ class _contentListStateful extends State<contentListStateful> {
                       ),
                 onPressed: () {
                   setState(() {
-                    if (!favoritePressed[indexNum]) {
+                    if (!Content.wishList.contains(contentId)) {
                       //데이터에 추가를 해야겠다
-                      favoritePressed[indexNum] = !favoritePressed[indexNum];
+                      Content.addToWishList(contentId);
                     } else {
                       //데이터를 삭제한다.
-                      favoritePressed[indexNum] = !favoritePressed[indexNum];
+                      Content.removeFromWishList(contentId);
                     }
                   });
                 },
@@ -181,6 +182,7 @@ class _contentListStateful extends State<contentListStateful> {
               expand: true,
               context: context,
               builder: (BuildContext context) {
+                mainPage.me.watch(contentId);
                 return SingleChildScrollView(
                   controller: ModalScrollController.of(context),
                   child: Container(
@@ -216,7 +218,7 @@ class _contentListStateful extends State<contentListStateful> {
                                   Container(
                                       margin: const EdgeInsets.only(top: 9),
                                       alignment: Alignment.bottomLeft,
-                                      child: Text("Math",
+                                      child: Text(widget.subName,
                                           style: const TextStyle(
                                               decoration: TextDecoration.none,
                                               color: const Color(0xff5c5d60),

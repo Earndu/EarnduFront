@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/mainPage.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Student {
   //유저 정보를 저장할 변수들
@@ -57,7 +59,7 @@ class Student {
     Map postData = {
       "username": username,
       "password": password,
-      "wish_list": Contents.wishList
+      "wish_list": Content.wishList
     };
 
     if (Curriculum.list.isNotEmpty) {
@@ -85,7 +87,7 @@ class Student {
         headers: {"Content-Type": "application/json"}, body: body);
 
     var response = json.decode(rawResponse.body);
-    // print(response);
+    print(response);
 
     return response;
   }
@@ -96,10 +98,14 @@ class Student {
 
 //카테고리에 대한 클래스
 
-class Contents {
-  static List<Contents> totalList = List();
-  static List<int> wishList = List();
-  static List<Contents> downloadList = List();
+class Content {
+  static List<Content> totalList = List();
+  // static List<int> wishList = List();
+  static List<int> wishList = [14];
+  static List<int> downloadList = List();
+  static List<int> historyList = List();
+  static List<String> categoryList = ['Math', 'Science', 'English'];
+  static String selectedType = null;
 
   int id = null;
   String category = null;
@@ -107,7 +113,7 @@ class Contents {
   String title = null;
   int level = null;
   String content = null;
-  List<String> res_image = null;
+  List<Image> res_image = null;
   String res_sound = null;
 
   Teacher teacher;
@@ -125,7 +131,7 @@ class Contents {
     this.score = score;
   }*/
 
-  Contents.fromJson(Map<String, dynamic> data, String type, String category) {
+  Content.fromJson(Map<String, dynamic> data, String type, String category) {
     this.id = data['id'];
     this.category = (category == null) ? data['category'] : category;
     this.type = (type == null) ? data['type'] : type;
@@ -134,21 +140,21 @@ class Contents {
     this.teacher = Teacher.fromJson(data['teacher']);
   }
 
-  Contents.detailFromJson(Map<String, dynamic> data) {
+  Content.detailFromJson(Map<String, dynamic> data) {
     id = data['id'];
     category = data['category'];
-    type = data['type'];
+    type = data['type'].toString();
     title = data['title'];
     level = data['level'];
     teacher = Teacher.fromJson(data['teacher']);
     content = data['content'];
     res_sound = data['res_sound'];
-    res_image = data['res_image'].toString().split('<SEP>');
+    res_image = [for (String _image in data['res_image'].toString().split('<SEP>')) Image.memory(base64.decode(_image))];
   }
 
-  static List<Contents> getType(String type) {
-    List<Contents> ret = List();
-    for (Contents content in Contents.totalList) {
+  static List<Content> getType(String type) {
+    List<Content> ret = List();
+    for (Content content in Content.totalList) {
       if (content.type == type) {
         ret.add(content);
       }
@@ -156,14 +162,53 @@ class Contents {
     return ret;
   }
 
-  static List<Contents> getDetailType(String type) {
-    List<Contents> ret = List();
-    for (Contents content in Contents.downloadList) {
-      if (content.type == type) {
-        ret.add(content);
+  static List<Content> getDetailType(String type) {
+    List<Content> ret = List();
+    for (int i in Content.downloadList) {
+      if (Content.totalList[i].type == type) {
+        ret.add(Content.totalList[i]);
       }
     }
     return ret;
+  }
+
+  static int getIndexById(int contentId) {
+    for (int i=0; i<Content.totalList.length; i++) {
+      if (Content.totalList[i].id == contentId) {
+        return i;
+      }
+    }
+    return null;
+  }
+
+  static Content getById(int contentId) {
+    int index = getIndexById(contentId);
+    if (index == null) {
+      return null;
+    } else {
+      return totalList[index];
+    }
+  }
+
+  static List<Content> getByCategory(String category) {
+    List<Content> ret = List();
+    for (int i=0; i<Content.totalList.length; i++) {
+      if (Content.totalList[i].type == selectedType && Content.totalList[i].category == category) {
+        ret.add(Content.totalList[i]);
+      }
+    }
+    return ret;
+  }
+
+  static void removeFromDownloadList(int contentId) {
+    downloadList.remove(contentId);
+  }
+
+  static void addToWishList(int contentId) {
+    wishList.add(contentId);
+  }
+  static void removeFromWishList(int contentId) {
+    wishList.remove(contentId);
   }
 }
 

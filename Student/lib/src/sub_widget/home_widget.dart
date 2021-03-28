@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_app/src/contentList.dart';
 import '../contentList.dart';
 import '../contents.dart';
+import '../data.dart';
 
 //과목이름 갱신용
 @override
@@ -73,8 +74,7 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
 
 //히스토리카드 제작용
 @override
-Widget historyCard(BuildContext context, String sub, double wid_val) {
-  int contentVal = 1;
+Widget historyCard(BuildContext context, Content content) {
   List<String> imgList = [
     'image/math_1.png',
     'image/math_2.png',
@@ -93,20 +93,9 @@ Widget historyCard(BuildContext context, String sub, double wid_val) {
     height: 83,
     child: InkWell(
       onTap: () {
-        if (contentVal == 1) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  contentsPageStateful(contentsName: sub, contentsType: 1)));
-        } else if (contentVal == 2) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  contentsPageStateful(contentsName: sub, contentsType: 2)));
-        } else {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  contentsPageStateful(contentsName: sub, contentsType: 3)));
-        }
-        print("$sub");
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                contentsPageStateful(content: content)));
       },
       child: Container(
         width: 320,

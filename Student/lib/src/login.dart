@@ -223,20 +223,20 @@ class loginPage extends StatelessWidget {
                         }
 
                         for (String type in data['content_list'].keys) {
-                          print('type: $type');
                           for (String category in data['content_list'][type].keys) {
-                            print('category: $category');
                             for (Map content in data['content_list'][type][category]) {
-                              Contents.totalList.add(Contents.fromJson(content, type, category));
+                              Content.totalList.add(Content.fromJson(content, type, category));
                             }
                           }
                         }
-                        print('Total List: ${Contents.totalList.length}');
+                        print('Total List: ${Content.totalList.length}');
 
-                        for (Map content in data['wish_list']) {
-                          Contents.downloadList.add(Contents.detailFromJson(content));
+                        for (Map _content in data['wish_list']) {
+                          Content content = Content.detailFromJson(_content);
+                          Content.totalList[Content.getIndexById(content.id)] = content;
+                          Content.downloadList.add(content.id);
                         }
-                        print('Download List: ${Contents.downloadList.length}');
+                        print('Download List: ${Content.downloadList.length}');
 
                         for (Map curriculum in data['curriculum']) {
                           Curriculum.list.add(Curriculum.fromJson(curriculum));
