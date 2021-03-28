@@ -433,7 +433,7 @@ class _signUp_stateful extends State<signUp_stateful> {
                     var dataConvertedToJSON = json.decode(response.body);
                     return response;
                   }
-
+                  //아직 실행 안했듬듬
                   //var result = postRequest();
 
                   Navigator.of(context, rootNavigator: true).pop(context);
