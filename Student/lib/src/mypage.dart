@@ -19,20 +19,60 @@ class _myPage extends State<myPage> {
 
   //학습 시간에 대한 값을 가져오는 변수
 
-  Map<int, int> WeeklyStudytime = {1: 2, 2: 4, 3: 4, 4: 2, 5: 7, 6: 10};
+  Map<int, int> WeeklyStudytime = {0: 2, 1: 10, 2: 3, 3: 7, 4: 2, 5: 8, 6: 10};
   Map<int, int> MontlyStudytime = {
-    2: 4,
-    3: 4,
+    0: 2,
+    1: 10,
+    2: 3,
+    3: 7,
     4: 2,
-    5: 7,
+    5: 8,
     6: 10,
-    8: 20,
-    20: 10
+    7: 3,
+    8: 13,
+    9: 6,
+    10: 10,
+    11: 3,
+    12: 7,
+    13: 2,
+    14: 8,
+    15: 10,
+    16: 3,
+    17: 13,
+    18: 6,
+    19: 10,
+    20: 3,
+    21: 7,
+    22: 2,
+    23: 8,
+    24: 10,
+    25: 3,
+    26: 13,
+    27: 6,
+    28: 10
   };
-  Map<int, int> yearStudytime = {2: 4, 3: 4, 4: 2, 5: 7, 6: 10, 8: 20, 20: 10};
+  Map<int, int> yearStudytime = {
+    0: 2,
+    7: 3,
+    20: 14,
+    25: 3,
+    26: 13,
+    27: 6,
+    28: 10,
+    42: 3,
+    63: 13,
+    83: 6,
+    96: 10,
+    112: 2,
+    7: 3,
+    20: 14,
+    25: 3,
+    26: 13,
+  };
 
-  Map<int, int> WholeData = {2: 4};
+  Map<int, int> WholeData = {1: 1};
 
+  List<int> subVal = [40, 30, 20, 20, 15];
   String tmp = "";
   String userName = "";
   int cnt = 0;
@@ -57,6 +97,7 @@ class _myPage extends State<myPage> {
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
+          padding: const EdgeInsets.only(top: 15),
           child: Column(
             children: <Widget>[
               Center(
@@ -283,7 +324,8 @@ class _myPage extends State<myPage> {
                                       )),
                                   sectionsSpace: 0,
                                   centerSpaceRadius: 30,
-                                  sections: showingSections(touchedIndex)),
+                                  sections:
+                                      showingSections(touchedIndex, subVal)),
                             ),
                           ),
                         ),

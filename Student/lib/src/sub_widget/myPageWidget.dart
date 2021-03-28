@@ -13,12 +13,12 @@ LineChartData mainData(int cnt, Map<int, int> studyTime) {
     dateval = 364;
   }
 
-  List<FlSpot> tmp;
+  List<FlSpot> tmp = List<FlSpot>();
 
-  // for (var i in studyTime.keys) {
-  //   FlSpot a = FlSpot(i.toDouble(), studyTime[i].toDouble());
-  //   tmp.add(a);
-  // }
+  for (var i in studyTime.keys) {
+    FlSpot a = FlSpot(i.toDouble(), studyTime[i].toDouble());
+    tmp.add(a);
+  }
   return LineChartData(
     titlesData: FlTitlesData(
       show: true,
@@ -91,10 +91,10 @@ LineChartData mainData(int cnt, Map<int, int> studyTime) {
     minX: 0,
     maxX: dateval,
     minY: 0,
-    maxY: 6,
+    maxY: 15,
     lineBarsData: [
       LineChartBarData(
-        spots: [FlSpot(1, 2)],
+        spots: tmp,
         isCurved: true,
         barWidth: 5,
         isStrokeCapRound: true,
@@ -107,7 +107,9 @@ LineChartData mainData(int cnt, Map<int, int> studyTime) {
 }
 
 //파이차트 데이터
-List<PieChartSectionData> showingSections(int touchedIndex) {
+List<PieChartSectionData> showingSections(int touchedIndex, List<int> subVal) {
+  T sum<T extends num>(T lhs, T rhs) => lhs + rhs;
+  int resultVal = subVal.reduce(sum);
   return List.generate(5, (i) {
     final isTouched = i == touchedIndex;
     final double fontSize = isTouched ? 20 : 16;
@@ -116,7 +118,7 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
       case 0:
         return PieChartSectionData(
           color: const Color(0xffffaf57),
-          value: 30,
+          value: (subVal[0] / resultVal) * 100,
           title: 'Math',
           radius: radius,
           titleStyle: TextStyle(
@@ -128,7 +130,7 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
         return PieChartSectionData(
           color: const Color(0xffff7f41),
           //변수로 지정해 주어야 하는 부분
-          value: 30,
+          value: (subVal[1] / resultVal) * 100,
           title: 'English',
           radius: radius,
           titleStyle: TextStyle(
@@ -139,7 +141,7 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
       case 2:
         return PieChartSectionData(
           color: const Color(0xffff5f57),
-          value: 10,
+          value: (subVal[2] / resultVal) * 100,
           title: 'History',
           radius: radius,
           titleStyle: TextStyle(
@@ -150,7 +152,7 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
       case 3:
         return PieChartSectionData(
           color: const Color(0xffffdfc1),
-          value: 10,
+          value: (subVal[3] / resultVal) * 100,
           title: 'Science',
           radius: radius,
           titleStyle: TextStyle(
@@ -161,7 +163,7 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
       case 4:
         return PieChartSectionData(
           color: const Color(0xffffdf57),
-          value: 20,
+          value: (subVal[4] / resultVal) * 100,
           title: 'Sports',
           radius: radius,
           titleStyle: TextStyle(
