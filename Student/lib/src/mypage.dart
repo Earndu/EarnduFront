@@ -19,9 +19,19 @@ class _myPage extends State<myPage> {
 
   //학습 시간에 대한 값을 가져오는 변수
 
-  Map<int, int> WeeklyStudytime = {2: 4, 3: 4, 4: 2, 5: 7, 6: 10};
-  Map<int, int> MontlyStudytime = {};
-  Map<int, int> yearStudytime = {};
+  Map<int, int> WeeklyStudytime = {1: 2, 2: 4, 3: 4, 4: 2, 5: 7, 6: 10};
+  Map<int, int> MontlyStudytime = {
+    2: 4,
+    3: 4,
+    4: 2,
+    5: 7,
+    6: 10,
+    8: 20,
+    20: 10
+  };
+  Map<int, int> yearStudytime = {2: 4, 3: 4, 4: 2, 5: 7, 6: 10, 8: 20, 20: 10};
+
+  Map<int, int> WholeData = {2: 4};
 
   String tmp = "";
   String userName = "";
@@ -130,6 +140,7 @@ class _myPage extends State<myPage> {
                         onTap: () {
                           setState(() {
                             cnt = 0;
+                            WholeData = WeeklyStudytime;
                           });
                         },
                       ),
@@ -164,6 +175,7 @@ class _myPage extends State<myPage> {
                         onTap: () {
                           setState(() {
                             cnt = 1;
+                            WholeData = MontlyStudytime;
                           });
                         },
                       ),
@@ -198,6 +210,7 @@ class _myPage extends State<myPage> {
                         onTap: () {
                           setState(() {
                             cnt = 2;
+                            WholeData = yearStudytime;
                           });
                         },
                       ),
@@ -222,7 +235,7 @@ class _myPage extends State<myPage> {
                           padding: const EdgeInsets.only(
                               right: 18.0, left: 12.0, top: 24, bottom: 12),
                           child: LineChart(
-                            mainData(cnt, WeeklyStudytime),
+                            mainData(cnt, WholeData),
                           ),
                         ),
                       ),

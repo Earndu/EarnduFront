@@ -13,6 +13,12 @@ LineChartData mainData(int cnt, Map<int, int> studyTime) {
     dateval = 364;
   }
 
+  List<FlSpot> tmp;
+
+  // for (var i in studyTime.keys) {
+  //   FlSpot a = FlSpot(i.toDouble(), studyTime[i].toDouble());
+  //   tmp.add(a);
+  // }
   return LineChartData(
     titlesData: FlTitlesData(
       show: true,
@@ -64,7 +70,7 @@ LineChartData mainData(int cnt, Map<int, int> studyTime) {
               case 150:
                 return 'MAY';
               case 210:
-                return 'JUL';
+                return 'JUl';
               case 270:
                 return 'SEP';
               case 330:
@@ -88,15 +94,7 @@ LineChartData mainData(int cnt, Map<int, int> studyTime) {
     maxY: 6,
     lineBarsData: [
       LineChartBarData(
-        spots: [
-          FlSpot(0, 2),
-          FlSpot(2.6, 2),
-          FlSpot(4.9, 5),
-          FlSpot(6.8, 3.1),
-          FlSpot(7, 4),
-          FlSpot(7.5, 3),
-          FlSpot(7, 4),
-        ],
+        spots: [FlSpot(1, 2)],
         isCurved: true,
         barWidth: 5,
         isStrokeCapRound: true,
