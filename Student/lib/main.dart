@@ -14,12 +14,7 @@ void main() {
 
       debugShowCheckedModeBanner: false,
       title: 'Start',
-      home: MultiProvider(
-        providers: [
-          Provider<student>(create: (context) => student()),
-        ],
-        child: loginPage(),
-      ),
+      home: loginPage(),
     ),
   );
 }

@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 import 'tutorial.dart';
+import 'data.dart';
 
 class selectData {
   final String selData;
@@ -20,14 +21,14 @@ class _selectPage extends State<selectPage> {
   @override
   selectData data;
   final List<String> imgList = [
-    "image/Hippo_3.png",
-    "image/Flamingo_3.png",
     "image/Koala_3.png",
+    "image/Flamingo_3.png",
+    "image/Hippo_3.png",
   ];
   final List<String> nameList = [
-    "Image Contents",
+    "Read Contents",
     "Sound Contents",
-    "Read Contents"
+    "Image Contents",
   ];
 
   Widget build(BuildContext context) {
@@ -127,6 +128,7 @@ class _selectPage extends State<selectPage> {
                       itemWidth: 300.0,
                       itemHeight: 300.0,
                       onTap: (int index) {
+                        Content.selectedType = index.toString();
                         if (tutorialCount == 0) {
                           tutorialCount += 1;
                           Navigator.of(context).push(MaterialPageRoute(

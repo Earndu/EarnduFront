@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'mainPage.dart';
 
 class appTutorial extends StatelessWidget {
   @override

@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 
 import 'selectImage.dart';
 import 'package:crypto/crypto.dart';
+import 'data.dart';
 
 class signUp extends StatelessWidget {
   @override
@@ -35,9 +36,8 @@ class signUp_stateful extends StatefulWidget {
 
 class _signUp_stateful extends State<signUp_stateful> {
   Image imageFile = Image.asset(
-    'image/person.png',
-    width: 180,
-    height: 180,
+    'image/Elephant_1.png',
+    fit: BoxFit.fill,
   );
   TextEditingController userName = TextEditingController();
   TextEditingController passWord = TextEditingController();
@@ -50,7 +50,7 @@ class _signUp_stateful extends State<signUp_stateful> {
     });
   }
 
-  int image_id;
+  int image_id = 0;
   @override
   Widget build(BuildContext context) {
     //시간을 갱신하기 위한 함수 setState를 사용하였다.
@@ -407,36 +407,23 @@ class _signUp_stateful extends State<signUp_stateful> {
                       textAlign: TextAlign.center),
                 ),
                 onTap: () {
-                  String ymd =
-                      DateFormat("yyyy-MM-dd").format(_selectedDateTime);
-                  var pwdData = sha256.convert(utf8.encode(passWord.text));
+                  postRequest().then((data) {
+                    if (data['status_code'] == 200) {
+                      Student.setUsername(userName.text);
+                      Student.setFullName(fullName.text);
+                      Student.setBirthday(_selectedDateTime);
+                      Student.setImageId(image_id);
+                      Student.setEmail(eMail.text);
 
-                  //post 통신 구간
-                  Future<http.Response> postRequest() async {
-                    var url = 'http://svclaw.ipdisk.co.kr:11002/student/total';
-
-                    Map Post_data = {
-                      "username": "$userName", // 로그인에 사용할 아이디
-                      "password": "$pwdData", // SHA-256 해싱된 암호
-                      "fullname": "$fullName", // 이름
-                      "email": "$eMail", // 이메일
-                      "birthday": "$ymd", // 생년월일
-                      "image_id": "$image_id"
-                    };
-                    var body = json.encode(Post_data);
-                    print(body);
-
-                    var response = await http.post(url,
-                        headers: {"Content-Type": "application/json"},
-                        body: body);
-
-                    var dataConvertedToJSON = json.decode(response.body);
-                    return response;
-                  }
-                  //아직 실행 안했듬듬
-                  //var result = postRequest();
-
-                  Navigator.of(context, rootNavigator: true).pop(context);
+                      Navigator.of(context, rootNavigator: true).pop(context);
+                    } else {
+                      print(data['message']);
+                      FlutterDialog(context);
+                    }
+                  }).catchError((error) {
+                    print(error);
+                    FlutterDialog(context);
+                  });
                 },
               )
             ],
@@ -444,5 +431,69 @@ class _signUp_stateful extends State<signUp_stateful> {
         ),
       ),
     );
+  }
+
+  Future<Map> postRequest() async {
+    var url = 'https://svclaw.ipdisk.co.kr:11003/student';
+
+    String ymd = DateFormat("yyyy-MM-dd").format(_selectedDateTime);
+    String pwdData = sha256.convert(utf8.encode(passWord.text)).toString();
+
+    Map Post_data = {
+      "username": userName.text, // 로그인에 사용할 아이디
+      "password": pwdData, // SHA-256 해싱된 암호
+      "fullname": fullName.text, // 이름
+      "email": eMail.text, // 이메일
+      "birthday": ymd, // 생년월일
+      "image_id": image_id
+    };
+    var body = json.encode(Post_data);
+    print(body);
+
+    var rawResponse = await http.post(url,
+        headers: {"Content-Type": "application/json"},
+        body: body);
+
+    var response = json.decode(rawResponse.body);
+
+    return response;
+  }
+
+  void FlutterDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //Dialog Main Title
+            title: Column(
+              children: <Widget>[
+                new Text("Error"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Error occurs during signing up.",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Ok"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
   }
 }

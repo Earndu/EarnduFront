@@ -5,10 +5,7 @@ import '../contents.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 //리스트  요소 함수
-Widget wish_list(BuildContext context, String subName, String tName,
-    List<String> sList, List<String> tList) {
-  bool favoritePressed = true;
-  IconData data = Icons.favorite;
+Widget wish_list(BuildContext context, Content content) {
   return InkWell(
     onTap: () {
       showCupertinoModalBottomSheet(
@@ -38,7 +35,7 @@ Widget wish_list(BuildContext context, String subName, String tName,
                           child: Column(
                             children: [
                               Container(
-                                  child: Text(subName,
+                                  child: Text(content.title,
                                       style: const TextStyle(
                                           decoration: TextDecoration.none,
                                           color: const Color(0xff3d4047),
@@ -50,7 +47,7 @@ Widget wish_list(BuildContext context, String subName, String tName,
                               Container(
                                   margin: const EdgeInsets.only(top: 9),
                                   alignment: Alignment.bottomLeft,
-                                  child: Text("Math",
+                                  child: Text(content.category,
                                       style: const TextStyle(
                                           decoration: TextDecoration.none,
                                           color: const Color(0xff5c5d60),
@@ -103,7 +100,7 @@ Widget wish_list(BuildContext context, String subName, String tName,
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(top: 11, bottom: 4),
-                  child: Text('$subName',
+                  child: Text(content.title,
                       style: const TextStyle(
                           color: const Color(0xff000000),
                           fontWeight: FontWeight.w700,
@@ -113,7 +110,7 @@ Widget wish_list(BuildContext context, String subName, String tName,
                       textAlign: TextAlign.left),
                 ),
                 Container(
-                  child: Text("$tName",
+                  child: Text(content.teacher.fullname,
                       style: const TextStyle(
                           color: const Color(0xff000000),
                           fontWeight: FontWeight.w400,
@@ -136,7 +133,7 @@ Widget wish_list(BuildContext context, String subName, String tName,
                 color: Color(0xffff7f41),
               ),
             ),
-            onTap: () => FlutterDialog(context),
+            onTap: () => FlutterDialog(context, content.id, 1),
           )
         ],
       ),
@@ -145,7 +142,7 @@ Widget wish_list(BuildContext context, String subName, String tName,
 }
 
 //다운로드 리스트  요소 함수
-Widget download_list(BuildContext context, String subName, String tName) {
+Widget download_list(BuildContext context, Content content) {
   bool favoritePressed = false;
   int remain = 0;
   return Container(
@@ -181,7 +178,7 @@ Widget download_list(BuildContext context, String subName, String tName) {
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(top: 11, bottom: 4),
-                  child: Text('$subName',
+                  child: Text(content.title,
                       style: const TextStyle(
                           color: const Color(0xff000000),
                           fontWeight: FontWeight.w700,
@@ -191,7 +188,7 @@ Widget download_list(BuildContext context, String subName, String tName) {
                       textAlign: TextAlign.left),
                 ),
                 Container(
-                  child: Text("$tName",
+                  child: Text(content.teacher.fullname,
                       style: const TextStyle(
                           color: const Color(0xff000000),
                           fontWeight: FontWeight.w400,
@@ -211,7 +208,7 @@ Widget download_list(BuildContext context, String subName, String tName) {
                             color: Color(0xffff7f41),
                           ),
                           onTap: () {
-                            FlutterDialog(context);
+                            FlutterDialog(context, content.id, 2);
                           },
                         ),
                       ),
@@ -247,25 +244,25 @@ Widget download_list(BuildContext context, String subName, String tName) {
                 size: 50,
               ),
               onPressed: () {
-                print('Hello');
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => contentsPageStateful(
-                            contentsName: subName, contentsType: 1)));
+                        builder: (context) => contentsPageStateful(content: content)));
               },
             ),
           )
         ],
       ),
       onTap: () {
-        print("object");
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                contentsPageStateful(content: content)));
       },
     ),
   );
 }
 
-void FlutterDialog(BuildContext context) {
+void FlutterDialog(BuildContext context, int contentId, int type) {
   // final earndu = Provider.of<earnduData>(context);
   showDialog(
       context: context,
@@ -296,6 +293,18 @@ void FlutterDialog(BuildContext context) {
             new FlatButton(
               child: new Text("Yes"),
               onPressed: () {
+                switch (type) {
+                  // 위시리스트
+                  case 1: {
+                    Content.removeFromWishList(contentId);
+                    break;
+                  }
+                  // 다운로드 리스트
+                  case 2: {
+                    Content.removeFromDownloadList(contentId);
+                    break;
+                  }
+                }
                 Navigator.pop(context);
               },
             ),
