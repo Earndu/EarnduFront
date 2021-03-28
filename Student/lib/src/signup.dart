@@ -1,12 +1,16 @@
+//통신쪽 패키지
 import 'dart:convert';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
+//위젯구성 패키지
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter_app/src/selectImage.dart';
 import 'package:intl/intl.dart';
-import 'selectImage.dart';
 
+import 'selectImage.dart';
 import 'package:crypto/crypto.dart';
 
 class signUp extends StatelessWidget {
@@ -39,17 +43,17 @@ class _signUp_stateful extends State<signUp_stateful> {
   TextEditingController passWord = TextEditingController();
   TextEditingController fullName = TextEditingController();
   TextEditingController eMail = TextEditingController();
+  DateTime _selectedDateTime = DateTime.now();
+  void onBirthdayChange(DateTime birthday) {
+    setState(() {
+      _selectedDateTime = birthday;
+    });
+  }
+
+  int image_id;
   @override
   Widget build(BuildContext context) {
-    DateTime _selectedDateTime = DateTime.now();
-    final String formatedData = DateFormat.yMd().format(_selectedDateTime);
-
     //시간을 갱신하기 위한 함수 setState를 사용하였다.
-    void onBirthdayChange(DateTime birthday) {
-      setState(() {
-        _selectedDateTime = birthday;
-      });
-    }
 
 //각각의 텍스트를확인할 때는 userName.text처럼 값을 가져올 수 있다.
 
@@ -121,13 +125,24 @@ class _signUp_stateful extends State<signUp_stateful> {
                   child: ClipOval(child: imageFile),
                 ),
                 onTap: () async {
-                  final reuslt = await Navigator.push(
+                  final result = await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => selectImage()),
                   );
                   setState(() {
+                    if (result == 'image/Elephant_1.png') {
+                      image_id = 0;
+                    } else if (result == 'image/Flamingo_1.png') {
+                      image_id = 1;
+                    } else if (result == 'image/Giraffe_1.png') {
+                      image_id = 2;
+                    } else if (result == 'image/Hippo_1.png') {
+                      image_id = 3;
+                    } else if (result == 'image/Koala_1.png') {
+                      image_id = 4;
+                    }
                     imageFile = Image.asset(
-                      reuslt,
+                      result,
                       fit: BoxFit.fill,
                     );
                   });
@@ -392,9 +407,35 @@ class _signUp_stateful extends State<signUp_stateful> {
                       textAlign: TextAlign.center),
                 ),
                 onTap: () {
-                  print(_selectedDateTime);
-                  var byte = utf8.encode(passWord.text);
-                  var pwdData = sha256.convert(byte);
+                  String ymd =
+                      DateFormat("yyyy-MM-dd").format(_selectedDateTime);
+                  var pwdData = sha256.convert(utf8.encode(passWord.text));
+
+                  //post 통신 구간
+                  Future<http.Response> postRequest() async {
+                    var url = 'http://svclaw.ipdisk.co.kr:11002/student/total';
+
+                    Map Post_data = {
+                      "username": "$userName", // 로그인에 사용할 아이디
+                      "password": "$pwdData", // SHA-256 해싱된 암호
+                      "fullname": "$fullName", // 이름
+                      "email": "$eMail", // 이메일
+                      "birthday": "$ymd", // 생년월일
+                      "image_id": "$image_id"
+                    };
+                    var body = json.encode(Post_data);
+                    print(body);
+
+                    var response = await http.post(url,
+                        headers: {"Content-Type": "application/json"},
+                        body: body);
+
+                    var dataConvertedToJSON = json.decode(response.body);
+                    return response;
+                  }
+
+                  //var result = postRequest();
+
                   Navigator.of(context, rootNavigator: true).pop(context);
                 },
               )
