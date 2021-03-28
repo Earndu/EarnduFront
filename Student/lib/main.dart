@@ -1,7 +1,8 @@
 //import 'dart:js';
 
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
+import 'package:flutter_app/src/data.dart';
+import 'package:provider/provider.dart';
 
 import 'src/login.dart';
 
@@ -13,7 +14,12 @@ void main() {
 
       debugShowCheckedModeBanner: false,
       title: 'Start',
-      home: loginPage(),
+      home: MultiProvider(
+        providers: [
+          Provider<student>(create: (context) => student()),
+        ],
+        child: loginPage(),
+      ),
     ),
   );
 }

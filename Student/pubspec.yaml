@@ -38,7 +38,7 @@ dependencies:
   #데이터를  하나로 모아놓는  역할을 위한  용도
   provider: ^4.3.3
   #튜토리얼을 한번만 진행하기 위한 용도
-  #shared_preferences: ^0.5.12+4
+  shared_preferences: ^0.5.12+4
   assets_audio_player: ^2.0.15
   flutter_markdown: ^0.5.2
   # The following adds the Cupertino Icons font to your application.

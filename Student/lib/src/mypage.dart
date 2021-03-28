@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'sub_widget/myPageWidget.dart';
 
 class myPage extends StatefulWidget {
   @override
@@ -8,134 +9,70 @@ class myPage extends StatefulWidget {
 
 class _myPage extends State<myPage> {
   @override
-  //라인 차트를 구성하는 옵션
-  LineChartData mainData() {
-    return LineChartData(
-      titlesData: FlTitlesData(
-        show: true,
-        bottomTitles: SideTitles(
-          showTitles: true,
-          //이부분을 버튼 누를때마다 바뀔 수 있도록 변수로 지정해주어야 한다.
-          reservedSize: 22,
-          getTextStyles: (value) => const TextStyle(
-              color: Color(0xffff7f41),
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return 'MAR';
-              case 5:
-                return 'JUN';
-              case 8:
-                return 'SEP';
-            }
-            return '';
-          },
-          margin: 8,
-        ),
-        leftTitles: SideTitles(
-          showTitles: false,
-        ),
-      ),
-      borderData: FlBorderData(
-        show: false,
-      ),
-      minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: 6,
-      lineBarsData: [
-        LineChartBarData(
-          spots: [
-            FlSpot(0, 2),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
-          isCurved: true,
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: FlDotData(
-            show: false,
-          ),
-        ),
-      ],
-    );
-  }
 
-//파이차트 데이터
-  List<PieChartSectionData> showingSections(int touchedIndex) {
-    return List.generate(5, (i) {
-      final isTouched = i == touchedIndex;
-      final double fontSize = isTouched ? 20 : 16;
-      final double radius = isTouched ? 60 : 50;
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: const Color(0xffffaf57),
-            value: 30,
-            title: 'Math',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: const Color(0xffff7f41),
-            //변수로 지정해 주어야 하는 부분
-            value: 30,
-            title: 'English',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 2:
-          return PieChartSectionData(
-            color: const Color(0xffff5f57),
-            value: 10,
-            title: 'History',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 3:
-          return PieChartSectionData(
-            color: const Color(0xffffdfc1),
-            value: 10,
-            title: 'Science',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 4:
-          return PieChartSectionData(
-            color: const Color(0xffffdf57),
-            value: 20,
-            title: 'Sports',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        default:
-          return null;
-      }
-    });
-  }
+  //파이차트에 들어갈 각 과목의 퍼센테이지
+  double history;
+  double math;
+  double science;
+  double health;
+  double sports;
 
+  //학습 시간에 대한 값을 가져오는 변수
+
+  Map<int, int> WeeklyStudytime = {0: 2, 1: 10, 2: 3, 3: 7, 4: 2, 5: 8, 6: 10};
+  Map<int, int> MontlyStudytime = {
+    0: 2,
+    1: 10,
+    2: 3,
+    3: 7,
+    4: 2,
+    5: 8,
+    6: 10,
+    7: 3,
+    8: 13,
+    9: 6,
+    10: 10,
+    11: 3,
+    12: 7,
+    13: 2,
+    14: 8,
+    15: 10,
+    16: 3,
+    17: 13,
+    18: 6,
+    19: 10,
+    20: 3,
+    21: 7,
+    22: 2,
+    23: 8,
+    24: 10,
+    25: 3,
+    26: 13,
+    27: 6,
+    28: 10
+  };
+  Map<int, int> yearStudytime = {
+    0: 2,
+    7: 3,
+    20: 14,
+    25: 3,
+    26: 13,
+    27: 6,
+    28: 10,
+    42: 3,
+    63: 13,
+    83: 6,
+    96: 10,
+    112: 2,
+    7: 3,
+    20: 14,
+    25: 3,
+    26: 13,
+  };
+
+  Map<int, int> WholeData = {1: 1};
+
+  List<int> subVal = [40, 30, 20, 20, 15];
   String tmp = "";
   String userName = "";
   int cnt = 0;
@@ -160,6 +97,7 @@ class _myPage extends State<myPage> {
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
+          padding: const EdgeInsets.only(top: 15),
           child: Column(
             children: <Widget>[
               Center(
@@ -241,8 +179,10 @@ class _myPage extends State<myPage> {
                         ),
                         //상태변화 정의
                         onTap: () {
-                          cnt = 0;
-                          setState(() {});
+                          setState(() {
+                            cnt = 0;
+                            WholeData = WeeklyStudytime;
+                          });
                         },
                       ),
                     ),
@@ -274,8 +214,10 @@ class _myPage extends State<myPage> {
                         ),
                         //상태 변화 정의
                         onTap: () {
-                          cnt = 1;
-                          setState(() {});
+                          setState(() {
+                            cnt = 1;
+                            WholeData = MontlyStudytime;
+                          });
                         },
                       ),
                     ),
@@ -307,8 +249,10 @@ class _myPage extends State<myPage> {
                         ),
                         //상태변화 정의
                         onTap: () {
-                          cnt = 2;
-                          setState(() {});
+                          setState(() {
+                            cnt = 2;
+                            WholeData = yearStudytime;
+                          });
                         },
                       ),
                     ),
@@ -332,7 +276,7 @@ class _myPage extends State<myPage> {
                           padding: const EdgeInsets.only(
                               right: 18.0, left: 12.0, top: 24, bottom: 12),
                           child: LineChart(
-                            mainData(),
+                            mainData(cnt, WholeData),
                           ),
                         ),
                       ),
@@ -380,7 +324,8 @@ class _myPage extends State<myPage> {
                                       )),
                                   sectionsSpace: 0,
                                   centerSpaceRadius: 30,
-                                  sections: showingSections(touchedIndex)),
+                                  sections:
+                                      showingSections(touchedIndex, subVal)),
                             ),
                           ),
                         ),
