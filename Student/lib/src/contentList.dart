@@ -3,7 +3,6 @@ import 'package:flutter_app/src/data.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'mainPage.dart';
 
 class contentList extends StatelessWidget {
   @override
@@ -28,8 +27,7 @@ class contentListStateful extends StatefulWidget {
 }
 
 class _contentListStateful extends State<contentListStateful> {
-  var favoritePressed = [false, false, false, false, false, false];
-  
+
   @override
   Widget build(BuildContext context) {
     final String category = widget.subName;
@@ -182,7 +180,6 @@ class _contentListStateful extends State<contentListStateful> {
               expand: true,
               context: context,
               builder: (BuildContext context) {
-                mainPage.me.watch(contentId);
                 return SingleChildScrollView(
                   controller: ModalScrollController.of(context),
                   child: Container(

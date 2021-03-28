@@ -8,35 +8,14 @@ import 'data.dart';
 
 //상태 변동이 수행되어야 하는 스테이트 풀 위젯 선언
 class mainPage extends StatefulWidget {
-  mainPageStateful state;
-  static mainPage me;
 
   @override
-  State<StatefulWidget> createState() {
-    state = mainPageStateful();
-    me = this;
-    return state;
-  }
-
-  void watch(int contentId) {
-    if (state != null) {
-      state.watch(contentId);
-    }
-  }
+  State<StatefulWidget> createState() => mainPageStateful();
 }
 
 //변환되는 페이지에 대한 선언으로 위의 홈페이지 클래스의 상태를 전달한다.
 class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMixin {
-  List<int> history = List();
-
   TabController _tabController;
-
-  void watch(int contentId) {
-    if (history.contains(contentId)) {
-      history.remove(contentId);
-    }
-    history.insert(0, contentId);
-  }
 
   @override
   void initState() {
@@ -47,18 +26,26 @@ class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMix
 
   void _handleTabSelection() {
     print('on Tab : ${_tabController.index}');
-    if (_tabController.index == 0) {
-      setState(() {
-        history.add(0);
-        history.removeLast();
-      });
-    }
+    setState(() {
+      switch (_tabController.index) {
+        case 0: {
+          Content.refreshHistory();
+          break;
+        }
+        case 1: {
+          Content.refreshWishList();
+          break;
+        }
+        case 2: {
+          Content.refreshDownloadList();
+          break;
+        }
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('build');
-
     //각각의 위젯을 위치를 디바이스에 맞게 조정하기 위해 스마트폰의 길이를 저장
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
@@ -160,8 +147,8 @@ class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMix
                       Container(
                         //내부에 카드를 정렬시켜놓고 보이도록 호출
                         child: Column(
-                          children: [for (int i in history)
-                            historyCard(context, Content.getById(i))],
+                          children: [for (Content content in Content.getHistory())
+                            historyCard(context, content)],
                         ),
                       )
                     ],
@@ -222,10 +209,8 @@ class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMix
                                       color: const Color(0xffededed),
                                       width: 3))),
 
-                          for (int i in Content.wishList)
-                            wish_list(
-                                context,
-                                Content.getById(i)),
+                          for (Content content in Content.getWish())
+                            wish_list(context, content),
                         ],
                       ),
                     ),
@@ -284,8 +269,8 @@ class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMix
                                       color: const Color(0xffededed),
                                       width: 3))),
 
-                          for (int i in Content.downloadList)
-                            download_list(context, Content.getById(i)),
+                          for (Content content in Content.getDownload())
+                            download_list(context, content),
 
                           // 리스트뷰가 들어갈 컨테이너
                         ],

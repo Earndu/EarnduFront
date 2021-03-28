@@ -101,7 +101,7 @@ class Student {
 class Content {
   static List<Content> totalList = List();
   // static List<int> wishList = List();
-  static List<int> wishList = [14];
+  static List<int> wishList = [15];
   static List<int> downloadList = List();
   static List<int> historyList = List();
   static List<String> categoryList = ['Math', 'Science', 'English'];
@@ -207,8 +207,64 @@ class Content {
   static void addToWishList(int contentId) {
     wishList.add(contentId);
   }
+
   static void removeFromWishList(int contentId) {
     wishList.remove(contentId);
+  }
+
+  static void watch(int contentId) {
+    if (historyList.contains(contentId)) {
+      historyList.remove(contentId);
+    }
+    historyList.insert(0, contentId);
+  }
+
+  static void refreshHistory() {
+    historyList.add(0);
+    historyList.removeLast();
+  }
+
+  static void refreshWishList() {
+    wishList.add(0);
+    wishList.removeLast();
+  }
+
+  static void refreshDownloadList() {
+    downloadList.add(0);
+    downloadList.removeLast();
+  }
+
+  static List<Content> getHistory() {
+    List<Content> ret = List();
+    for (int i in historyList) {
+      Content content = getById(i);
+      if (content.type == selectedType) {
+        ret.add(content);
+      }
+    }
+    return ret;
+  }
+
+  static List<Content> getWish() {
+    List<Content> ret = List();
+    for (int i in wishList) {
+      Content content = getById(i);
+      if (content.type == selectedType) {
+        ret.add(content);
+      }
+    }
+    return ret;
+  }
+
+  static List<Content> getDownload() {
+    List<Content> ret = List();
+    for (int i in downloadList) {
+      Content content = getById(i);
+      if (content.type == selectedType) {
+        ret.add(content);
+      }
+    }
+    return ret;
   }
 }
 

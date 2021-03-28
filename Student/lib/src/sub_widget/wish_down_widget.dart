@@ -244,18 +244,19 @@ Widget download_list(BuildContext context, Content content) {
                 size: 50,
               ),
               onPressed: () {
-                print('Hello');
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => contentsPageStateful()));
+                        builder: (context) => contentsPageStateful(content: content)));
               },
             ),
           )
         ],
       ),
       onTap: () {
-        print("object");
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                contentsPageStateful(content: content)));
       },
     ),
   );

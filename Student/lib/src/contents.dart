@@ -6,6 +6,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:flutter_app/src/mainPage.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -38,6 +39,8 @@ class _contentsPageStateful extends State<contentsPageStateful> {
 
   @override
   Widget build(BuildContext context) {
+    Content.watch(widget.content.id);
+
     String contentsVal = widget.content.type;
     double _width = MediaQuery.of(context).size.width;
 
@@ -89,18 +92,16 @@ class _contentsPageStateful extends State<contentsPageStateful> {
                 decoration: BoxDecoration(
                     border:
                         Border.all(color: const Color(0xffededed), width: 3))),
-            if (contentsVal == '1')
-              Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  width: 300,
-                  height: 670,
-                  child: imageContents(context, 1, imgList))
-            else if (contentsVal == '2')
-              Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  width: 300,
-                  height: 600,
-                  child: soundContents(context, 1, ContentName, _play))
+            if (contentsVal == '1') Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: 300,
+                height: 600,
+                child: soundContents(context, 1, ContentName, _play))
+            else if (contentsVal == '2') Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: 300,
+                height: 670,
+                child: imageContents(context))
             else
               Container(
                   margin: const EdgeInsets.only(top: 10),
@@ -157,17 +158,17 @@ class _contentsPageStateful extends State<contentsPageStateful> {
   }
 
   Widget imageContents(
-      BuildContext context, int contentsType, List<Image> imgList) {
+      BuildContext context) {
     return Scaffold(
       body: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: imgList.length,
+        itemCount: widget.content.res_image.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
               margin: const EdgeInsets.only(bottom: 30),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: (imgList[index]),
+                child: (widget.content.res_image[index]),
               ));
         },
       ),

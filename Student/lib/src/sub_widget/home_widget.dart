@@ -75,13 +75,6 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
 //히스토리카드 제작용
 @override
 Widget historyCard(BuildContext context, Content content) {
-  List<String> imgList = [
-    'image/math_1.png',
-    'image/math_2.png',
-    'image/math_3.png',
-    'image/math_4.png',
-    'image/math_5.png',
-  ];
 
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 0),
@@ -135,7 +128,7 @@ Widget historyCard(BuildContext context, Content content) {
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.only(top: 11, bottom: 4),
-                    child: Text('play with number!',
+                    child: Text(content.title,
                         style: const TextStyle(
                             color: const Color(0xff000000),
                             fontWeight: FontWeight.w700,
@@ -145,7 +138,7 @@ Widget historyCard(BuildContext context, Content content) {
                         textAlign: TextAlign.left),
                   ),
                   Container(
-                    child: Text("Teacher username",
+                    child: Text(content.teacher.fullname,
                         style: const TextStyle(
                             color: const Color(0xff000000),
                             fontWeight: FontWeight.w400,
