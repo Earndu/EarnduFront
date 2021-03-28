@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-//import 'sub_widget/mypage_widget.dart';
 
 class myPage extends StatefulWidget {
   @override
@@ -16,6 +15,7 @@ class _myPage extends State<myPage> {
         show: true,
         bottomTitles: SideTitles(
           showTitles: true,
+          //이부분을 버튼 누를때마다 바뀔 수 있도록 변수로 지정해주어야 한다.
           reservedSize: 22,
           getTextStyles: (value) => const TextStyle(
               color: Color(0xffff7f41),
@@ -69,7 +69,7 @@ class _myPage extends State<myPage> {
 
 //파이차트 데이터
   List<PieChartSectionData> showingSections(int touchedIndex) {
-    return List.generate(4, (i) {
+    return List.generate(5, (i) {
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 20 : 16;
       final double radius = isTouched ? 60 : 50;
@@ -77,7 +77,7 @@ class _myPage extends State<myPage> {
         case 0:
           return PieChartSectionData(
             color: const Color(0xffffaf57),
-            value: 40,
+            value: 30,
             title: 'Math',
             radius: radius,
             titleStyle: TextStyle(
@@ -88,6 +88,7 @@ class _myPage extends State<myPage> {
         case 1:
           return PieChartSectionData(
             color: const Color(0xffff7f41),
+            //변수로 지정해 주어야 하는 부분
             value: 30,
             title: 'English',
             radius: radius,
@@ -99,7 +100,7 @@ class _myPage extends State<myPage> {
         case 2:
           return PieChartSectionData(
             color: const Color(0xffff5f57),
-            value: 15,
+            value: 10,
             title: 'History',
             radius: radius,
             titleStyle: TextStyle(
@@ -109,9 +110,20 @@ class _myPage extends State<myPage> {
           );
         case 3:
           return PieChartSectionData(
-            color: const Color(0xffffdf57),
-            value: 15,
+            color: const Color(0xffffdfc1),
+            value: 10,
             title: 'Science',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        case 4:
+          return PieChartSectionData(
+            color: const Color(0xffffdf57),
+            value: 20,
+            title: 'Sports',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -132,7 +144,7 @@ class _myPage extends State<myPage> {
   void setImage(String img) {
     setState(() {
       if (tmp != "") {
-        Image.asset(tmp);
+        Image.asset(tmp, fit: BoxFit.cover);
       } else {
         Icon(Icons.person);
       }
@@ -227,6 +239,7 @@ class _myPage extends State<myPage> {
                                 textAlign: TextAlign.left),
                           ),
                         ),
+                        //상태변화 정의
                         onTap: () {
                           cnt = 0;
                           setState(() {});
@@ -259,6 +272,7 @@ class _myPage extends State<myPage> {
                                 textAlign: TextAlign.left),
                           ),
                         ),
+                        //상태 변화 정의
                         onTap: () {
                           cnt = 1;
                           setState(() {});
@@ -291,6 +305,7 @@ class _myPage extends State<myPage> {
                                 textAlign: TextAlign.left),
                           ),
                         ),
+                        //상태변화 정의
                         onTap: () {
                           cnt = 2;
                           setState(() {});
