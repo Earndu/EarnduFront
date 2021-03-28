@@ -7,12 +7,9 @@ import 'package:provider/provider.dart';
 class contentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<student>(
-      create: (context) => student(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: contentListStateful(),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: contentListStateful(),
     );
   }
 }
