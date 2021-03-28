@@ -2,6 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7011f19-f799-498b-9cb0-ba029af95969" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Student/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student/lib/src/data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Student/lib/src/data.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student/lib/src/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Student/lib/src/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Student/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Student/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Elephant_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Elephant_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Elephant_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Elephant_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Elephant_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Elephant_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Flamingo_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Flamingo_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Flamingo_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Flamingo_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Flamingo_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Flamingo_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Giraffe_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Giraffe_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Giraffe_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Giraffe_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Giraffe_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Giraffe_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Hippo_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Hippo_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Hippo_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Hippo_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Hippo_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Hippo_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Koala_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Koala_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Koala_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Koala_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/Koala_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/image/Koala_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/read.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Teacher/image/sound.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Teacher/lib/src/contentList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/lib/src/contentList.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Teacher/lib/src/homePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/lib/src/homePage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Teacher/lib/src/mypage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/Teacher/lib/src/mypage.dart" afterDir="false" />

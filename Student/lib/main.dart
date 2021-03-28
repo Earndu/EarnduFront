@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/data.dart';
 import 'package:provider/provider.dart';

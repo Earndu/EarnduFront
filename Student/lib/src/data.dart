@@ -5,20 +5,24 @@ import 'package:http/http.dart' as http;
 
 class student with ChangeNotifier {
   //유저 정보를 저장할 변수들
-  String username="Orland5";
+  String username = "Orland5";
   String password = "";
   String fullname = "";
   String email = "";
-  DateTime birthday = DateTime.now() ;
+  DateTime birthday = DateTime.now();
   String imagedata = "1";
 
   //위시 리스트 요청에 대한 변수 선언
   List<int> wish_list;
-  List<Map<String, dynamic>> curriculum;
-  Map<String, dynamic> testcurri = { "content_id": 1,
-          "percentage": 20,
-          "score": 100,
-          "end_datetime": "2021-03-26 20:40"}
+  List<Map<String, dynamic>> curriculum = [];
+
+  Map<String, dynamic> testcurri = {
+    "content_id": 1,
+    "percentage": 20,
+    "score": 100,
+    "end_datetime": "2021-03-26 20:40"
+  };
+
   //학생에 대한 기본적인 생성자
   student({
     this.username,
@@ -35,9 +39,9 @@ class student with ChangeNotifier {
     var url = 'http://svclaw.ipdisk.co.kr:11002/student/total';
 
     Map Post_data = {
-      "username": "student01",
-      "password": "student01",
-      "wish_list": [1],
+      "username": username,
+      "password": password,
+      "wish_list": wish_list,
       "curriculum": [
         {
           "content_id": 1,
@@ -67,7 +71,6 @@ class student with ChangeNotifier {
 
 Contents a = new Contents(1, '따님을제게줏빗이보', 20, 22.0, 100);
 List<Contents> maradona = [a];
-
 
 //카테고리에 대한 클래스
 
@@ -104,3 +107,5 @@ class Teacher {
   int id;
   String fullname;
 }
+
+class studentdata extends ChangeNotifier {}

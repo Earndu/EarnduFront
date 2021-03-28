@@ -9,7 +9,6 @@ import 'package:crypto/crypto.dart';
 
 import 'data.dart';
 
-
 class loginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     //현재 페이지에서 요구되는 데이터는 각각 username, password이므로 이를
@@ -207,6 +206,8 @@ class loginPage extends StatelessWidget {
                     ),
                     //터치시 상호작용의 정의, 현재는 바로 메인페이지로 이동되도록 선언했다.
                     onTap: () {
+                      var id = userName;
+                      var pw = passWord;
                       if (log_in_count == 0) {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => selectPage()));
