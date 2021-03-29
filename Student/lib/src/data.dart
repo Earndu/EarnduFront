@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Student {
   //유저 정보를 저장할 변수들
   static String username = null;
@@ -40,15 +42,19 @@ class Student {
   static void setUsername(String _username) {
     username = _username;
   }
+
   static void setFullName(String _fullName) {
     fullname = _fullName;
   }
+
   static void setEmail(String _email) {
     email = _email;
   }
+
   static void setBirthday(DateTime _birthday) {
     birthday = _birthday;
   }
+
   static void setImageId(int _imageData) {
     imagedata = _imageData;
   }
@@ -149,7 +155,10 @@ class Content {
     teacher = Teacher.fromJson(data['teacher']);
     content = data['content'];
     res_sound = data['res_sound'];
-    res_image = [for (String _image in data['res_image'].toString().split('<SEP>')) Image.memory(base64.decode(_image))];
+    res_image = [
+      for (String _image in data['res_image'].toString().split('<SEP>'))
+        Image.memory(base64.decode(_image))
+    ];
   }
 
   static List<Content> getType(String type) {
@@ -173,7 +182,7 @@ class Content {
   }
 
   static int getIndexById(int contentId) {
-    for (int i=0; i<Content.totalList.length; i++) {
+    for (int i = 0; i < Content.totalList.length; i++) {
       if (Content.totalList[i].id == contentId) {
         return i;
       }
@@ -192,8 +201,9 @@ class Content {
 
   static List<Content> getByCategory(String category) {
     List<Content> ret = List();
-    for (int i=0; i<Content.totalList.length; i++) {
-      if (Content.totalList[i].type == selectedType && Content.totalList[i].category == category) {
+    for (int i = 0; i < Content.totalList.length; i++) {
+      if (Content.totalList[i].type == selectedType &&
+          Content.totalList[i].category == category) {
         ret.add(Content.totalList[i]);
       }
     }

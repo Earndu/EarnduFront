@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/signup.dart';
-import 'package:provider/provider.dart';
+
 import 'data.dart';
 import 'select.dart';
 
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
-import 'data.dart';
 import 'dart:io';
 
+import 'package:shared_preferences/shared_preferences.dart';
 
 class loginPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -20,14 +20,36 @@ class loginPage extends StatelessWidget {
 
     final Color maincolor = Color(0xffff7f41);
 
-    /*
-     */
-
     HttpOverrides.global = new MyHttpOverrides();
 
+    String shared_UserName = null;
+    String shared_PassWord;
+    String _totalContents;
+    String _wishList;
+    String _downList;
     // 어플 실행 시 인터넷 되는지 확인하고,
     // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
 
+    /*shared_preference를 통한 값 저장 부분*/
+    get_UserName(String userName) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      shared_UserName = prefs.getString(userName);
+    }
+
+    get_PassWord(String Password) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      shared_PassWord = prefs.getString(Password);
+    }
+
+    get_totalContents(String totalcontents) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      totalcontents = prefs.getString(totalcontents);
+    }
+
+    /*
+  qlfem qnqns
+  
+  */
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.grey[700]),
@@ -211,21 +233,26 @@ class loginPage extends StatelessWidget {
                     var byte = utf8.encode(passWord.text);
                     String pwdData = sha256.convert(byte).toString();
 
-                    Student.postRequest(userName.text, pwdData).then((response) {
+                    Student.postRequest(userName.text, pwdData)
+                        .then((response) {
                       if (response['status_code'] == 200) {
                         Map data = response['data'];
                         if (Student.username == null) {
                           Student.setUsername(data['user_data']['username']);
                           Student.setFullName(data['user_data']['fullname']);
-                          Student.setBirthday(DateTime.parse(data['user_data']['birthday']));
+                          Student.setBirthday(
+                              DateTime.parse(data['user_data']['birthday']));
                           Student.setEmail(data['user_data']['email']);
                           Student.setImageId(data['user_data']['image_id']);
                         }
 
                         for (String type in data['content_list'].keys) {
-                          for (String category in data['content_list'][type].keys) {
-                            for (Map content in data['content_list'][type][category]) {
-                              Content.totalList.add(Content.fromJson(content, type, category));
+                          for (String category
+                              in data['content_list'][type].keys) {
+                            for (Map content in data['content_list'][type]
+                                [category]) {
+                              Content.totalList.add(
+                                  Content.fromJson(content, type, category));
                             }
                           }
                         }
@@ -233,7 +260,8 @@ class loginPage extends StatelessWidget {
 
                         for (Map _content in data['wish_list']) {
                           Content content = Content.detailFromJson(_content);
-                          Content.totalList[Content.getIndexById(content.id)] = content;
+                          Content.totalList[Content.getIndexById(content.id)] =
+                              content;
                           Content.downloadList.add(content.id);
                         }
                         print('Download List: ${Content.downloadList.length}');
@@ -345,10 +373,11 @@ class loginPage extends StatelessWidget {
   }
 }
 
-class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext context){
+  HttpClient createHttpClient(SecurityContext context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

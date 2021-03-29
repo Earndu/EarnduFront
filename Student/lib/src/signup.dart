@@ -451,8 +451,7 @@ class _signUp_stateful extends State<signUp_stateful> {
     print(body);
 
     var rawResponse = await http.post(url,
-        headers: {"Content-Type": "application/json"},
-        body: body);
+        headers: {"Content-Type": "application/json"}, body: body);
 
     var response = json.decode(rawResponse.body);
 
