@@ -39,29 +39,14 @@ class loginPage extends StatelessWidget {
     // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
 
     /*shared_preference를 통한 값 저장 부분*/
-    set_UserName(String userName) async {
+    set_UserInfo(String userName, String passWord, String email,
+        String birthday, int imageData) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
+
       shared_UserName = prefs.getString(userName);
-    }
-
-    set_PassWord(String passWord) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       shared_PassWord = prefs.getString(passWord);
-    }
-
-    set_Email(String email) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       shared_Email = prefs.getString(email);
-    }
-
-    set_Birthday(String birthday) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       shared_PassWord = prefs.getString(birthday);
-    }
-
-    set_ImageData(int imageData) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      shared_ImageData = prefs.getInt('image_data');
       prefs.setInt('image_data', shared_ImageData);
     }
 
@@ -82,12 +67,12 @@ class loginPage extends StatelessWidget {
 
     set_historyList(List<int> historyList) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      //shared_totalList = prefs.getString(totalList);
+      shared_totalList = prefs.getString(json.encode(historyList));
     }
 
     set_categoryList(List<String> categoryList) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      //shared_totalList = prefs.getString(totalList);
+      shared_totalList = prefs.getString(json.encode(categoryList));
     }
 
     set_selectType(String selectType) async {
