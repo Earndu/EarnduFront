@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'sub_widget/myPageWidget.dart';
+import 'data.dart';
 
 class myPage extends StatefulWidget {
   @override
@@ -73,19 +74,25 @@ class _myPage extends State<myPage> {
   Map<int, int> WholeData = {1: 1};
 
   List<int> subVal = [40, 30, 20, 20, 15];
-  String tmp = "";
+
   String userName = "";
   int cnt = 0;
   int touchedIndex;
   //이미지랑 아이콘 둘 중 하나를 쓰기 위한 페이지
-  void setImage(String img) {
-    setState(() {
-      if (tmp != "") {
-        Image.asset(tmp, fit: BoxFit.cover);
-      } else {
-        Icon(Icons.person);
-      }
-    });
+  String setImage() {
+    String result;
+    if (Student.imagedata == 0) {
+      result = 'image/Elephant_1.png';
+    } else if (Student.imagedata == 1) {
+      result = 'image/Flamingo_1.png';
+    } else if (Student.imagedata == 2) {
+      result = 'image/Giraffe_1.png';
+    } else if (Student.imagedata == 3) {
+      result = 'image/Hippo_1.png';
+    } else {
+      result = 'image/Koala_1.png';
+    }
+    return result;
   }
 
   Widget build(BuildContext context) {
@@ -106,6 +113,10 @@ class _myPage extends State<myPage> {
                   width: 120,
                   height: 120,
                   decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(setImage()),
+                        fit: BoxFit.fill,
+                      ),
                       borderRadius: BorderRadius.circular(100),
                       boxShadow: [
                         BoxShadow(
@@ -115,15 +126,10 @@ class _myPage extends State<myPage> {
                             spreadRadius: 0)
                       ],
                       color: const Color(0xffff7f41)),
-                  child: Icon(
-                    Icons.person_outline,
-                    size: 120,
-                    color: Colors.white,
-                  ),
                 ),
               ),
               Center(
-                child: Text("Student username",
+                child: Text("${Student.username}",
                     style: const TextStyle(
                         color: const Color(0xff000000),
                         fontWeight: FontWeight.w700,

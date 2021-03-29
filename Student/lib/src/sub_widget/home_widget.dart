@@ -63,6 +63,7 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
         ],
       ),
       onTap: () {
+        print(Content.originalContent);
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -75,7 +76,6 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
 //히스토리카드 제작용
 @override
 Widget historyCard(BuildContext context, Content content) {
-
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 0),
     margin: const EdgeInsets.only(bottom: 10),
@@ -87,8 +87,7 @@ Widget historyCard(BuildContext context, Content content) {
     child: InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                contentsPageStateful(content: content)));
+            builder: (context) => contentsPageStateful(content: content)));
       },
       child: Container(
         width: 320,

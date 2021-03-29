@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/data.dart';
+import 'package:flutter_app/src/manageState.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -27,12 +28,10 @@ class contentListStateful extends StatefulWidget {
 }
 
 class _contentListStateful extends State<contentListStateful> {
-
   @override
   Widget build(BuildContext context) {
     final String category = widget.subName;
     List<Content> contentList = Content.getByCategory(category);
-
     double _height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
@@ -68,10 +67,10 @@ class _contentListStateful extends State<contentListStateful> {
               child: ListView(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 27, vertical: 20),
-                children:
-                <Widget>[
+                children: <Widget>[
                   for (Content content in contentList)
-                    contents(context, content.title, content.teacher.fullname, content.id)
+                    contents(context, content.title, content.teacher.fullname,
+                        content.id)
                 ],
               ),
             ),
@@ -161,12 +160,20 @@ class _contentListStateful extends State<contentListStateful> {
                       ),
                 onPressed: () {
                   setState(() {
+                    // String wishData =
+                    //     Provider.of<manage>(context, listen: false).userVal();
+                    // Content.loadMetaFromString(wishData);
                     if (!Content.wishList.contains(contentId)) {
                       //데이터에 추가를 해야겠다
+
                       Content.addToWishList(contentId);
                     } else {
                       //데이터를 삭제한다.
                       Content.removeFromWishList(contentId);
+                      // wishData = Content.metaToString();
+                      // Provider.of<manage>(context, listen: false)
+                      //     .setUser(wishData);
+                      // Provider.of<manage>(context, listen: false).getUser();
                     }
                   });
                 },
