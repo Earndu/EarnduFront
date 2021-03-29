@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/contentList.dart';
 import 'package:flutter_app/src/mainPage.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -82,9 +84,13 @@ class Student {
 //카테고리에 대한 클래스
 
 class Content {
+  // 데이터 원본 저장
+  static Map<String, dynamic> originalContent = null;
+  static List<Map> originalDownload = null;
+
   static List<Content> totalList = List();
-  // static List<int> wishList = List();
-  static List<int> wishList = [15];
+  static List<int> wishList = List();
+  // static List<int> wishList = [15];
   static List<int> downloadList = List();
   static List<int> historyList = List();
   static List<String> categoryList = ['Math', 'Science', 'English'];
@@ -252,6 +258,68 @@ class Content {
       }
     }
     return ret;
+  }
+
+  static String metaToString() {
+    Map<String, dynamic> ret = Map();
+    ret['wishList'] = wishList;
+    ret['downloadList'] = downloadList;
+    ret['historyList'] = historyList;
+    ret['user'] = {
+      'username': Student.username,
+      'fullname': Student.fullname,
+      'email': Student.email,
+      'birthday': (Student.birthday == null) ? null : DateFormat('yyyy-MM-dd').format(Student.birthday),
+      'imagedata': Student.imagedata,
+    };
+    return json.encode(ret);
+  }
+
+  static void loadMetaFromString(String str) {
+    Map<String, dynamic> data = json.decode(str);
+    wishList = List<int>.from(data['wishList']);
+    downloadList = List<int>.from(data['downloadList']);
+    historyList = List<int>.from(data['historyList']);
+    Student.username = data['user']['username'];
+    Student.fullname = data['user']['fullname'];
+    Student.email = data['user']['email'];
+    Student.birthday = DateFormat('yyyy-MM-dd').parse(data['user']['birthday']);
+    Student.imagedata = data['user']['imagedata'];
+  }
+
+  static String contentToString() {
+    String str = json.encode({
+      'content_list': originalContent,
+      'wish_list': originalDownload
+    });
+
+    return str;
+  }
+
+  static void loadContentFromString(String str) {
+    Map data = json.decode(str);
+    loadContentFromMap(data['content_list'], List<Map>.from(data['wish_list']));
+  }
+
+  static void loadContentFromMap(
+      Map<String, dynamic> contents, List<Map> downloads) {
+    for (String type in contents.keys) {
+      for (String category
+      in contents[type].keys) {
+        for (Map content in contents[type]
+        [category]) {
+          Content.totalList.add(
+              Content.fromJson(content, type, category));
+        }
+      }
+    }
+
+    for (Map _content in downloads) {
+      Content content = Content.detailFromJson(_content);
+      Content.totalList[Content.getIndexById(content.id)] =
+          content;
+      Content.downloadList.add(content.id);
+    }
   }
 }
 

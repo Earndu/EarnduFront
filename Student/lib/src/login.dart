@@ -285,30 +285,28 @@ class loginPage extends StatelessWidget {
                           Student.setImageId(data['user_data']['image_id']);
                         }
 
-                        for (String type in data['content_list'].keys) {
-                          for (String category
-                              in data['content_list'][type].keys) {
-                            for (Map content in data['content_list'][type]
-                                [category]) {
-                              Content.totalList.add(
-                                  Content.fromJson(content, type, category));
-                            }
-                          }
-                        }
-                        print('Total List: ${Content.totalList.length}');
+                        Content.originalContent = data['content_list'];
+                        Content.originalDownload = List<Map>.from(data['wish_list']);
 
-                        for (Map _content in data['wish_list']) {
-                          Content content = Content.detailFromJson(_content);
-                          Content.totalList[Content.getIndexById(content.id)] =
-                              content;
-                          Content.downloadList.add(content.id);
-                        }
+                        print('Total List: ${Content.totalList.length}');
                         print('Download List: ${Content.downloadList.length}');
 
                         for (Map curriculum in data['curriculum']) {
                           Curriculum.list.add(Curriculum.fromJson(curriculum));
                         }
                         print('Curriculum List: ${Curriculum.list.length}');
+
+                        // 변환 테스트
+                        print('Start convert');
+                        String str = Content.contentToString();
+                        print('content to str ok');
+                        Content.loadContentFromString(str);
+                        print('str to content ok');
+                        str = Content.metaToString();
+                        print('meta to str ok');
+                        Content.loadMetaFromString(str);
+                        print('str to meta ok');
+                        print('Convert successful');
 
                         // 뒤로가기 눌렀을 때 다시 로그인창 뜨지 않도록
                         Navigator.of(context).pop();
