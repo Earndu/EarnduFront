@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/src/contentList.dart';
 import 'package:flutter_app/src/signup.dart';
 
 import 'data.dart';
@@ -12,6 +13,18 @@ import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class loginPage extends StatelessWidget {
+  // ***데이터들이 저장될 변수***
+  String shared_UserName;
+  String shared_PassWord;
+  String shared_Email;
+  String shared_Birthday;
+  int shared_ImageData;
+  String shared_totalList;
+  String shared_wishList;
+  String shared_downList;
+  String shared_CategoryList;
+  String shared_SelectType;
+
   Widget build(BuildContext context) {
     //현재 페이지에서 요구되는 데이터는 각각 username, password이므로 이를
     //텍스트필드 컨트롤러 변수로 선언하여 받아올 수 있도록 지정
@@ -22,32 +35,73 @@ class loginPage extends StatelessWidget {
 
     HttpOverrides.global = new MyHttpOverrides();
 
-    String shared_UserName = null;
-    String shared_PassWord;
-    String _totalContents;
-    String _wishList;
-    String _downList;
     // 어플 실행 시 인터넷 되는지 확인하고,
     // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
 
     /*shared_preference를 통한 값 저장 부분*/
-    get_UserName(String userName) async {
+    set_UserName(String userName) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       shared_UserName = prefs.getString(userName);
     }
 
-    get_PassWord(String Password) async {
+    set_PassWord(String passWord) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      shared_PassWord = prefs.getString(Password);
+      shared_PassWord = prefs.getString(passWord);
     }
 
-    get_totalContents(String totalcontents) async {
+    set_Email(String email) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      totalcontents = prefs.getString(totalcontents);
+      shared_Email = prefs.getString(email);
+    }
+
+    set_Birthday(String birthday) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      shared_PassWord = prefs.getString(birthday);
+    }
+
+    set_ImageData(int imageData) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      shared_ImageData = prefs.getInt('image_data');
+      prefs.setInt('image_data', shared_ImageData);
+    }
+
+    set_totalContents(List<Content> totalList) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //shared_totalList = prefs.getString(totalList);
+    }
+
+    set_wishList(List<int> wishList) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //shared_totalList = prefs.getString(totalList);
+    }
+
+    set_downloadList(List<int> downloadList) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //shared_totalList = prefs.getString(totalList);
+    }
+
+    set_historyList(List<int> historyList) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //shared_totalList = prefs.getString(totalList);
+    }
+
+    set_categoryList(List<String> categoryList) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //shared_totalList = prefs.getString(totalList);
+    }
+
+    set_selectType(String selectType) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      shared_SelectType = prefs.getString(selectType);
+    }
+
+    // ***sharedPreferences에서 값을 반환하는 함수***
+    String get_UserName() {
+      return shared_UserName;
     }
 
     /*
-  qlfem qnqns
+  빌드 부분
   
   */
     return MaterialApp(

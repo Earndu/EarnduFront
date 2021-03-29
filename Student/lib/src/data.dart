@@ -15,29 +15,6 @@ class Student {
   static DateTime birthday = null;
   static int imagedata = null;
 
-/*
-  //위시 리스트 요청에 대한 변수 선언
-  List<int> wish_list;
-  List<Map<String, dynamic>> curriculum;
-  Map<String, dynamic> testcurri = {
-    "content_id": 1,
-    "percentage": 20,
-    "score": 100,
-    "end_datetime": "2021-03-26 20:40"
-  };
-  //학생에 대한 기본적인 생성자
-  Student({
-    this.username,
-    this.password,
-    this.fullname,
-    this.email,
-    this.birthday,
-    this.imagedata,
-    this.wish_list,
-    this.curriculum,
-  });
-  */
-
   // *** 어플 실행 시 저장된 데이터 불러와야함 ***
   static void setUsername(String _username) {
     username = _username;
