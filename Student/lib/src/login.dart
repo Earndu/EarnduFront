@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/contentList.dart';
+import 'package:flutter_app/src/manageState.dart';
 import 'package:flutter_app/src/signup.dart';
+import 'package:provider/provider.dart';
 
 import 'data.dart';
 import 'select.dart';
@@ -10,27 +11,13 @@ import 'package:crypto/crypto.dart';
 
 import 'dart:io';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class loginPage extends StatelessWidget {
-  // ***데이터들이 저장될 변수***
-  String shared_UserName;
-  String shared_PassWord;
-  String shared_Email;
-  String shared_Birthday;
-  int shared_ImageData;
-  String shared_totalList;
-  String shared_wishList;
-  String shared_downList;
-  String shared_CategoryList;
-  String shared_SelectType;
-
   Widget build(BuildContext context) {
     //현재 페이지에서 요구되는 데이터는 각각 username, password이므로 이를
     //텍스트필드 컨트롤러 변수로 선언하여 받아올 수 있도록 지정
     TextEditingController userName = TextEditingController();
     TextEditingController passWord = TextEditingController();
-
+    final manageprovider = Provider.of<manage>(context);
     final Color maincolor = Color(0xffff7f41);
 
     HttpOverrides.global = new MyHttpOverrides();
@@ -39,51 +26,6 @@ class loginPage extends StatelessWidget {
     // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
 
     /*shared_preference를 통한 값 저장 부분*/
-    set_UserInfo(String userName, String passWord, String email,
-        String birthday, int imageData) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      shared_UserName = prefs.getString(userName);
-      shared_PassWord = prefs.getString(passWord);
-      shared_Email = prefs.getString(email);
-      shared_PassWord = prefs.getString(birthday);
-      prefs.setInt('image_data', shared_ImageData);
-    }
-
-    set_totalContents(List<Content> totalList) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      //shared_totalList = prefs.getString(totalList);
-    }
-
-    set_wishList(List<int> wishList) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      //shared_totalList = prefs.getString(totalList);
-    }
-
-    set_downloadList(List<int> downloadList) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      //shared_totalList = prefs.getString(totalList);
-    }
-
-    set_historyList(List<int> historyList) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      shared_totalList = prefs.getString(json.encode(historyList));
-    }
-
-    set_categoryList(List<String> categoryList) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      shared_totalList = prefs.getString(json.encode(categoryList));
-    }
-
-    set_selectType(String selectType) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      shared_SelectType = prefs.getString(selectType);
-    }
-
-    // ***sharedPreferences에서 값을 반환하는 함수***
-    String get_UserName() {
-      return shared_UserName;
-    }
 
     /*
   빌드 부분
@@ -271,11 +213,12 @@ class loginPage extends StatelessWidget {
                   onTap: () {
                     var byte = utf8.encode(passWord.text);
                     String pwdData = sha256.convert(byte).toString();
-
+                    Provider.of<manage>(context, listen: false).getTotal();
                     Student.postRequest(userName.text, pwdData)
                         .then((response) {
                       if (response['status_code'] == 200) {
                         Map data = response['data'];
+                        print(data);
                         if (Student.username == null) {
                           Student.setUsername(data['user_data']['username']);
                           Student.setFullName(data['user_data']['fullname']);
@@ -286,7 +229,8 @@ class loginPage extends StatelessWidget {
                         }
 
                         Content.originalContent = data['content_list'];
-                        Content.originalDownload = List<Map>.from(data['wish_list']);
+                        Content.originalDownload =
+                            List<Map>.from(data['wish_list']);
 
                         print('Total List: ${Content.totalList.length}');
                         print('Download List: ${Content.downloadList.length}');
@@ -295,25 +239,46 @@ class loginPage extends StatelessWidget {
                           Curriculum.list.add(Curriculum.fromJson(curriculum));
                         }
                         print('Curriculum List: ${Curriculum.list.length}');
+                        manageprovider.setPwd(pwdData);
+                        manageprovider.setTotal(Content.contentToString());
+                        manageprovider.setUser(Content.metaToString());
+                        Provider.of<manage>(context, listen: false).getTotal();
+                        Provider.of<manage>(context, listen: false).getUser();
 
-                        // 변환 테스트
-                        print('Start convert');
-                        String str = Content.contentToString();
-                        print('content to str ok');
-                        Content.loadContentFromString(str);
-                        print('str to content ok');
-                        str = Content.metaToString();
-                        print('meta to str ok');
-                        Content.loadMetaFromString(str);
-                        print('str to meta ok');
-                        print('Convert successful');
+                        //  변환 테스트
+                        // print('Start convert');
+                        // String str = Content.contentToString();
+                        // print('content to str ok');
+                        // Content.loadContentFromString(str);
+                        // print('str to content ok');
+                        // //유저 데이터를 포함해서 wish his down 세가지에 저장 및 로드
+                        // str = Content.metaToString();
+                        // Provider.of<manage>(context, listen: false)
+                        //     .setTotal(Content.metaToString());
+                        // print('meta to str ok');
+                        // Content.loadMetaFromString(str);
+                        // print('str to meta ok');
+                        // print('Convert successful');
 
                         // 뒤로가기 눌렀을 때 다시 로그인창 뜨지 않도록
                         Navigator.of(context).pop();
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => selectPage()));
                       } else {
-                        FlutterDialog(context);
+                        String checkData =
+                            Provider.of<manage>(context, listen: false)
+                                .userVal();
+                        Content.loadContentFromString(checkData);
+                        String checkPwd =
+                            Provider.of<manage>(context, listen: false)
+                                .pwdVal();
+                        if (Student.username == userName.toString() &&
+                            pwdData == checkPwd) {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => selectPage()));
+                        } else
+                          FlutterDialog(context);
                       }
                     }).catchError((error) {
                       print(error);

@@ -8,13 +8,13 @@ import 'data.dart';
 
 //상태 변동이 수행되어야 하는 스테이트 풀 위젯 선언
 class mainPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => mainPageStateful();
 }
 
 //변환되는 페이지에 대한 선언으로 위의 홈페이지 클래스의 상태를 전달한다.
-class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMixin {
+class mainPageStateful extends State<mainPage>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
@@ -28,18 +28,21 @@ class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMix
     print('on Tab : ${_tabController.index}');
     setState(() {
       switch (_tabController.index) {
-        case 0: {
-          Content.refreshHistory();
-          break;
-        }
-        case 1: {
-          Content.refreshWishList();
-          break;
-        }
-        case 2: {
-          Content.refreshDownloadList();
-          break;
-        }
+        case 0:
+          {
+            Content.refreshHistory();
+            break;
+          }
+        case 1:
+          {
+            Content.refreshWishList();
+            break;
+          }
+        case 2:
+          {
+            Content.refreshDownloadList();
+            break;
+          }
       }
     });
   }
@@ -101,15 +104,15 @@ class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMix
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             //카드를 형태 지정
                             shape: RoundedRectangleBorder(
-                              //모서리를 둥글게 만들 것이다
+                                //모서리를 둥글게 만들 것이다
                                 borderRadius: BorderRadius.circular(36)),
                             //1차적으로 내부 구성을 열 타입으로 생성, 소개 멘트와 이미지가 들어갈것이다
                             child: Center(
                                 child: Image.asset(
-                                  'image/image_tutorial.png',
-                                  width: 350,
-                                  fit: BoxFit.cover,
-                                )),
+                              'image/image_tutorial.png',
+                              width: 350,
+                              fit: BoxFit.cover,
+                            )),
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -147,8 +150,10 @@ class mainPageStateful extends State<mainPage> with SingleTickerProviderStateMix
                       Container(
                         //내부에 카드를 정렬시켜놓고 보이도록 호출
                         child: Column(
-                          children: [for (Content content in Content.getHistory())
-                            historyCard(context, content)],
+                          children: [
+                            for (Content content in Content.getHistory())
+                              historyCard(context, content)
+                          ],
                         ),
                       )
                     ],

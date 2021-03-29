@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/src/contentList.dart';
-import 'package:flutter_app/src/mainPage.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Student {
   //유저 정보를 저장할 변수들
@@ -269,7 +265,9 @@ class Content {
       'username': Student.username,
       'fullname': Student.fullname,
       'email': Student.email,
-      'birthday': (Student.birthday == null) ? null : DateFormat('yyyy-MM-dd').format(Student.birthday),
+      'birthday': (Student.birthday == null)
+          ? null
+          : DateFormat('yyyy-MM-dd').format(Student.birthday),
       'imagedata': Student.imagedata,
     };
     return json.encode(ret);
@@ -288,10 +286,8 @@ class Content {
   }
 
   static String contentToString() {
-    String str = json.encode({
-      'content_list': originalContent,
-      'wish_list': originalDownload
-    });
+    String str = json.encode(
+        {'content_list': originalContent, 'wish_list': originalDownload});
 
     return str;
   }
@@ -304,20 +300,16 @@ class Content {
   static void loadContentFromMap(
       Map<String, dynamic> contents, List<Map> downloads) {
     for (String type in contents.keys) {
-      for (String category
-      in contents[type].keys) {
-        for (Map content in contents[type]
-        [category]) {
-          Content.totalList.add(
-              Content.fromJson(content, type, category));
+      for (String category in contents[type].keys) {
+        for (Map content in contents[type][category]) {
+          Content.totalList.add(Content.fromJson(content, type, category));
         }
       }
     }
 
     for (Map _content in downloads) {
       Content content = Content.detailFromJson(_content);
-      Content.totalList[Content.getIndexById(content.id)] =
-          content;
+      Content.totalList[Content.getIndexById(content.id)] = content;
       Content.downloadList.add(content.id);
     }
   }
