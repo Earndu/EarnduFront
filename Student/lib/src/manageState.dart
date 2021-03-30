@@ -40,6 +40,7 @@ class manage with ChangeNotifier {
     prefs = await SharedPreferences.getInstance();
     user = (prefs.getString('data2') ?? "None");
     print(user);
+    print('good');
     notifyListeners();
   }
 
