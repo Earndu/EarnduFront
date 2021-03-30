@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Manage {
@@ -6,7 +5,23 @@ class Manage {
   static String user = null;
   static String pwd = null;
   static String download = null;
+  static int tutorialCnt = 0;
   static SharedPreferences prefs;
+
+  static int cntVal() {
+    return tutorialCnt;
+  }
+
+  static void getCnt() async {
+    prefs = await SharedPreferences.getInstance();
+    tutorialCnt = prefs.getInt('cnt') ?? 0;
+  }
+
+  static void incrementCnt() async {
+    prefs = await SharedPreferences.getInstance();
+    tutorialCnt = (prefs.getInt('cnt') ?? 0) + 1;
+    prefs.setInt('cnt', tutorialCnt);
+  }
 
   static void setPwd(String val) async {
     prefs = await SharedPreferences.getInstance();
@@ -15,7 +30,7 @@ class Manage {
 
   static void getPwd() async {
     prefs = await SharedPreferences.getInstance();
-    total = (prefs.getString('pwd') ?? null);
+    pwd = (prefs.getString('pwd') ?? null);
     // print(pwd);
     print('getPwd');
   }

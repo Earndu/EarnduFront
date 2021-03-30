@@ -6,6 +6,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'tutorial.dart';
 import 'data.dart';
+import 'manageState.dart';
 
 class selectData {
   final String selData;
@@ -38,8 +39,9 @@ class _selectPage extends State<selectPage> {
 
     int tutorialCount = 0;
     //머티리얼 앱을 반환하도록 설정
+    Manage.getCnt();
     return MaterialApp(
-      //거지같은 디버그 줄 제거
+      //디버그 줄 제거
       debugShowCheckedModeBanner: false,
       //앱 호환이 되도록 visualDensity지정
       theme: ThemeData(
@@ -129,8 +131,8 @@ class _selectPage extends State<selectPage> {
                       itemHeight: 300.0,
                       onTap: (int index) {
                         Content.selectedType = index.toString();
-                        if (tutorialCount == 0) {
-                          tutorialCount += 1;
+                        if (Manage.cntVal() == 0) {
+                          Manage.incrementCnt();
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => mainPage()));
                           Navigator.of(context).push(MaterialPageRoute(

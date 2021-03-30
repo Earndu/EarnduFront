@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'sub_widget/myPageWidget.dart';
+import 'package:flutter_app/src/manageState.dart';
 import 'data.dart';
+
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class myPage extends StatefulWidget {
   @override
@@ -107,26 +111,84 @@ class _myPage extends State<myPage> {
           padding: const EdgeInsets.only(top: 15),
           child: Column(
             children: <Widget>[
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 30, bottom: 6),
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(setImage()),
-                        fit: BoxFit.fill,
-                      ),
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: [
-                        BoxShadow(
-                            color: const Color(0x29000000),
-                            offset: Offset(0, 3),
-                            blurRadius: 6,
-                            spreadRadius: 0)
-                      ],
-                      color: const Color(0xffff7f41)),
-                ),
+              Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 30, bottom: 6),
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(setImage()),
+                            fit: BoxFit.fill,
+                          ),
+                          borderRadius: BorderRadius.circular(100),
+                          boxShadow: [
+                            BoxShadow(
+                                color: const Color(0x29000000),
+                                offset: Offset(0, 3),
+                                blurRadius: 6,
+                                spreadRadius: 0),
+                          ],
+                          color: const Color(0xffff7f41)),
+                    ),
+                  ),
+                  Positioned(
+                      top: 15,
+                      right: 15,
+                      child: IconButton(
+                          icon: const Icon(Icons.replay),
+                          iconSize: 40,
+                          color: const Color(0xffffc12f),
+                          onPressed: () {
+                            Student.postRequest(Student.username, Manage.pwd)
+                                .then((response) {
+                              if (response['status_code'] == 200) {
+                                Map data = response['data'];
+                                if (Student.username == null) {
+                                  Student.setUsername(
+                                      data['user_data']['username']);
+                                  Student.setFullName(
+                                      data['user_data']['fullname']);
+                                  Student.setBirthday(DateTime.parse(
+                                      data['user_data']['birthday']));
+                                  Student.setEmail(data['user_data']['email']);
+                                  Student.setImageId(
+                                      data['user_data']['image_id']);
+                                }
+
+                                Content.originalContent = data['content_list'];
+                                Content.originalDownload
+                                    .addAll(List<Map>.from(data['wish_list']));
+
+                                Content.loadContentFromMap(
+                                    Content.originalContent);
+                                Content.loadDownloadFromMap(
+                                    Content.originalDownload);
+                                print(
+                                    'Total List: ${Content.totalList.length}');
+                                print(
+                                    'Download List: ${Content.downloadList.length}');
+
+                                for (Map curriculum in data['curriculum']) {
+                                  Curriculum.list
+                                      .add(Curriculum.fromJson(curriculum));
+                                }
+                                print(
+                                    'Curriculum List: ${Curriculum.list.length}');
+
+                                Content.wishList = [];
+
+                                Manage.setPwd(Manage.pwdVal());
+                                Manage.setTotal(Content.contentToString());
+                                Manage.setUser(Content.metaToString());
+                                Manage.setDownload(Content.downloadToString());
+                              }
+                            });
+                          }))
+                ],
               ),
               Center(
                 child: Text("${Student.username}",

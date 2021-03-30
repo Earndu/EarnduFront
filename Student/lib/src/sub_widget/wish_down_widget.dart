@@ -310,7 +310,7 @@ void FlutterDialog(BuildContext context, int contentId, int type) {
                       Content.removeFromWishList(contentId);
                       //Provider를 통해 값 갱신
                       Manage.setUser(Content.metaToString());
-                      Manage.getUser();
+                      //Manage.getUser();
                       break;
                     }
                   // 다운로드 리스트
@@ -319,7 +319,7 @@ void FlutterDialog(BuildContext context, int contentId, int type) {
                       Content.removeFromDownloadList(contentId);
                       //Provider를 통해 값 갱신
                       Manage.setUser(Content.metaToString());
-                      Manage.getUser();
+                      //Manage.getUser();
                       break;
                     }
                 }

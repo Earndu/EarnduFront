@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/manageState.dart';
 import 'package:flutter_app/src/signup.dart';
-import 'package:provider/provider.dart';
 
 import 'data.dart';
 import 'select.dart';
@@ -222,7 +221,7 @@ class loginPage extends StatelessWidget {
                   onTap: () {
                     var byte = utf8.encode(passWord.text);
                     String pwdData = sha256.convert(byte).toString();
-
+                    Manage.pwd = pwdData;
                     Student.postRequest(userName.text, pwdData)
                         .then((response) {
                       if (response['status_code'] == 200) {
@@ -237,7 +236,8 @@ class loginPage extends StatelessWidget {
                         }
 
                         Content.originalContent = data['content_list'];
-                        Content.originalDownload.addAll(List<Map>.from(data['wish_list']));
+                        Content.originalDownload
+                            .addAll(List<Map>.from(data['wish_list']));
 
                         Content.loadContentFromMap(Content.originalContent);
                         Content.loadDownloadFromMap(Content.originalDownload);

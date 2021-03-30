@@ -166,12 +166,12 @@ class _contentListStateful extends State<contentListStateful> {
                       //데이터에 추가를 해야겠다
                       Content.addToWishList(contentId);
                       Manage.setUser(Content.metaToString());
-                      Manage.getUser();
+                      //Manage.getUser();
                     } else {
                       //데이터를 삭제한다.
                       Content.removeFromWishList(contentId);
                       Manage.setUser(Content.metaToString());
-                      Manage.getUser();
+                      //Manage.getUser();
                     }
                   });
                 },
