@@ -3,7 +3,7 @@ import 'package:flutter_app/src/data.dart';
 import 'package:flutter_app/src/manageState.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class contentList extends StatelessWidget {
   @override
@@ -128,6 +128,7 @@ class _contentListStateful extends State<contentListStateful> {
                             fontFamily: "Arial",
                             fontStyle: FontStyle.normal,
                             fontSize: 15.0),
+                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left),
                   ),
                   Container(
@@ -138,6 +139,7 @@ class _contentListStateful extends State<contentListStateful> {
                             fontFamily: "Arial",
                             fontStyle: FontStyle.normal,
                             fontSize: 10.0),
+                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left),
                   )
                 ],
@@ -206,7 +208,7 @@ class _contentListStateful extends State<contentListStateful> {
                               child: Column(
                                 children: [
                                   Container(
-                                      child: Text(subName,
+                                      child: AutoSizeText(subName,
                                           style: const TextStyle(
                                               decoration: TextDecoration.none,
                                               color: const Color(0xff3d4047),
@@ -214,6 +216,9 @@ class _contentListStateful extends State<contentListStateful> {
                                               fontFamily: "Arial",
                                               fontStyle: FontStyle.normal,
                                               fontSize: 20.0),
+                                          maxLines: 1,
+                                          minFontSize: 15,
+                                          overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.left)),
                                   Container(
                                       margin: const EdgeInsets.only(top: 9),
