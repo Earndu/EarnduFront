@@ -3,6 +3,8 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -35,9 +37,15 @@ class contentsPageStateful extends StatefulWidget {
 //일단 제목은 이전 페이지의 터치로부터 가져오는 것이며, 내용 자체는 provider에서 가져오는 것으로 진행
 class _contentsPageStateful extends State<contentsPageStateful> {
   bool _play = false;
+  AssetsAudioPlayer _player = null;
 
   @override
   Widget build(BuildContext context) {
+    if (widget.content.type == '1' && _player == null) {
+      print('start makefile');
+      _makeFile();
+      print('end makefile');
+    }
     Content.watch(widget.content.id);
 
     String contentsVal = widget.content.type;
@@ -90,7 +98,7 @@ class _contentsPageStateful extends State<contentsPageStateful> {
                   margin: const EdgeInsets.only(top: 10),
                   width: 300,
                   height: 600,
-                  child: soundContents(context, 1, ContentName, _play))
+                  child: soundContents(context))
             else if (contentsVal == '2')
               Container(
                   margin: const EdgeInsets.only(top: 10),
@@ -110,28 +118,27 @@ class _contentsPageStateful extends State<contentsPageStateful> {
   }
 
   Widget soundContents(
-      BuildContext context, int contentsType, String contentsName, bool play) {
-    return AudioWidget.assets(
-      path: "sound/RunningMate.mp3",
-      play: _play,
-      child: FloatingActionButton(
-          backgroundColor: Color(0xffff7f41),
-          child: Icon(
-            _play ? Icons.pause : Icons.play_arrow,
-            size: 230,
-          ),
-          onPressed: () {
-            setState(() {
-              _play = !_play;
-            });
-          }),
-      onReadyToPlay: (duration) {
-        //onReadyToPlay
-      },
-      onPositionChanged: (current, duration) {
-        //onPositionChanged
-      },
-    );
+      BuildContext context) {
+    if (_player == null) {
+      return null;
+    }
+
+    return FloatingActionButton(
+        backgroundColor: Color(0xffff7f41),
+        child: Icon(
+          _play ? Icons.pause : Icons.play_arrow,
+          size: 230,
+        ),
+        onPressed: () {
+          setState(() {
+            if (_play) {
+              _player.pause();
+            } else {
+              _player.play();
+            }
+            _play = !_play;
+          });
+        });
   }
 
 //마크다운  파일을 가져오기 위한  함수 Future는 값이 할당되고 나서 타입이 결정
@@ -165,5 +172,17 @@ class _contentsPageStateful extends State<contentsPageStateful> {
         },
       ),
     );
+  }
+
+  Future<Null> _makeFile() {
+    getTemporaryDirectory().then((tempDir) {
+      File tempFile = File('${tempDir.path}/temp.mp3');
+      tempFile.writeAsBytes(base64.decode(widget.content.res_sound), flush: true).then((value) {
+        setState(() {
+          _player = AssetsAudioPlayer();
+          _player.open(Audio.file(tempFile.path));
+        });
+      });
+    });
   }
 }
