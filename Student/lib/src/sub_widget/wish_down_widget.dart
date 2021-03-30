@@ -3,6 +3,7 @@ import 'package:flutter_app/src/data.dart';
 import 'package:flutter_app/src/manageState.dart';
 import '../contents.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 //리스트  요소 함수
 Widget wish_list(BuildContext context, Content content) {
@@ -31,11 +32,13 @@ Widget wish_list(BuildContext context, Content content) {
                                 color: const Color(0xffffc12f))),
                         Container(
                           height: 50,
+                          width: 200,
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                  child: Text(content.title,
+                                  child: AutoSizeText(content.title,
                                       style: const TextStyle(
                                           decoration: TextDecoration.none,
                                           color: const Color(0xff3d4047),
@@ -43,6 +46,8 @@ Widget wish_list(BuildContext context, Content content) {
                                           fontFamily: "Arial",
                                           fontStyle: FontStyle.normal,
                                           fontSize: 20.0),
+                                      maxLines: 1,
+                                      minFontSize: 2,
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left)),
                               Container(

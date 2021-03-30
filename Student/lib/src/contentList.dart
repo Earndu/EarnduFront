@@ -219,11 +219,11 @@ class _contentListStateful extends State<contentListStateful> {
                                               fontStyle: FontStyle.normal,
                                               fontSize: 20.0),
                                           maxLines: 1,
-                                          minFontSize: 2,
+                                          minFontSize: 10,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.left)),
                                   Container(
-                                      margin: const EdgeInsets.only(top: 2),
+                                      margin: const EdgeInsets.only(top: 9),
                                       alignment: Alignment.bottomLeft,
                                       child: Text(widget.subName,
                                           style: const TextStyle(
