@@ -37,10 +37,18 @@ class Student {
   static Future<Map> postRequest(String username, String password) async {
     var url = 'https://svclaw.ipdisk.co.kr:11003/student/total';
 
+    // 다운로드 리스트에 이미 존재하는 컨텐츠는 다시 다운받지 않음
+    List<int> wishList = [];
+    for (int idx in Content.wishList) {
+      if (!Content.downloadList.contains(idx)) {
+        wishList.add(idx);
+      }
+    }
+
     Map postData = {
       "username": username,
       "password": password,
-      "wish_list": Content.wishList
+      "wish_list": wishList
     };
 
     if (Curriculum.list.isNotEmpty) {
@@ -68,7 +76,7 @@ class Student {
         headers: {"Content-Type": "application/json"}, body: body);
 
     var response = json.decode(rawResponse.body);
-    print(response);
+    print('response: $response');
 
     return response;
   }
@@ -81,8 +89,8 @@ class Student {
 
 class Content {
   // 데이터 원본 저장
-  static Map<String, dynamic> originalContent = null;
-  static List<Map> originalDownload = null;
+  static Map<String, dynamic> originalContent = {};
+  static List<Map> originalDownload = [];
 
   static List<Content> totalList = List();
 
@@ -276,6 +284,7 @@ class Content {
   }
 
   static void loadMetaFromString(String str) {
+    if (str == null) return;
     Map<String, dynamic> data = json.decode(str);
     wishList = List<int>.from(data['wishList']);
     downloadList = List<int>.from(data['downloadList']);
@@ -288,19 +297,19 @@ class Content {
   }
 
   static String contentToString() {
-    String str = json.encode(
-        {'content_list': originalContent, 'wish_list': originalDownload});
-
+    String str = json.encode(originalContent);
     return str;
   }
 
   static void loadContentFromString(String str) {
-    Map data = json.decode(str);
-    loadContentFromMap(data['content_list'], List<Map>.from(data['wish_list']));
+    if (str == null) return;
+    Map contents = json.decode(str);
+    loadContentFromMap(contents);
   }
 
   static void loadContentFromMap(
-      Map<String, dynamic> contents, List<Map> downloads) {
+      Map<String, dynamic> contents) {
+
     for (String type in contents.keys) {
       for (String category in contents[type].keys) {
         for (Map content in contents[type][category]) {
@@ -308,11 +317,27 @@ class Content {
         }
       }
     }
+  }
 
+  static String downloadToString() {
+    String str = json.encode(originalDownload);
+    return str;
+  }
+
+  static void loadDownloadFromString(String str) {
+    if (str == null) return;
+    List<Map> downloads = List<Map<String, dynamic>>.from(json.decode(str));
+    loadDownloadFromMap(downloads);
+  }
+
+  static void loadDownloadFromMap(List<Map> downloads) {
     for (Map _content in downloads) {
       Content content = Content.detailFromJson(_content);
-      Content.totalList[Content.getIndexById(content.id)] = content;
-      Content.downloadList.add(content.id);
+      // 이미 다운로드 받은 컨텐츠는 추가하지 않음
+      if (!Content.downloadList.contains(content.id)) {
+        Content.totalList[Content.getIndexById(content.id)] = content;
+        Content.downloadList.add(content.id);
+      }
     }
   }
 }
