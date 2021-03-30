@@ -12,12 +12,13 @@ import 'package:crypto/crypto.dart';
 import 'dart:io';
 
 class loginPage extends StatelessWidget {
+  int a = 0;
   Widget build(BuildContext context) {
     //현재 페이지에서 요구되는 데이터는 각각 username, password이므로 이를
     //텍스트필드 컨트롤러 변수로 선언하여 받아올 수 있도록 지정
+
     TextEditingController userName = TextEditingController();
     TextEditingController passWord = TextEditingController();
-    final manageprovider = Provider.of<manage>(context);
     final Color maincolor = Color(0xffff7f41);
 
     HttpOverrides.global = new MyHttpOverrides();
@@ -25,12 +26,14 @@ class loginPage extends StatelessWidget {
     // 어플 실행 시 인터넷 되는지 확인하고,
     // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
 
-    /*shared_preference를 통한 값 저장 부분*/
-
     /*
   빌드 부분
   
   */
+    if (a == 0) {
+      Manage.getUser();
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.grey[700]),
@@ -211,11 +214,10 @@ class loginPage extends StatelessWidget {
                   ),
                   //터치시 상호작용의 정의, 현재는 바로 메인페이지로 이동되도록 선언했다.
                   onTap: () {
-                    Provider.of<manage>(context, listen: false).getUser();
-
+                    Content.loadMetaFromString(Manage.user);
                     var byte = utf8.encode(passWord.text);
                     String pwdData = sha256.convert(byte).toString();
-                    Provider.of<manage>(context, listen: false).getTotal();
+
                     Student.postRequest(userName.text, pwdData)
                         .then((response) {
                       if (response['status_code'] == 200) {
@@ -242,12 +244,14 @@ class loginPage extends StatelessWidget {
                           Curriculum.list.add(Curriculum.fromJson(curriculum));
                         }
                         print('Curriculum List: ${Curriculum.list.length}');
-                        manageprovider.setPwd(pwdData);
-                        manageprovider.setTotal(Content.contentToString());
-                        manageprovider.setUser(Content.metaToString());
-                        Provider.of<manage>(context, listen: false).getTotal();
-                        Provider.of<manage>(context, listen: false).getUser();
 
+                        Manage.setPwd(pwdData);
+                        Manage.setTotal(Content.contentToString());
+                        Manage.setUser(Content.metaToString());
+
+                        Manage.getTotal();
+                        Manage.getUser();
+                        Manage.getPwd();
                         //  변환 테스트
                         // print('Start convert');
                         // String str = Content.contentToString();
@@ -268,13 +272,9 @@ class loginPage extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => selectPage()));
                       } else {
-                        String checkData =
-                            Provider.of<manage>(context, listen: false)
-                                .userVal();
+                        String checkData = Manage.userVal();
                         Content.loadContentFromString(checkData);
-                        String checkPwd =
-                            Provider.of<manage>(context, listen: false)
-                                .pwdVal();
+                        String checkPwd = Manage.pwdVal();
                         if (Student.username == userName.toString() &&
                             pwdData == checkPwd) {
                           Navigator.of(context).pop();
@@ -327,7 +327,6 @@ class loginPage extends StatelessWidget {
                         textAlign: TextAlign.center),
                   ),
                   onTap: () {
-                    Provider.of<manage>(context, listen: false).getUser();
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => signUp()));
                   },
