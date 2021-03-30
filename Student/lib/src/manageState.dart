@@ -5,6 +5,7 @@ class Manage {
   static String total = null;
   static String user = null;
   static String pwd = null;
+  static String download = null;
   static SharedPreferences prefs;
 
   static void setPwd(String val) async {
@@ -14,8 +15,9 @@ class Manage {
 
   static void getPwd() async {
     prefs = await SharedPreferences.getInstance();
-    total = (prefs.getString('pwd') ?? "None");
-    print(pwd);
+    total = (prefs.getString('pwd') ?? null);
+    // print(pwd);
+    print('getPwd');
   }
 
   static void setTotal(String val) async {
@@ -25,8 +27,9 @@ class Manage {
 
   static void getTotal() async {
     prefs = await SharedPreferences.getInstance();
-    total = (prefs.getString('data1') ?? "None");
-    print(total);
+    total = (prefs.getString('data1') ?? null);
+    // print(total);
+    print('getTotal');
   }
 
   static void setUser(String val) async {
@@ -36,8 +39,21 @@ class Manage {
 
   static void getUser() async {
     prefs = await SharedPreferences.getInstance();
-    user = (prefs.getString('data2') ?? "None");
-    print(user);
+    user = (prefs.getString('data2') ?? null);
+    // print(user);
+    print('getUser');
+  }
+
+  static void setDownload(String val) async {
+    prefs = await SharedPreferences.getInstance();
+    prefs.setString('data3', val);
+  }
+
+  static void getDownload() async {
+    prefs = await SharedPreferences.getInstance();
+    download = (prefs.getString('data3') ?? null);
+    // print(download);
+    print('getDownload');
   }
 
   static String pwdVal() {
@@ -50,5 +66,9 @@ class Manage {
 
   static String userVal() {
     return user;
+  }
+
+  static String downloadVal() {
+    return download;
   }
 }
