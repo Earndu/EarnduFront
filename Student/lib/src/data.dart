@@ -86,9 +86,9 @@ class Content {
 
   static List<Content> totalList = List();
 
-  // static List<int> wishList = List();
+  static List<int> wishList = List();
 
-  static List<int> wishList = [16];
+  //static List<int> wishList = [16];
   static List<int> downloadList = List();
   static List<int> historyList = List();
   static List<String> categoryList = ['Math', 'Science', 'English'];
