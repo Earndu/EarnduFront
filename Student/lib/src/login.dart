@@ -28,6 +28,9 @@ class loginPage extends StatelessWidget {
 
     if (a == 0) {
       Manage.getUser();
+      Content.loadMetaFromString(Manage.userVal());
+      Manage.getDownload();
+      Content.loadDownloadFromString(Manage.downloadVal());
       a++;
     }
     ;
@@ -217,7 +220,6 @@ class loginPage extends StatelessWidget {
                   ),
                   //터치시 상호작용의 정의, 현재는 바로 메인페이지로 이동되도록 선언했다.
                   onTap: () {
-                    Content.loadMetaFromString(Manage.user);
                     var byte = utf8.encode(passWord.text);
                     String pwdData = sha256.convert(byte).toString();
 
@@ -225,7 +227,6 @@ class loginPage extends StatelessWidget {
                         .then((response) {
                       if (response['status_code'] == 200) {
                         Map data = response['data'];
-                        print(data);
                         if (Student.username == null) {
                           Student.setUsername(data['user_data']['username']);
                           Student.setFullName(data['user_data']['fullname']);
@@ -236,10 +237,10 @@ class loginPage extends StatelessWidget {
                         }
 
                         Content.originalContent = data['content_list'];
-                        Content.originalDownload =
-                            List<Map>.from(data['wish_list']);
-                        Content.loadContentFromMap(
-                            Content.originalContent, Content.originalDownload);
+                        Content.originalDownload.addAll(List<Map>.from(data['wish_list']));
+
+                        Content.loadContentFromMap(Content.originalContent);
+                        Content.loadDownloadFromMap(Content.originalDownload);
                         print('Total List: ${Content.totalList.length}');
                         print('Download List: ${Content.downloadList.length}');
 
@@ -253,10 +254,12 @@ class loginPage extends StatelessWidget {
                         Manage.setPwd(pwdData);
                         Manage.setTotal(Content.contentToString());
                         Manage.setUser(Content.metaToString());
+                        Manage.setDownload(Content.downloadToString());
 
-                        Manage.getTotal();
-                        Manage.getUser();
-                        Manage.getPwd();
+                        // Manage.getTotal();
+                        // Manage.getUser();
+                        // Manage.getPwd();
+
                         //  변환 테스트
                         // print('Start convert');
                         // String str = Content.contentToString();

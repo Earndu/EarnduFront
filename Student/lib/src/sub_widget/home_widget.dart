@@ -63,7 +63,7 @@ Widget setListItem(BuildContext context, String sub, IconData iconVal) {
         ],
       ),
       onTap: () {
-        print(Content.originalContent);
+        // print(Content.originalContent);
         Navigator.push(
             context,
             MaterialPageRoute(
