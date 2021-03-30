@@ -40,6 +40,14 @@ class _contentsPageStateful extends State<contentsPageStateful> {
   AssetsAudioPlayer _player = null;
 
   @override
+  void dispose() {
+    if (_player != null && _player.isPlaying.value) {
+      _player.stop();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (widget.content.type == '1' && _player == null) {
       print('start makefile');
