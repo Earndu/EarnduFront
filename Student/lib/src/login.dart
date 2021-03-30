@@ -26,8 +26,6 @@ class loginPage extends StatelessWidget {
     // 어플 실행 시 인터넷 되는지 확인하고,
     // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
 
-    /*shared_preference를 통한 값 저장 부분*/
-
     /*
   빌드 부분
   
@@ -333,7 +331,6 @@ class loginPage extends StatelessWidget {
                         textAlign: TextAlign.center),
                   ),
                   onTap: () {
-                    Provider.of<manage>(context, listen: false).getUser();
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => signUp()));
                   },
