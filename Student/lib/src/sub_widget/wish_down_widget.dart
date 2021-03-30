@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/data.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_app/src/manageState.dart';
 import '../contents.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -44,6 +43,7 @@ Widget wish_list(BuildContext context, Content content) {
                                           fontFamily: "Arial",
                                           fontStyle: FontStyle.normal,
                                           fontSize: 20.0),
+                                      overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left)),
                               Container(
                                   margin: const EdgeInsets.only(top: 9),
@@ -56,6 +56,7 @@ Widget wish_list(BuildContext context, Content content) {
                                           fontFamily: "Arial",
                                           fontStyle: FontStyle.normal,
                                           fontSize: 15.0),
+                                      overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left)),
                             ],
                           ),
@@ -108,6 +109,7 @@ Widget wish_list(BuildContext context, Content content) {
                           fontFamily: "Arial",
                           fontStyle: FontStyle.normal,
                           fontSize: 15.0),
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left),
                 ),
                 Container(
@@ -118,6 +120,7 @@ Widget wish_list(BuildContext context, Content content) {
                           fontFamily: "Arial",
                           fontStyle: FontStyle.normal,
                           fontSize: 10.0),
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left),
                 )
               ],
@@ -186,6 +189,7 @@ Widget download_list(BuildContext context, Content content) {
                           fontFamily: "Arial",
                           fontStyle: FontStyle.normal,
                           fontSize: 15.0),
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left),
                 ),
                 Container(

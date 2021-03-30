@@ -1,18 +1,15 @@
 //컨텐츠 내용을 표시하는 페이지 컨텐츠 타입에 따라 표시되는 내용이 다르다.
 
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:flutter_app/src/mainPage.dart';
+
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'dart:convert';
 import 'data.dart';
 
 class contentsPage extends StatelessWidget {
@@ -125,8 +122,7 @@ class _contentsPageStateful extends State<contentsPageStateful> {
     );
   }
 
-  Widget soundContents(
-      BuildContext context) {
+  Widget soundContents(BuildContext context) {
     if (_player == null) {
       return null;
     }
@@ -185,7 +181,9 @@ class _contentsPageStateful extends State<contentsPageStateful> {
   Future<Null> _makeFile() {
     getTemporaryDirectory().then((tempDir) {
       File tempFile = File('${tempDir.path}/temp.mp3');
-      tempFile.writeAsBytes(base64.decode(widget.content.res_sound), flush: true).then((value) {
+      tempFile
+          .writeAsBytes(base64.decode(widget.content.res_sound), flush: true)
+          .then((value) {
         setState(() {
           _player = AssetsAudioPlayer();
           _player.open(Audio.file(tempFile.path));
