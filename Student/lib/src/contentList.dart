@@ -203,9 +203,11 @@ class _contentListStateful extends State<contentListStateful> {
                                     color: const Color(0xffffc12f))),
                             Container(
                               height: 50,
+                              width: 200,
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                       child: AutoSizeText(subName,
@@ -217,11 +219,11 @@ class _contentListStateful extends State<contentListStateful> {
                                               fontStyle: FontStyle.normal,
                                               fontSize: 20.0),
                                           maxLines: 1,
-                                          minFontSize: 15,
+                                          minFontSize: 2,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.left)),
                                   Container(
-                                      margin: const EdgeInsets.only(top: 9),
+                                      margin: const EdgeInsets.only(top: 2),
                                       alignment: Alignment.bottomLeft,
                                       child: Text(widget.subName,
                                           style: const TextStyle(
@@ -231,6 +233,7 @@ class _contentListStateful extends State<contentListStateful> {
                                               fontFamily: "Arial",
                                               fontStyle: FontStyle.normal,
                                               fontSize: 15.0),
+                                          overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.left)),
                                 ],
                               ),
