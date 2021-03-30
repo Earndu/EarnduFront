@@ -12,7 +12,6 @@ import 'package:crypto/crypto.dart';
 import 'dart:io';
 
 class loginPage extends StatelessWidget {
-  int a = 0;
   Widget build(BuildContext context) {
     //현재 페이지에서 요구되는 데이터는 각각 username, password이므로 이를
     //텍스트필드 컨트롤러 변수로 선언하여 받아올 수 있도록 지정
@@ -25,14 +24,18 @@ class loginPage extends StatelessWidget {
 
     // 어플 실행 시 인터넷 되는지 확인하고,
     // 인터넷 안되면 자동으로 저장된 데이터 사용해야 함 (TODO)
+    int a = 0;
+
+    if (a == 0) {
+      Manage.getUser();
+      a++;
+    }
+    ;
 
     /*
   빌드 부분
-  
+    
   */
-    if (a == 0) {
-      Manage.getUser();
-    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -245,6 +248,8 @@ class loginPage extends StatelessWidget {
                         }
                         print('Curriculum List: ${Curriculum.list.length}');
 
+                        Content.wishList = [];
+
                         Manage.setPwd(pwdData);
                         Manage.setTotal(Content.contentToString());
                         Manage.setUser(Content.metaToString());
@@ -272,7 +277,9 @@ class loginPage extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => selectPage()));
                       } else {
+                        String checkTotal = Manage.totalVal();
                         String checkData = Manage.userVal();
+                        Content.loadContentFromString(checkTotal);
                         Content.loadContentFromString(checkData);
                         String checkPwd = Manage.pwdVal();
                         if (Student.username == userName.toString() &&
