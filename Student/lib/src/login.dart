@@ -211,6 +211,8 @@ class loginPage extends StatelessWidget {
                   ),
                   //터치시 상호작용의 정의, 현재는 바로 메인페이지로 이동되도록 선언했다.
                   onTap: () {
+                    Provider.of<manage>(context, listen: false).getUser();
+
                     var byte = utf8.encode(passWord.text);
                     String pwdData = sha256.convert(byte).toString();
                     Provider.of<manage>(context, listen: false).getTotal();
@@ -325,6 +327,7 @@ class loginPage extends StatelessWidget {
                         textAlign: TextAlign.center),
                   ),
                   onTap: () {
+                    Provider.of<manage>(context, listen: false).getUser();
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => signUp()));
                   },
