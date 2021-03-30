@@ -3,6 +3,8 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -35,9 +37,18 @@ class contentsPageStateful extends StatefulWidget {
 //일단 제목은 이전 페이지의 터치로부터 가져오는 것이며, 내용 자체는 provider에서 가져오는 것으로 진행
 class _contentsPageStateful extends State<contentsPageStateful> {
   bool _play = false;
+  String uri = null;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.content.type == '1' && uri == null) {
+      _makeFile();
+    }
     Content.watch(widget.content.id);
 
     String contentsVal = widget.content.type;
@@ -90,7 +101,7 @@ class _contentsPageStateful extends State<contentsPageStateful> {
                   margin: const EdgeInsets.only(top: 10),
                   width: 300,
                   height: 600,
-                  child: soundContents(context, 1, ContentName, _play))
+                  child: soundContents(context))
             else if (contentsVal == '2')
               Container(
                   margin: const EdgeInsets.only(top: 10),
@@ -110,9 +121,10 @@ class _contentsPageStateful extends State<contentsPageStateful> {
   }
 
   Widget soundContents(
-      BuildContext context, int contentsType, String contentsName, bool play) {
-    return AudioWidget.assets(
-      path: "sound/RunningMate.mp3",
+      BuildContext context) {
+
+    return AudioWidget.file(
+      path: uri,
       play: _play,
       child: FloatingActionButton(
           backgroundColor: Color(0xffff7f41),
@@ -167,5 +179,12 @@ class _contentsPageStateful extends State<contentsPageStateful> {
         },
       ),
     );
+  }
+
+  Future<Null> _makeFile() async {
+    Directory tempDir = await getTemporaryDirectory();
+    File tempFile = File('${tempDir.path}/temp.mp3');
+    await tempFile.writeAsBytes(base64.decode(widget.content.res_sound), flush: true);
+    uri = tempFile.uri.toString();
   }
 }
