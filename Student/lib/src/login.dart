@@ -231,7 +231,8 @@ class loginPage extends StatelessWidget {
                         Content.originalContent = data['content_list'];
                         Content.originalDownload =
                             List<Map>.from(data['wish_list']);
-
+                        Content.loadContentFromMap(
+                            Content.originalContent, Content.originalDownload);
                         print('Total List: ${Content.totalList.length}');
                         print('Download List: ${Content.downloadList.length}');
 

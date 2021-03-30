@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/data.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_app/src/manageState.dart';
 import '../contents.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -247,7 +248,8 @@ Widget download_list(BuildContext context, Content content) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => contentsPageStateful(content: content)));
+                        builder: (context) =>
+                            contentsPageStateful(content: content)));
               },
             ),
           )
@@ -255,8 +257,7 @@ Widget download_list(BuildContext context, Content content) {
       ),
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                contentsPageStateful(content: content)));
+            builder: (context) => contentsPageStateful(content: content)));
       },
     ),
   );
@@ -295,15 +296,25 @@ void FlutterDialog(BuildContext context, int contentId, int type) {
               onPressed: () {
                 switch (type) {
                   // 위시리스트
-                  case 1: {
-                    Content.removeFromWishList(contentId);
-                    break;
-                  }
+                  case 1:
+                    {
+                      Content.removeFromWishList(contentId);
+                      //Provider를 통해 값 갱신
+                      Provider.of<manage>(context, listen: false)
+                          .setUser(Content.metaToString());
+                      Provider.of<manage>(context, listen: false).getUser();
+                      break;
+                    }
                   // 다운로드 리스트
-                  case 2: {
-                    Content.removeFromDownloadList(contentId);
-                    break;
-                  }
+                  case 2:
+                    {
+                      Content.removeFromDownloadList(contentId);
+                      //Provider를 통해 값 갱신
+                      Provider.of<manage>(context, listen: false)
+                          .setUser(Content.metaToString());
+                      Provider.of<manage>(context, listen: false).getUser();
+                      break;
+                    }
                 }
                 Navigator.pop(context);
               },

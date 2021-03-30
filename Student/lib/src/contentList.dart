@@ -160,20 +160,20 @@ class _contentListStateful extends State<contentListStateful> {
                       ),
                 onPressed: () {
                   setState(() {
-                    // String wishData =
-                    //     Provider.of<manage>(context, listen: false).userVal();
-                    // Content.loadMetaFromString(wishData);
                     if (!Content.wishList.contains(contentId)) {
                       //데이터에 추가를 해야겠다
+
+                      Provider.of<manage>(context, listen: false)
+                          .setUser(Content.metaToString());
+                      Provider.of<manage>(context, listen: false).getUser();
 
                       Content.addToWishList(contentId);
                     } else {
                       //데이터를 삭제한다.
                       Content.removeFromWishList(contentId);
-                      // wishData = Content.metaToString();
-                      // Provider.of<manage>(context, listen: false)
-                      //     .setUser(wishData);
-                      // Provider.of<manage>(context, listen: false).getUser();
+                      Provider.of<manage>(context, listen: false)
+                          .setUser(Content.metaToString());
+                      Provider.of<manage>(context, listen: false).getUser();
                     }
                   });
                 },
